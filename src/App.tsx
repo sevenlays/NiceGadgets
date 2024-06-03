@@ -15,7 +15,7 @@ export const App = () => {
 
   return (
     <div className="App">
-      <p>Hello world</p>
+      <p>Hello world1</p>
       <h1>Product Catalog</h1>
       <h2>{count}</h2>
       <input
