@@ -20,6 +20,7 @@ interface CustomCSSProperties extends React.CSSProperties {
 type ButtonProps = {
   type: 'number' | 'radio' | 'icon' | 'back' | 'primary';
   size: Size;
+  mesure?: 'px' | '%';
   state?: 'selected' | 'disabled';
   color?: string;
   onClick?: () => void;
@@ -30,6 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
   type,
   state,
   size,
+  mesure = 'px',
   color,
   onClick,
   children,
@@ -40,8 +42,8 @@ export const Button: React.FC<ButtonProps> = ({
 
   const darkerColor = color ? makeColorDarker(color, 15) : undefined;
   const style: CustomCSSProperties = {
-    '--btn-width': `${size.width}px`,
-    '--btn-height': `${size.height}px`,
+    '--btn-width': `${size.width}${mesure}`,
+    '--btn-height': `${size.height}${mesure}`,
     ...(type === 'radio' && color
       ? {
           '--radio-color': color,
