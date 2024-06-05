@@ -1,0 +1,73 @@
+@import '../../../styles/colors.scss';
+
+.nav {
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 14px;
+
+  display: none;
+  flex-grow: 1;
+
+  margin-left: 13px;
+  &__list {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+    list-style-type: none;
+    padding: 0;
+  }
+  &__link {
+    padding-block: 18px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: $Secondary;
+
+    display: flex;
+    position: relative;
+
+    transition: 0.3s color;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background-color: $Primary;
+      height: 3px;
+      transition: 0.3s width;
+
+      width: 0;
+    }
+    &:hover {
+      color: $Primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+    &_active {
+      color: $Primary;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .nav {
+    display: flex;
+  }
+}
+
+@media (min-width: 1440px) {
+  .nav {
+    margin-left: 24px;
+    &__list {
+      gap: 64px;
+    }
+    &__link {
+      padding-block: 26.5px;
+    }
+  }
+}

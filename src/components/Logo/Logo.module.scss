@@ -1,0 +1,15 @@
+.logo {
+  display: flex;
+  padding: 13px 16px;
+  max-width: 96px;
+  &__img {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1440px)  {
+  .logo {
+    padding: 18px 24px;
+    max-width: 128px;
+  }
+}

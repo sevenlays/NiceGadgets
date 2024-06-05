@@ -1,0 +1,32 @@
+@import '../../../styles/colors.scss';
+
+.back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  &__link {
+    font-size: 12px;
+    font-weight: 600;
+    color: $Icons;
+
+    transition: 0.3s color;
+    &:hover {
+      color: $Primary;
+    }
+  }
+  &__icon {
+    display: flex;
+    padding: 8px;
+    border: 1px solid $Icons;
+
+    transition: 0.3s border-color;
+    &:hover {
+      border-color: $Primary;
+    }
+    &__img {
+      width: 16px;
+      object-fit: contain;
+    }
+  }
+}

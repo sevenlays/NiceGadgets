@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import './App.scss';
+import { Test } from './components/test/Test';
+import { Header } from './components/HeaderComponents/Header/Header';
+import { Footer } from './components/FooterComponents/Footer/Footer';
+import { MobileMenu } from './components/MenuComponents/MobileMenu/MobileMenu';
 
 export const App = () => {
   const [count, setCount] = useState(0);
@@ -15,7 +19,8 @@ export const App = () => {
 
   return (
     <div className="App">
-      <p>Hello world1</p>
+      <Header />
+      <Test />
       <h1>Product Catalog</h1>
       <h2>{count}</h2>
       <input
@@ -29,6 +34,10 @@ export const App = () => {
         <button onClick={increment}>+</button>
         <button onClick={decrement}>-</button>
       </div>
+
+      <Footer />
+
+      <MobileMenu />
     </div>
   );
 };

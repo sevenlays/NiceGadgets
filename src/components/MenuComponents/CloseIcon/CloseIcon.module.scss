@@ -1,0 +1,18 @@
+@import '../../../styles/colors.scss';
+
+.icon {
+  display: flex;
+  padding: 16px;
+  border: 1px solid $Icons;
+  &__img {
+    width: 16px;
+    object-fit: cover;
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 640px) {
+  .icon {
+    display: none;
+  }
+}

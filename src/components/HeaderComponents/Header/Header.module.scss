@@ -1,0 +1,16 @@
+@import '../../../styles/colors.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  border-bottom: 1px solid $Icons;
+}
+
+@media (min-width: 640px) {
+  .header {
+    justify-content: start;
+  }
+}
