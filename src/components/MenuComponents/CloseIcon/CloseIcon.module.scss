@@ -2,12 +2,14 @@
 
 .icon {
   display: flex;
-  padding: 16px;
-  border: 1px solid $Icons;
-  &__img {
-    width: 16px;
-    object-fit: cover;
-    margin: 0 auto;
+  width: 50px;
+  &__large {
+    width: 50%;
+  }
+  button {
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
   }
 }
 

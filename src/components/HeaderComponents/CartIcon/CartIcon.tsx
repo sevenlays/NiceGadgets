@@ -1,8 +1,11 @@
-import cart from '../../../assets/icons/Shopping bag.svg';
+import { Button } from '../../../UI';
+import icon from '../../../assets/icons/Shopping bag.svg';
 import styles from './CartIcon.module.scss';
 
 export const CartIcon = () => (
-  <a href="#" className={styles.icon}>
-    <img src={cart} alt="burger-icon" className={styles.icon__img} />
-  </a>
+  <div className={styles.icon}>
+    <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+      <img src={icon} alt="burger-icon" className={styles.icon__img} />
+    </Button>
+  </div>
 );

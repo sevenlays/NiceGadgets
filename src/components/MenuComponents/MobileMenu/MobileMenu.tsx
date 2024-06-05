@@ -1,11 +1,17 @@
-import { CartIcon } from '../../HeaderComponents/CartIcon/CartIcon';
-import { FavourIcon } from '../../HeaderComponents/FavourIcon/FavourIcon';
+import { Button } from '../../../UI';
 import { Logo } from '../../Logo/Logo';
 import { CloseIcon } from '../CloseIcon/CloseIcon';
 import styles from './MobileMenu.module.scss';
+import favouriteIcon from '../../../assets/icons/Favourites.svg';
+import cartIcon from '../../../assets/icons/Shopping bag.svg';
+import cn from 'classnames';
 
 export const MobileMenu = () => (
-  <aside className={styles.aside}>
+  <aside
+    className={cn(styles.aside, {
+      [styles.aside_active]: false,
+    })}
+  >
     <div className={styles.header}>
       <Logo />
       <CloseIcon />
@@ -14,7 +20,12 @@ export const MobileMenu = () => (
     <div className={styles.nav}>
       <ul className={styles.nav__list}>
         <li className="nav__item">
-          <a href="#" className={styles.nav__link}>
+          <a
+            href="#"
+            className={cn(styles.nav__link, {
+              [styles.nav__link_active]: true,
+            })}
+          >
             home
           </a>
         </li>
@@ -37,8 +48,20 @@ export const MobileMenu = () => (
     </div>
 
     <div className={styles.footer}>
-      <FavourIcon />
-      <CartIcon />
+      <div
+        className={cn(styles.icon__large, {
+          [styles.icon__large_active]: true,
+        })}
+      >
+        <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+          <img src={favouriteIcon} alt="Icon" />
+        </Button>
+      </div>
+      <div className={styles.icon__large}>
+        <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+          <img src={cartIcon} alt="Icon" />
+        </Button>
+      </div>
     </div>
   </aside>
 );

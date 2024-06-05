@@ -2,18 +2,15 @@
 
 .icon {
   display: none;
-  padding: 16px;
-  border: 1px solid $Icons;
-
-  transition: 0.3s border-color;
-  &__img {
-    width: 16px;
-    height: 16px;
-    object-fit: contain;
-    margin: 0 auto;
+  width: 50px;
+  &__large {
+    display: flex;
+    width: 50%;
   }
-  &:hover {
-    border-color: $Primary;
+  button {
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
   }
 }
 
@@ -25,6 +22,6 @@
 
 @media (min-width: 1440px) {
   .icon {
-    padding: 24px;
+    width: 64px;
   }
 }

@@ -1,14 +1,19 @@
 import icon from '../../../assets/icons/Favourites.svg';
 import iconActive from '../../../assets/icons/Favourites Filled.svg';
 import styles from './FavourIcon.module.scss';
+import { Button } from '../../../UI';
 
 export const FavourIcon = () =>
-  false ? (
-    <a href="#" className={styles.icon}>
-      <img src={iconActive} alt="burger-icon" className={styles.icon__img} />
-    </a>
+  true ? (
+    <div className={styles.icon}>
+      <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+        <img src={iconActive} alt="burger-icon" className={styles.icon__img} />
+      </Button>
+    </div>
   ) : (
-    <a href="#" className={styles.icon}>
-      <img src={icon} alt="burger-icon" className={styles.icon__img} />
-    </a>
+    <div className={styles.icon}>
+      <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+        <img src={icon} alt="burger-icon" className={styles.icon__img} />
+      </Button>
+    </div>
   );

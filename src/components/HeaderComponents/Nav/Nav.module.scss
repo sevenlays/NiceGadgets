@@ -63,11 +63,13 @@
 @media (min-width: 1440px) {
   .nav {
     margin-left: 24px;
+
+    line-height: 10px;
     &__list {
       gap: 64px;
     }
     &__link {
-      padding-block: 26.5px;
+      padding-block: 27px;
     }
   }
 }
