@@ -1,0 +1,27 @@
+@import '../../../styles/colors';
+
+.icon {
+  display: none;
+  width: 50px;
+  &__large {
+    display: flex;
+    width: 50%;
+  }
+  button {
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+}
+
+@media (min-width: 640px) {
+  .icon {
+    display: flex;
+  }
+}
+
+@media (min-width: 1440px) {
+  .icon {
+    width: 64px;
+  }
+}
