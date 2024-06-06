@@ -63,7 +63,11 @@ export const MobileMenu: React.FC<Props> = ({ showMenu, setShowMenu }) => {
             <img src={favouriteIcon} alt="Icon" />
           </Button>
         </div>
-        <div className={styles.icon__large}>
+        <div
+          className={cn(styles.icon__large, {
+            [styles.icon__large_active]: false,
+          })}
+        >
           <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
             <img src={cartIcon} alt="Icon" />
           </Button>

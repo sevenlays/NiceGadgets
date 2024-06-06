@@ -1,0 +1,54 @@
+@mixin header-icon {
+  position: relative;
+
+  transition: 0.3s all;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    background-color: $Primary;
+    height: 3px;
+    transition: 0.3s width;
+
+    width: 0;
+  }
+  button {
+    border-right: 1px solid transparent;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+}
+
+@mixin header-item-active {
+  color: $Primary;
+
+  &::after {
+    width: 100%;
+  }
+}
+
+@mixin header-large-icon {
+  display: flex;
+  width: 50%;
+  height: 64px;
+
+  position: relative;
+  button {
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    background-color: $Primary;
+    height: 3px;
+    transition: 0.3s width;
+  }
+  &_active {
+    &:after {
+      width: 100%;
+    }
+  }
+}

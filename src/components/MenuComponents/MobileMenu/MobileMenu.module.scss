@@ -1,4 +1,5 @@
 @import '../../../styles/colors';
+@import '../../../styles/icons';
 
 .aside {
   display: flex;
@@ -12,7 +13,7 @@
   width: 100%;
   height: 100%;
 
-  transition: .3s all;
+  transition: 0.3s all;
   &_active {
     left: 0;
   }
@@ -71,20 +72,7 @@
     }
   }
 }
-
-.icon {
+.icon__large {
   display: flex;
-  width: 50px;
-  &__large {
-    display: flex;
-    width: 50%;
-    height: 64px;
-    button {
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-    }
-    &_active {
-      border-bottom: 3px solid $Primary;
-    }
-  }
+  @include header-large-icon;
 }
