@@ -59,7 +59,7 @@ export const MobileMenu: React.FC<Props> = ({ showMenu, setShowMenu }) => {
             [styles.icon__large_active]: true,
           })}
         >
-          <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+          <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
             <img src={favouriteIcon} alt="Icon" />
           </Button>
         </div>
@@ -68,7 +68,7 @@ export const MobileMenu: React.FC<Props> = ({ showMenu, setShowMenu }) => {
             [styles.icon__large_active]: false,
           })}
         >
-          <Button type="icon" size={{ width: 100, height: 100 }} mesure="%">
+          <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
             <img src={cartIcon} alt="Icon" />
           </Button>
         </div>
