@@ -47,7 +47,7 @@
     transition: 0.3s width;
   }
   &_active {
-    &:after {
+    &::after {
       width: 100%;
     }
   }

@@ -72,7 +72,9 @@
     }
   }
 }
+
 .icon__large {
   display: flex;
+
   @include header-large-icon;
 }
