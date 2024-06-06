@@ -1,34 +1,50 @@
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
+import { PATHS } from '../../../constants';
 
 export const Nav = () => (
   <nav className={styles.nav}>
     <ul className={styles.nav__list}>
       <li>
-        <a
-          href="#"
-          className={cn(styles.nav__link, { [styles.nav__link_active]: true })}
+        <NavLink
+          to={PATHS.HOME}
+          className={({ isActive }) =>
+            cn(styles.nav__link, { [styles.nav__link_active]: isActive })
+          }
         >
           home
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a
-          href="#"
-          className={cn(styles.nav__link, { [styles.nav__link_active]: false })}
+      <li>
+        <NavLink
+          to={`${PATHS.PHONES.LIST}`}
+          className={({ isActive }) =>
+            cn(styles.nav__link, { [styles.nav__link_active]: isActive })
+          }
         >
           Phones
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+      <li>
+        <NavLink
+          to={`${PATHS.TABLETS.LIST}`}
+          className={({ isActive }) =>
+            cn(styles.nav__link, { [styles.nav__link_active]: isActive })
+          }
+        >
           tablets
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+      <li>
+        <NavLink
+          to={`${PATHS.ACCESSORIES.LIST}`}
+          className={({ isActive }) =>
+            cn(styles.nav__link, { [styles.nav__link_active]: isActive })
+          }
+        >
           accessories
-        </a>
+        </NavLink>
       </li>
     </ul>
   </nav>
