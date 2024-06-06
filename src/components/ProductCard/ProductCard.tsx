@@ -5,25 +5,13 @@ import { ProductParams } from './ProductParams/ProductParams';
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
 import { useState } from 'react';
+import { Product } from '../../types/Product';
 
-const product = {
-  id: 194,
-  category: 'phones',
-  itemId: 'apple-iphone-14-pro-1tb-gold',
-  name: 'Apple iPhone 14 Pro 1TB Gold',
-  fullPrice: 1740,
-  price: 1520,
-  screen: "6.1' OLED",
-  capacity: '1TB',
-  color: 'gold',
-  ram: '6GB',
-  year: 2022,
-  image: 'img/phones/apple-iphone-14-pro/gold/00.webp',
+type Props = {
+  product: Product;
 };
 
-/* product object should be props now its just a placeholder ti prevent errors*/
-
-export const ProductCard = (/*{product}*/) => {
+export const ProductCard: React.FC<Props> = ({ product }) => {
   const [selected, setSelected] = useState({
     primary: false,
     favourite: false,
@@ -58,7 +46,6 @@ export const ProductCard = (/*{product}*/) => {
           type="primary"
           state={selected.primary ? 'selected' : 'disabled'}
           size={{
-            width: 160,
             height: 40,
           }}
         >
@@ -67,7 +54,7 @@ export const ProductCard = (/*{product}*/) => {
         <Button
           state={selected.favourite ? 'selected' : 'disabled'}
           type="icon"
-          size={{ width: 40, height: 40 }}
+          size={{ height: 40 }}
           onClick={onFavouriteButtonClick}
         >
           <img

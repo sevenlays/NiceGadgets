@@ -19,6 +19,12 @@
     margin-bottom: 24px;
   }
 
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
   &__pagination {
     display: flex;
     justify-content: center;
