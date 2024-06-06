@@ -1,5 +1,9 @@
+@import '../../../styles/colors';
+
 .footer {
   padding-block: 32px;
+
+  border-top: 1px solid $Icons;
 
   &__wrapper {
     display: flex;
