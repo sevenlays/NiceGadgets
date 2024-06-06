@@ -13,7 +13,10 @@ export const Nav = () => (
         </a>
       </li>
       <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+        <a
+          href="#"
+          className={cn(styles.nav__link, { [styles.nav__link_active]: false })}
+        >
           Phones
         </a>
       </li>

@@ -1,4 +1,4 @@
-@mixin header-icon {
+@mixin underline {
   position: relative;
 
   transition: 0.3s all;
@@ -20,7 +20,7 @@
   }
 }
 
-@mixin header-item-active {
+@mixin underline-active {
   color: $Primary;
 
   &::after {
@@ -47,8 +47,6 @@
     transition: 0.3s width;
   }
   &_active {
-    &::after {
-      width: 100%;
-    }
+    @include underline-active;
   }
 }

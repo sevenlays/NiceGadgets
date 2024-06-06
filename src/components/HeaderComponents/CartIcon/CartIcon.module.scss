@@ -5,9 +5,9 @@
   display: none;
   width: 50px;
 
-  @include header-icon;
+  @include underline;
   &_active {
-    @include header-item-active;
+    @include underline-active;
   }
 }
 
