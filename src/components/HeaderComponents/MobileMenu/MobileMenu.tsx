@@ -5,6 +5,7 @@ import styles from './MobileMenu.module.scss';
 import favouriteIcon from '../../../assets/icons/Favourites.svg';
 import cartIcon from '../../../assets/icons/Shopping bag.svg';
 import cn from 'classnames';
+import { Nav } from '../Nav/Nav';
 
 type Props = {
   showMenu: boolean;
@@ -23,34 +24,8 @@ export const MobileMenu: React.FC<Props> = ({ showMenu, setShowMenu }) => {
         <CloseIcon setShowMenu={setShowMenu} />
       </div>
 
-      <div className={styles.nav}>
-        <ul className={styles.nav__list}>
-          <li className="nav__item">
-            <a
-              href="#"
-              className={cn(styles.nav__link, {
-                [styles.nav__link_active]: true,
-              })}
-            >
-              home
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="#" className={styles.nav__link}>
-              Phones
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="#" className={styles.nav__link}>
-              tablets
-            </a>
-          </li>
-          <li className="nav__item">
-            <a href="#" className={styles.nav__link}>
-              accessories
-            </a>
-          </li>
-        </ul>
+      <div className={styles.nav__mobile}>
+        <Nav />
       </div>
 
       <div className={styles.footer}>
@@ -63,7 +38,11 @@ export const MobileMenu: React.FC<Props> = ({ showMenu, setShowMenu }) => {
             <img src={favouriteIcon} alt="Icon" />
           </Button>
         </div>
-        <div className={styles.icon__large}>
+        <div
+          className={cn(styles.icon__large, {
+            [styles.icon__large_active]: false,
+          })}
+        >
           <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
             <img src={cartIcon} alt="Icon" />
           </Button>

@@ -5,7 +5,7 @@ import { Logo } from '../../Logo/Logo';
 import { Nav } from '../Nav/Nav';
 import styles from './Header.module.scss';
 import { BurgerIcon } from '../BurgerIcon/BurgerIcon';
-import { MobileMenu } from '../../MenuComponents/MobileMenu/MobileMenu';
+import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
 
 export const Header = () => {
@@ -17,7 +17,9 @@ export const Header = () => {
 
       <Logo />
 
-      <Nav />
+      <div className={styles.nav__desctop}>
+        <Nav />
+      </div>
 
       <BurgerIcon setShowMenu={setShowMenu} />
       <FavourIcon />
