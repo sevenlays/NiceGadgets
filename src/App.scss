@@ -1,3 +1,33 @@
-button {
-  width: 33px;
+.catalog {
+  padding: 24px 16px 64px;
+
+  &__breadcrumbs {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin-bottom: 8px;
+  }
+
+  &__subtitle {
+    margin-bottom: 32px;
+  }
+
+  &__dropdowns {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding-inline: 20px;
+
+    &__numbers {
+      display: flex;
+      gap: 8px;
+    }
+  }
 }
