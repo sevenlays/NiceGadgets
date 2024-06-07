@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import './PhonesPage.scss';
 import { useEffect, useState } from 'react';
 
@@ -27,7 +28,7 @@ const sortPhones = (phonesArray: Product[], criterion: string): Product[] => {
 export const PhonesPage = () => {
   const [phones, setPhones] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [itemsPerPage, setItemsPerPage] = useState(99999);
   const [translate, setTranslate] = useState(0);
   const [sortBy, setSortBy] = useState<string>('year');
 
@@ -80,7 +81,7 @@ export const PhonesPage = () => {
   }, []);
 
   return (
-    <div className="App">
+    <div className="page__container">
       <div className="catalog">
         <div className="catalog__breadcrumbs">
           <img src={Home} alt="Breadctumbs_Path" />
@@ -100,14 +101,14 @@ export const PhonesPage = () => {
           />
           <DropdownMenu
             label="Items on page"
-            options={['4', '8', '16', 'All']}
+            options={['All', '4', '8', '16']}
             onSelect={handleItemsPerPageChange}
           />
         </div>
 
         <div className="catalog__list">
           {currentProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard product={product} />
           ))}
         </div>
 

@@ -1,13 +1,24 @@
 @import '../../styles/colors';
+@import '../../styles/grid';
 
 .catalog {
-  padding: 24px 16px 64px;
+  padding-top: 24px;
+  padding-bottom: 64px;
+
+  @include on-desctop {
+    padding-bottom: 80px;
+  }
+
 
   &__breadcrumbs {
     display: flex;
     align-items: end;
     gap: 8px;
     margin-bottom: 24px;
+
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
 
     &__text {
       font-size: 12px;
@@ -29,6 +40,10 @@
     font-size: 14px;
     line-height: 21px;
     color: $Secondary;
+
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
   }
 
   &__dropdowns {
@@ -38,9 +53,13 @@
   }
 
   &__list {
-    display: flex;
-    overflow: auto;
     margin-bottom: 24px;
+
+    @include page-grid;
+
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
   }
 
   &__pagination {

@@ -1,6 +1,5 @@
 import { Button } from '../../UI';
 import styles from './ProductCard.module.scss';
-import { ProductParams } from './ProductParams/ProductParams';
 
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
@@ -26,20 +25,41 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className={styles.card}>
-      <img className={styles.card__image} src={product.image} />
-      <h1 className={styles.card__title}>{product.name}</h1>
-      <div>
-        <p className={styles.card__price}>
-          <span
-            className={styles.card__price__actual}
-          >{`$${product.price}`}</span>
-          <div
-            className={styles.card__price__withoutDiscount}
-          >{`$${product.fullPrice}`}</div>
-        </p>
+      <div className={styles.card__imageBlock}>
+        <img className={styles.card__imageBlock__image} src={product.image} />
+      </div>
+      <div className={styles.card__top}>
+        <h1 className={styles.card__top__title}>{product.name}</h1>
+        <div>
+          <p className={styles.card__top__price}>
+            <span
+              className={styles.card__top__price__actual}
+            >{`$${product.price}`}</span>
+            <div
+              className={styles.card__top__price__withoutDiscount}
+            >{`$${product.fullPrice}`}</div>
+          </p>
+        </div>
       </div>
 
-      <ProductParams phoneParams={product} />
+      <section className={styles.phoneParams}>
+        <div className={styles.phoneParams__param}>
+          <p className={styles.phoneParams__param__name}>Screen</p>
+          <p className={styles.phoneParams__param__overview}>
+            {product.screen}
+          </p>
+        </div>
+        <div className={styles.phoneParams__param}>
+          <p className={styles.phoneParams__param__name}>Capacity</p>
+          <p className={styles.phoneParams__param__overview}>
+            {product.capacity}
+          </p>
+        </div>
+        <div className={styles.phoneParams__param}>
+          <p className={styles.phoneParams__param__name}>RAM</p>
+          <p className={styles.phoneParams__param__overview}>{product.ram}</p>
+        </div>
+      </section>
       <div className={styles.buttonsPlaceholder}>
         <Button
           onClick={onAddButtonClick}
@@ -51,6 +71,7 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         >
           {selected.primary ? 'Added' : 'Add to cart'}
         </Button>
+
         <Button
           state={selected.favourite ? 'selected' : 'disabled'}
           type="icon"
