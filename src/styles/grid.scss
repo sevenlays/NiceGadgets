@@ -32,14 +32,17 @@ $desctop--min-width: 1136px;
 @mixin container {
   padding-inline: 16px;
   padding-top: 24px;
+  padding-bottom: 64px;
 
   @include on-tablet {
     padding-inline: 24px;
     margin: 0 auto;
+    padding-bottom: 64px;
   }
 
   @include on-desctop {
     padding-inline: 0;
+    padding-bottom: 80px;
     max-width: $desctop--min-width;
     margin: 0 auto;
   }
