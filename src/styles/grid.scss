@@ -21,7 +21,7 @@ $desctop--min-width: 1136px;
   grid-template-columns: repeat(var(--columns), 1fr);
 
   @include on-tablet {
-    --columns: 12; 
+    --columns: 12;
   }
 
   @include on-desctop {
@@ -31,13 +31,14 @@ $desctop--min-width: 1136px;
 
 @mixin container {
   padding-inline: 16px;
+  padding-top: 24px;
 
-  @include on-tablet{
+  @include on-tablet {
     padding-inline: 24px;
     margin: 0 auto;
   }
 
-  @include on-desctop{
+  @include on-desctop {
     padding-inline: 0;
     max-width: $desctop--min-width;
     margin: 0 auto;

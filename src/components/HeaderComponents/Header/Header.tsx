@@ -11,14 +11,22 @@ import { useState } from 'react';
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
+  const handleCloseMenu = () => {
+    setShowMenu(false);
+  };
+
   return (
     <header className={styles.header}>
-      <MobileMenu showMenu={showMenu} setShowMenu={setShowMenu} />
+      <MobileMenu
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+        handleCloseMenu={handleCloseMenu}
+      />
 
       <Logo />
 
       <div className={styles.nav__desctop}>
-        <Nav />
+        <Nav handleCloseMenu={handleCloseMenu} />
       </div>
 
       <BurgerIcon setShowMenu={setShowMenu} />
