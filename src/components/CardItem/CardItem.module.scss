@@ -1,9 +1,8 @@
 @import '../../styles/colors';
 
 .cardItem {
-  padding: 24px;
+  padding: 23px;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 24px;
   width: fit-content;
@@ -82,15 +81,34 @@
   }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 743px) {
+  .cardItem {
+    &__title {
+      width: 178px;
+      word-break: normal;
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .cardItem {
+    width: 100%;
+    justify-content: space-between;
+    &__product {
+      align-self: flex-start;
+    }
+  }
+}
+
+@media screen and (max-width: 639px) {
   .cardItem {
     flex-direction: column;
     padding: 16px;
     gap: 16px;
+    width: fit-content;
 
     &__product {
       gap: 16px;
-
     }
 
     &__title {
