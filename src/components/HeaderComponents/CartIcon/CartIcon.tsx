@@ -11,7 +11,10 @@ export const CartIcon = () => (
       [styles.icon_active]: false,
     })}
   >
-    <NavLink to={`${PATHS.CART}`}>
+    <NavLink
+      to={`${PATHS.CART}`}
+      style={{ width: '100%', boxSizing: 'border-box' }}
+    >
       <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
         <img src={icon} alt="burger-icon" className={styles.icon__img} />
       </Button>
