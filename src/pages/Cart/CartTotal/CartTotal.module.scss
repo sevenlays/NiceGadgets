@@ -8,6 +8,8 @@
   flex-direction: column;
   align-self: start;
   align-items: center;
+  position: sticky;
+  top: 0;
 
   &__total {
     font-size: 32px;
@@ -15,6 +17,7 @@
     line-height: 41px;
     letter-spacing: -0.01em;
     color: $Primary;
+    position: relative;
   }
 
   &__amount {
@@ -49,7 +52,7 @@
     &__amount {
       margin-bottom: 27px;
 
-      &::after  {
+      &::after {
         bottom: -16px;
       }
     }
