@@ -69,22 +69,24 @@ export const CartPage = () => {
   };
 
   return (
-    <section className={style.cart}>
-      <Button
-        type="back"
-        size={{ width: 66, height: 16 }}
-        onClick={onBackClick}
-      >
-        Back
-      </Button>
-      <h1 className={style.cart__pageName}>Cart</h1>
-      <main className={style.cart__content}>
-        <CartList
-          favouriteProducts={favouriteProducts}
-          onDeleteClick={onDeleteClick}
-        />
-        <CartTotal favouriteProducts={favouriteProducts} />
-      </main>
-    </section>
+    <div className="page__container">
+      <section className={style.cart}>
+        <Button
+          type="back"
+          size={{ width: 66, height: 16 }}
+          onClick={onBackClick}
+        >
+          Back
+        </Button>
+        <h1 className={style.cart__pageName}>Cart</h1>
+        <main className={style.cart__content}>
+          <CartList
+            favouriteProducts={favouriteProducts}
+            onDeleteClick={onDeleteClick}
+          />
+          <CartTotal favouriteProducts={favouriteProducts} />
+        </main>
+      </section>
+    </div>
   );
 };
