@@ -5,7 +5,6 @@ import { Test } from './components/test/Test';
 import './App.scss';
 
 import { HomeSlider } from './components/HomeSlider/HomeSlider';
-// import { VariableWidth } from './components/SliderItems/SliderItems';
 
 export const App = () => {
   return (
@@ -21,8 +20,6 @@ export const App = () => {
 
       <div>3</div>
       <div>4</div>
-
-      {/* <VariableWidth /> */}
     </div>
   );
 };
