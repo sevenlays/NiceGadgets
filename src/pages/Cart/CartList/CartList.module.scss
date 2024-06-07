@@ -1,0 +1,15 @@
+.cartList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height:416px;
+  overflow-y: auto;
+}
+
+
+@media screen and (max-width: 639px) {
+  .cartList {
+    align-items: center;
+    justify-content: center;
+  }
+}
