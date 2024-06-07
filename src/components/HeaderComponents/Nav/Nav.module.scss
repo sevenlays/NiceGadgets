@@ -1,62 +1,66 @@
 @import '../../../styles/colors';
+@import '../../../styles/icons';
 
 .nav {
-  font-weight: 800;
-  font-size: 12px;
-  line-height: 14px;
-
-  display: none;
+  display: flex;
   flex-grow: 1;
+  align-self: center;
 
-  margin-left: 13px;
+  padding: 24px 16px;
+
   &__list {
     display: flex;
-    flex-direction: row;
-    gap: 32px;
-    list-style-type: none;
-    padding: 0;
-  }
-  &__link {
-    padding-block: 18px;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: $Secondary;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 800;
+  }
+
+  &__link {
     display: flex;
+
     position: relative;
 
-    transition: 0.3s color;
+    color: $Secondary;
+    padding: 8px 0;
 
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      background-color: $Primary;
-      height: 3px;
-      transition: 0.3s width;
-
-      width: 0;
-    }
-    &:hover {
-      color: $Primary;
-
-      &::after {
-        width: 100%;
-      }
-    }
+    @include underline;
+  
     &_active {
-      color: $Primary;
-
-      &::after {
-        width: 100%;
-      }
+      @include underline-active;
     }
   }
 }
 
+
+
 @media (min-width: 640px) {
   .nav {
-    display: flex;
+    font-weight: 800;
+    font-size: 12px;
+    
+    padding: 0;
+    margin-left: 13px;
+    &__list {
+      line-height: 14px;
+      flex-direction: row;
+      gap: 32px;
+    }
+    &__link {
+      padding-block: 18px;
+      text-transform: uppercase;
+  
+      &:hover {
+        @include underline-active;
+      }
+      &_active {
+        @include underline-active;
+      }
+    }
   }
 }
 

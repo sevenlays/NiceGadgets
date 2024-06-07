@@ -11,7 +11,8 @@ export const CloseIcon: React.FC<Props> = ({ setShowMenu }) => (
     <Button
       type="icon"
       onClick={() => setShowMenu(false)}
-      size={{ width: 50, height: 50 }}
+      size={{ width: 100, height: 100 }}
+      measure="%"
     >
       <img src={icon} alt="Icon" />
     </Button>

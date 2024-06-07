@@ -1,31 +1,46 @@
 import cn from 'classnames';
+import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
+import { PATHS } from '../../../constants';
+
+function getNavLinkClassName(isActive: boolean) {
+  return cn(styles.nav__link, { [styles.nav__link_active]: isActive });
+}
 
 export const Nav = () => (
   <nav className={styles.nav}>
     <ul className={styles.nav__list}>
       <li>
-        <a
-          href="#"
-          className={cn(styles.nav__link, { [styles.nav__link_active]: true })}
+        <NavLink
+          to={PATHS.HOME}
+          className={({ isActive }) => getNavLinkClassName(isActive)}
         >
           home
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+      <li>
+        <NavLink
+          to={`${PATHS.PHONES.LIST}`}
+          className={({ isActive }) => getNavLinkClassName(isActive)}
+        >
           Phones
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+      <li>
+        <NavLink
+          to={`${PATHS.TABLETS.LIST}`}
+          className={({ isActive }) => getNavLinkClassName(isActive)}
+        >
           tablets
-        </a>
+        </NavLink>
       </li>
-      <li className="nav__item">
-        <a href="#" className={styles.nav__link}>
+      <li>
+        <NavLink
+          to={`${PATHS.ACCESSORIES.LIST}`}
+          className={({ isActive }) => getNavLinkClassName(isActive)}
+        >
           accessories
-        </a>
+        </NavLink>
       </li>
     </ul>
   </nav>

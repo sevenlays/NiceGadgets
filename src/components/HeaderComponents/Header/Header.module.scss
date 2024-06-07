@@ -9,8 +9,18 @@
   border-bottom: 1px solid $Icons;
 }
 
+.nav__desctop {
+  display: none;
+
+  flex-grow: 1;
+}
+
 @media (min-width: 640px) {
   .header {
     justify-content: start;
+  }
+
+  .nav__desctop {
+    display: flex;
   }
 }
