@@ -1,8 +1,8 @@
+import { Product } from '../../../types/Product';
 import styles from './ProductParams.module.scss';
 
 type Props = {
-  phoneParams: any;
-  /* later im gonna change it to actual type*/
+  phoneParams: Pick<Product, 'screen' | 'capacity' | 'ram'>;
 };
 
 export const ProductParams: React.FC<Props> = ({ phoneParams }) => {

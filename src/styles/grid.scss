@@ -1,8 +1,22 @@
+$mobile-big-min-width: 500px;
 $tablet--min-width: 640px;
+$tablet-big-min-width: 768px;
 $desctop--min-width: 1136px;
+
+@mixin on-big-mobile {
+  @media (min-width: $mobile-big-min-width) {
+    @content;
+  }
+}
 
 @mixin on-tablet {
   @media (min-width: $tablet--min-width) {
+    @content;
+  }
+}
+
+@mixin on-big-tablet {
+  @media (min-width: $tablet-big-min-width) {
     @content;
   }
 }
