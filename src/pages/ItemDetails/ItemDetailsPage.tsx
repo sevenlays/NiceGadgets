@@ -6,6 +6,7 @@ import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
 import { ProductParams } from '../../components/ProductCard/ProductParams/ProductParams';
+import { makeColorDarker } from '../../utils/makeColorDarker';
 
 const item = {
   id: 'apple-iphone-11-128gb-black',
@@ -56,6 +57,32 @@ const item = {
   cell: ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE'],
 };
 
+function colorNameToHex(color: string) {
+  // Створення тимчасового елемента
+  const tempElement = document.createElement('div');
+
+  tempElement.style.color = color;
+  document.body.appendChild(tempElement);
+
+  // Отримання значення кольору в форматі RGB
+  const computedColor = getComputedStyle(tempElement).color;
+
+  document.body.removeChild(tempElement);
+
+  // Вилучення значень R, G, B з отриманого рядка
+  const rgbValues = computedColor.match(/\d+/g)?.map(Number);
+
+  if (!rgbValues) {
+    throw new Error('Invalid color value');
+  }
+
+  const hexColor = rgbValues
+    .map(value => value.toString(16).padStart(2, '0'))
+    .join('');
+
+  return `#${hexColor}`;
+}
+
 export const ItemDetailsPage = () => {
   // https://github.com/xiaolin/react-image-gallery
 
@@ -78,22 +105,27 @@ export const ItemDetailsPage = () => {
               <div className={styles.product__id}>ID: 802390</div>
             </div>
             <ul className={styles.colors__list}>
-              {item.colorsAvailable.map(colorFromServer => (
-                <li
-                  key={colorFromServer}
-                  className={classNames(styles.colors__outer, {
-                    [styles.colors__outer_active]: color === colorFromServer,
-                  })}
-                >
-                  <span
-                    // href="#"
-                    aria-label={colorFromServer}
-                    className={styles.colors__inner}
-                    style={{ backgroundColor: colorFromServer }}
-                    onClick={() => setColor(colorFromServer)}
-                  ></span>
-                </li>
-              ))}
+              {item.colorsAvailable.map(colorFromServer => {
+                const hex = colorNameToHex(colorFromServer) as string;
+                const darkerColor = makeColorDarker(hex, 15);
+
+                return (
+                  <li
+                    key={colorFromServer}
+                    className={classNames(styles.colors__outer, {
+                      [styles.colors__outer_active]: color === colorFromServer,
+                    })}
+                  >
+                    <span
+                      // href="#"
+                      aria-label={colorFromServer}
+                      className={styles.colors__inner}
+                      style={{ backgroundColor: darkerColor }}
+                      onClick={() => setColor(colorFromServer)}
+                    ></span>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className={styles.divider}></div>

@@ -113,6 +113,17 @@
       gap: 12px;
     }
 
+    &__inner {
+      display: flex;
+
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      opacity: 60%;
+
+      @include hover(opacity, 80%);
+    }
+
     &__outer {
       width: 34px;
       height: 34px;
@@ -129,16 +140,11 @@
 
       &_active {
         border-color: $Primary;
+
+        .colors__inner {
+          opacity: 80%;
+        }
       }
-    }
-
-    &__inner {
-      display: flex;
-
-      border-radius: 50%;
-      width: 26px;
-      height: 26px;
-      opacity: 80%;
     }
 
     @include on-tablet {
