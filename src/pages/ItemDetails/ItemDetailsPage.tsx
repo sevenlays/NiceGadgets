@@ -62,8 +62,6 @@ export const ItemDetailsPage = () => {
   const [color, setColor] = useState(item.color);
   const [capacity, setCapacity] = useState(item.capacity);
 
-  console.log(color);
-
   return (
     <div className={styles.page__container}>
       <div className={styles.breadcrumbs}>breadcrumbs</div>
