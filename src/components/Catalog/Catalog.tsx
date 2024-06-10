@@ -69,6 +69,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   useEffect(() => {
     fetchProducts(
       '/react_phone-catalog/api/products.json',
+      'category',
       productType.toLowerCase(),
     ).then(data => {
       setProducts(data);
