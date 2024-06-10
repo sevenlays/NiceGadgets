@@ -3,15 +3,23 @@ import styles from './ProductCard.module.scss';
 import { ProductParams } from './ProductParams/ProductParams';
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
-import { useState } from 'react';
+
 import { Product } from '../../types/Product';
 import { FullPrice } from './PriceWithoutDiscount/FullPrice';
 import { SingleParam } from './ProductParams/SingleParam/SingleParam';
 
 /* product object should be props now its just a placeholder ti prevent errors*/
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store';
+import {
+  addToCart,
+  addToFavorites,
+  removeFromCart,
+  removeFromFavorites,
+} from '../../feature/cart/productSlice';
 
 type Props = {
-  product?: Product;
+  product: Product;
   IsDiscount?: boolean;
 };
 
@@ -19,16 +27,33 @@ export const ProductCard: React.FC<Props> = ({
   product,
   IsDiscount = true,
 }) => {
-  const [selected, setSelected] = useState({
-    primary: false,
-    favourite: false,
-  });
-  const onAddButtonClick = () => {
-    setSelected(prev => ({ ...prev, primary: !prev.primary }));
+  const cart = useSelector((state: RootState) => state.productStorage.cart);
+  const favorites = useSelector(
+    (state: RootState) => state.productStorage.favorites,
+  );
+
+  const dispatch = useDispatch();
+
+  const isInCart = cart.includes(product?.itemId);
+
+  const isInFavorites = favorites.includes(product?.itemId);
+
+  window.console.log(cart);
+
+  const handleToggleToCart = () => {
+    if (isInCart) {
+      dispatch(removeFromCart(product.itemId));
+    } else {
+      dispatch(addToCart(product.itemId));
+    }
   };
 
-  const onFavouriteButtonClick = () => {
-    setSelected(prev => ({ ...prev, favourite: !prev.favourite }));
+  const handleToggleToFavorites = () => {
+    if (isInFavorites) {
+      dispatch(removeFromFavorites(product.itemId));
+    } else {
+      dispatch(addToFavorites(product.itemId));
+    }
   };
 
   return (
@@ -53,24 +78,24 @@ export const ProductCard: React.FC<Props> = ({
       </ProductParams>
       <div className={styles.buttonsPlaceholder}>
         <Button
-          onClick={onAddButtonClick}
+          onClick={handleToggleToCart}
           type="primary"
-          state={selected.primary ? 'selected' : 'disabled'}
+          state={isInCart ? 'selected' : 'disabled'}
           size={{
             width: 160,
             height: 40,
           }}
         >
-          {selected.primary ? 'Added' : 'Add to cart'}
+          {isInCart ? 'Added' : 'Add to cart'}
         </Button>
         <Button
-          state={selected.favourite ? 'selected' : 'disabled'}
+          state={isInFavorites ? 'selected' : 'disabled'}
           type="icon"
-          size={{ width: 40, height: 40 }}
-          onClick={onFavouriteButtonClick}
+          size={{ width: 50, height: 40 }}
+          onClick={handleToggleToFavorites}
         >
           <img
-            src={selected.favourite ? iconFavouriteActive : iconFavourite}
+            src={isInFavorites ? iconFavouriteActive : iconFavourite}
             alt="icon"
           ></img>
         </Button>

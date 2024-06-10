@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ProductCard } from '../../components/ProductCard/ProductCard';
+// import { ProductCard } from '../../components/ProductCard/ProductCard';
 import styles from './FavouritesPage.module.scss';
 
 export const FavouritesPage = () => {
@@ -32,7 +32,7 @@ export const FavouritesPage = () => {
           favouriteGoods.map(item => {
             return (
               <div key={item} className={styles.product}>
-                <ProductCard />
+                {/* <ProductCard /> */}
               </div>
             );
           })
