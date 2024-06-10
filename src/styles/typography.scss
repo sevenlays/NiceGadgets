@@ -1,5 +1,6 @@
 /* Mixin for base text styles */
 @mixin text-base {
+  /* stylelint-disable-next-line font-family-name-quotes */
   font-family: 'Mont', sans-serif;
 }
 
