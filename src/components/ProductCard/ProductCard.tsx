@@ -11,7 +11,7 @@ import { SingleParam } from './ProductParams/SingleParam/SingleParam';
 /* product object should be props now its just a placeholder ti prevent errors*/
 
 type Props = {
-  product: Product;
+  product?: Product;
   IsDiscount?: boolean;
 };
 
@@ -34,22 +34,22 @@ export const ProductCard: React.FC<Props> = ({
   return (
     <article className={styles.card}>
       <div className={styles.card__image_container}>
-        <img className={styles.card__image} src={product.image} />
+        <img className={styles.card__image} src={product?.image} />
       </div>
-      <h5 className={styles.card__title}>{product.name}</h5>
+      <h5 className={styles.card__title}>{product?.name}</h5>
       <div>
         <p className={styles.card__price}>
           <span
             className={styles.card__price__actual}
-          >{`$${product.price}`}</span>
-          {IsDiscount && <FullPrice fullPrice={product.fullPrice} />}
+          >{`$${product?.price}`}</span>
+          {IsDiscount && <FullPrice fullPrice={product?.fullPrice} />}
         </p>
       </div>
 
       <ProductParams>
-        <SingleParam name="Screen" param={product.screen} />
-        <SingleParam name="Capacity" param={product.capacity} />
-        <SingleParam name="RAM" param={product.ram} />
+        <SingleParam name="Screen" param={product?.screen} />
+        <SingleParam name="Capacity" param={product?.capacity} />
+        <SingleParam name="RAM" param={product?.ram} />
       </ProductParams>
       <div className={styles.buttonsPlaceholder}>
         <Button
