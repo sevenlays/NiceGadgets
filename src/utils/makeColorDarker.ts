@@ -1,3 +1,5 @@
+import getHexFromColorName from './LiteralColorToHex';
+
 export function makeColorDarker(color: string, percentage: number): string {
   // Function to convert hex to decimal
   function hexToDec(hex: string): number {
@@ -31,18 +33,6 @@ export function makeColorDarker(color: string, percentage: number): string {
     ];
   }
 
-  // Function to get color from name
-  function getColorFromName(colorName: string): string {
-    const colors: { [key: string]: string } = {
-      red: '#FF0000',
-      green: '#008000',
-      blue: '#0000FF',
-      // Add more colors as needed
-    };
-
-    return colors[colorName.toLowerCase()] || '';
-  }
-
   let hexColor = '';
 
   // Determine the color format
@@ -53,10 +43,7 @@ export function makeColorDarker(color: string, percentage: number): string {
 
     hexColor = rgbToHex(r, g, b);
   } else {
-    hexColor = getColorFromName(color);
-    if (!hexColor) {
-      throw new Error('Invalid color name');
-    }
+    hexColor = getHexFromColorName(color);
   }
 
   // Extract the components

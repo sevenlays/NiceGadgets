@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 import { makeColorDarker } from '../../utils/makeColorDarker';
 import ArrowLeft from '../../assets/icons/ArrowLeftBold.svg';
+import getHexFromColorName from '../../utils/LiteralColorToHex';
 
 type Size = {
   width?: number;
@@ -46,7 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
     '--btn-height': `${size.height}${measure}`,
     ...(type === 'radio' && color
       ? {
-          '--radio-color': color,
+          '--radio-color': getHexFromColorName(color),
           '--radio-hover-color': darkerColor,
         }
       : {}),
