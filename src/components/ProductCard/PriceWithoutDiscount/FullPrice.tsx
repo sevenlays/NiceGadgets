@@ -1,7 +1,7 @@
 import style from './FullPrice.module.scss';
 
 type Props = {
-  fullPrice: number;
+  fullPrice: number | undefined;
 };
 
 export const FullPrice: React.FC<Props> = ({ fullPrice }) => {

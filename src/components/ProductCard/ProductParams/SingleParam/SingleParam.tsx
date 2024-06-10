@@ -2,7 +2,7 @@ import styles from './SingleParam.module.scss';
 
 type Props = {
   name: string;
-  param: string;
+  param: string | undefined;
 };
 
 export const SingleParam: React.FC<Props> = ({ name, param }) => {

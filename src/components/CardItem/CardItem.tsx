@@ -9,9 +9,14 @@ import { useState } from 'react';
 type Props = {
   product: Product;
   onDeleteClick: (prdouctId: number) => void;
+  calculateTotal: (action: 'increase' | 'decrease', price: number) => void;
 };
 
-export const CardItem: React.FC<Props> = ({ product, onDeleteClick }) => {
+export const CardItem: React.FC<Props> = ({
+  product,
+  onDeleteClick,
+  calculateTotal,
+}) => {
   const [productAmount, setProductAmount] = useState<number>(1);
   const increaseProductAmount = () => {
     setProductAmount(prev => {
@@ -19,6 +24,7 @@ export const CardItem: React.FC<Props> = ({ product, onDeleteClick }) => {
 
       return newAmount;
     });
+    calculateTotal('increase', product.price);
   };
 
   const decreaseProductAmount = () => {
@@ -28,6 +34,7 @@ export const CardItem: React.FC<Props> = ({ product, onDeleteClick }) => {
 
         return newAmount;
       });
+      calculateTotal('decrease', product.price);
     }
   };
 

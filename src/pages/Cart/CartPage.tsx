@@ -140,16 +140,37 @@ export const CartPage = () => {
   const [favouriteProducts, setfavouriteProducts] =
     useState<Product[]>(productsExample);
 
+  const initialTotal = favouriteProducts.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.price;
+  }, 0);
+  const [total, setTotal] = useState(initialTotal);
   const navigate = useNavigate();
 
   const onBackClick = () => {
     navigate(-1);
   };
 
+  const calculateTotal = (action: 'increase' | 'decrease', price: number) => {
+    if (action === 'increase') {
+      setTotal(prev => prev + price);
+    }
+
+    if (action === 'decrease') {
+      setTotal(prev => prev - price);
+    }
+  };
+
   const onDeleteClick = (productId: number) => {
+    const decreasePrice = favouriteProducts.find(
+      product => product.id === productId,
+    );
+
     setfavouriteProducts(prev =>
       prev.filter(product => product.id !== productId),
     );
+    if (decreasePrice) {
+      calculateTotal('decrease', decreasePrice?.price);
+    }
   };
 
   return (
@@ -167,8 +188,9 @@ export const CartPage = () => {
           <CartList
             favouriteProducts={favouriteProducts}
             onDeleteClick={onDeleteClick}
+            calculateTotal={calculateTotal}
           />
-          <CartTotal favouriteProducts={favouriteProducts} />
+          <CartTotal favouriteProducts={favouriteProducts} total={total} />
         </main>
       </section>
     </div>
