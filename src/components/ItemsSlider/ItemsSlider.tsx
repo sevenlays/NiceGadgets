@@ -8,15 +8,18 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { ProductCard } from '../ProductCard/ProductCard';
 import { FC } from 'react';
+import { Product } from '../../pages/Cart/type/ProductType';
 
 interface ItemsSliderProps {
   prevButtonClass: string;
   nextButtonClass: string;
+  arrayToMap: Product[];
 }
 
 export const ItemsSlider: FC<ItemsSliderProps> = ({
   prevButtonClass,
   nextButtonClass,
+  arrayToMap,
 }) => {
   return (
     <div className="itemsSlider-wrapper">
@@ -31,36 +34,13 @@ export const ItemsSlider: FC<ItemsSliderProps> = ({
         }}
         modules={[Autoplay, Navigation]}
       >
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
-        <SwiperSlide>
-          <div className="productCard_wrapper">
-            <ProductCard />
-          </div>
-        </SwiperSlide>
+        {arrayToMap?.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="productCard_wrapper">
+              <ProductCard product={item} />
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

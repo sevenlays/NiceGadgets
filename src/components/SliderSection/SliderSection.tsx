@@ -3,17 +3,20 @@ import { SliderButton } from '../../UI';
 import { ItemsSlider } from '../../components';
 
 import styles from './SliderSection.module.scss';
+import { Product } from '../../pages/Cart/type/ProductType';
 
 interface SliderSectionProps {
   title: string;
   prevButtonClass: string;
   nextButtonClass: string;
+  arrayToMap: Product[];
 }
 
 export const SliderSection: React.FC<SliderSectionProps> = ({
   title,
   prevButtonClass,
   nextButtonClass,
+  arrayToMap,
 }) => (
   <section className={styles['slider-section']}>
     <div className={styles.container}>
@@ -28,6 +31,7 @@ export const SliderSection: React.FC<SliderSectionProps> = ({
     <ItemsSlider
       prevButtonClass={prevButtonClass}
       nextButtonClass={nextButtonClass}
+      arrayToMap={arrayToMap}
     />
   </section>
 );
