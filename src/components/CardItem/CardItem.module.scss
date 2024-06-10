@@ -81,6 +81,15 @@
   }
 }
 
+@media screen and (max-width: 743px) {
+  .cardItem {
+    &__title {
+      width: 178px;
+      word-break: normal;
+    }
+  }
+}
+
 @media screen and (max-width: 1199px) {
   .cardItem {
     width: 100%;
@@ -96,6 +105,7 @@
     flex-direction: column;
     padding: 16px;
     gap: 16px;
+    width: fit-content;
 
     &__product {
       gap: 16px;
