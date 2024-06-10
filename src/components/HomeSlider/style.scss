@@ -1,108 +1,107 @@
 @import '../../styles/colors';
 
-:root {
-  --swiper-navigation-size: 10px;
-}
-
-.wrapper {
+.main-banner {
   position: relative;
-}
+  margin: 0 auto;
 
-.swiper-button-prev {
-  position: absolute;
-  top: 10px;
-  left: 150px;
-}
+  display: flex;
+  justify-content: center;
 
-.swiper {
-  width: 100%;
-  height: 100%;
-  margin-left: auto;
-  margin-right: auto;
-
-  overflow: hidden;
+  gap: 19px;
 
   @media screen and (min-width: 640px) {
-    width: 490px;
+    min-width: 592px;
+    padding-inline: 24px;
   }
 
   @media screen and (min-width: 1200px) {
-    width: 1040px;
+    padding-inline: 32px;
+
+    max-width: 1136px;
+    gap: 16px;
+  }
+
+  .swiper {
+    height: 100%;
+    margin-left: 0;
+    margin-right: 0;
+
+    overflow: hidden;
+
+    @media screen and (min-width: 1200px) {
+      min-width: 1040px;
+    }
+
+    &-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+
+      @media screen and (min-width: 640px) {
+        min-width: 490px;
+      }
+
+      @media screen and (min-width: 1200px) {
+        width: 1040px;
+      }
+    }
+  }
+
+  .button-nav {
+    @media screen and (max-width: 639px) {
+      display: none;
+    }
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 32px;
+
+    border: 1px solid $Icons;
+
+    cursor: pointer;
+
+    transition: all 0.3s linear;
+
+    svg path {
+      fill: $Primary;
+      transition: all 0.3s linear;
+    }
+
+    &:hover {
+      border: 1px solid $Primary;
+    }
+
+    @media screen and (min-width: 1200px) {
+      height: 400px;
+    }
   }
 }
 
 .swiper-pagination {
-  bottom: -28px !important;
+  margin-top: 18px;
 
   position: static;
-}
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: #fff;
-
-  /* Center slide text vertically */
   display: flex;
+  gap: 9px;
   justify-content: center;
-  align-items: center;
-}
+  &-bullet {
+    display: inline-block;
+    width: 14px;
+    height: 4px;
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+    border-radius: 0;
 
-.swiper-button-prev,
-.swiper-button-next {
-  display: none;
-  position: absolute;
+    background-color: $Elements;
 
-  color: $Primary;
+    opacity: 1;
 
-  top: var(--swiper-navigation-top-offset, 44%);
+    transition: all 0.3s linear;
 
-  @media screen and (min-width: 640px) {
-    display: block;
-  }
-  &::after {
-    padding: 91px 12px 84px;
-
-    @media screen and (min-width: 1200px) {
-      padding-top: 184px;
-      padding-bottom: 203px;
+    &-active {
+      background-color: $Primary;
     }
   }
-  &:hover::after {
-    border: 1px solid $Primary;
-  }
-}
-
-.swiper-pagination-bullet {
-  display: inline-block;
-  width: 14px;
-  height: 4px;
-
-  border-radius: 0;
-
-  background-color: $Elements;
-
-  opacity: 1;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: $Primary;
-}
-
-.swiper-button-next,
-.swiper-rtl .swiper-button-prev {
-  right: var(--swiper-navigation-sides-offset, 32px);
-}
-
-/* stylelint-disable-next-line no-descending-specificity */
-.swiper-button-prev,
-.swiper-rtl .swiper-button-next {
-  left: var(--swiper-navigation-sides-offset, 6px);
 }
