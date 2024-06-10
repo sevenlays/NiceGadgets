@@ -3,8 +3,8 @@ import { Product } from '../types/Product';
 export const fetchProducts = (
   url: string,
   property?: keyof Product,
-  value?: any,
-): Promise<any> => {
+  value?: unknown,
+): Promise<Product[]> => {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
