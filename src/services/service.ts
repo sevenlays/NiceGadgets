@@ -4,7 +4,10 @@ const filterByCategory = (products: Product[], category: string): Product[] => {
   return products.filter(product => product.category === category);
 };
 
-export const fetchProducts = (url: string, category?: string): Promise<any> => {
+export const fetchProducts = (
+  url: string,
+  category?: string,
+): Promise<Product[]> => {
   return fetch(url)
     .then(response => {
       if (!response.ok) {

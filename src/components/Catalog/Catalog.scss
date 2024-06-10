@@ -2,13 +2,14 @@
 @import '../../styles/grid';
 
 .catalog {
+  min-height: calc(100vh - 68.8px);
+
   padding-top: 24px;
   padding-bottom: 64px;
 
   @include on-desctop {
     padding-bottom: 80px;
   }
-
 
   &__breadcrumbs {
     display: flex;
