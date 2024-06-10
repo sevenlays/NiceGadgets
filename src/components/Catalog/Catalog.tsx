@@ -102,7 +102,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
       <div className="catalog__list">
         {currentProducts.map(productItem => (
-          <ProductCard product={productItem} />
+          <ProductCard product={productItem} key={productItem.id} />
         ))}
       </div>
 
