@@ -5,19 +5,10 @@
   padding: 8px 0;
   display: flex;
   flex-direction: column;
-  width: 208px;
   gap: 8px;
   font-size: 12px;
-  &__param {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    font-weight: 600;
-    &__name {
-      color: $Secondary;
-    }
-    &__overview {
-      color: $Primary;
-    }
+
+  &__techSpecs {
+    font-size: 14px;
   }
 }

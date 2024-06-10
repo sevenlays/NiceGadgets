@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 import { makeColorDarker } from '../../utils/makeColorDarker';
 import ArrowLeft from '../../assets/icons/ArrowLeftBold.svg';
+import getHexFromColorName from '../../utils/LiteralColorToHex';
 
 type Size = {
   width?: number;
@@ -20,6 +21,7 @@ interface CustomCSSProperties extends React.CSSProperties {
 type ButtonProps = {
   type: 'number' | 'radio' | 'icon' | 'back' | 'primary';
   size: Size;
+  measure?: 'px' | '%';
   state?: 'selected' | 'disabled';
   color?: string;
   onClick?: () => void;
@@ -30,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({
   type,
   state,
   size,
+  measure = 'px',
   color,
   onClick,
   children,
@@ -40,11 +43,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   const darkerColor = color ? makeColorDarker(color, 15) : undefined;
   const style: CustomCSSProperties = {
-    '--btn-width': `${size.width}px`,
-    '--btn-height': `${size.height}px`,
+    '--btn-width': `${size.width}${measure}`,
+    '--btn-height': `${size.height}${measure}`,
     ...(type === 'radio' && color
       ? {
-          '--radio-color': color,
+          '--radio-color': getHexFromColorName(color),
           '--radio-hover-color': darkerColor,
         }
       : {}),

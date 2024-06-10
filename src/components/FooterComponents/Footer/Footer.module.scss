@@ -1,0 +1,28 @@
+@import '../../../styles/colors';
+@import '../../../styles/grid';
+
+.container {
+  @include container;
+}
+
+.footer {
+  padding-block: 32px;
+
+  border-top: 1px solid $Icons;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    margin: 0 auto;
+  }
+}
+
+@media (min-width: 640px) {
+  .footer__wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

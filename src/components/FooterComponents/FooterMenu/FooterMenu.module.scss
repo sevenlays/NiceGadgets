@@ -1,0 +1,40 @@
+@import '../../../styles/colors';
+
+.nav {
+  text-transform: uppercase;
+
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 11px;
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  &__link {
+    color: $Icons;
+
+    transition: 0.3s color;
+    &:hover {
+      color: $Primary;
+    }
+  }
+}
+
+@media (min-width: 640px) {
+  .nav {
+    &__list {
+      flex-direction: row;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .nav {
+    &__list {
+      flex-direction: row;
+      gap: 106px;
+    }
+  }
+}

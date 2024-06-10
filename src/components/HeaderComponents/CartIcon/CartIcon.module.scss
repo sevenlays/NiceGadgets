@@ -1,0 +1,24 @@
+@import '../../../styles/colors';
+@import '../../../styles/icons';
+
+.icon {
+  display: none;
+  width: 50px;
+
+  @include underline;
+  &_active {
+    @include underline-active;
+  }
+}
+
+@media (min-width: 640px) {
+  .icon {
+    display: flex;
+  }
+}
+
+@media (min-width: 1440px) {
+  .icon {
+    width: 64px;
+  }
+}

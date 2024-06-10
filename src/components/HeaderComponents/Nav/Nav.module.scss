@@ -1,0 +1,79 @@
+@import '../../../styles/colors';
+@import '../../../styles/icons';
+
+.nav {
+  display: flex;
+  flex-grow: 1;
+  align-self: center;
+
+  padding: 24px 16px;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 800;
+  }
+
+  &__link {
+    display: flex;
+
+    position: relative;
+
+    color: $Secondary;
+    padding: 8px 0;
+
+    @include underline;
+  
+    &_active {
+      @include underline-active;
+    }
+  }
+}
+
+
+
+@media (min-width: 640px) {
+  .nav {
+    font-weight: 800;
+    font-size: 12px;
+    
+    padding: 0;
+    margin-left: 13px;
+    &__list {
+      line-height: 14px;
+      flex-direction: row;
+      gap: 32px;
+    }
+    &__link {
+      padding-block: 18px;
+      text-transform: uppercase;
+  
+      &:hover {
+        @include underline-active;
+      }
+      &_active {
+        @include underline-active;
+      }
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  .nav {
+    margin-left: 24px;
+
+    line-height: 10px;
+    &__list {
+      gap: 64px;
+    }
+    &__link {
+      padding-block: 27px;
+    }
+  }
+}

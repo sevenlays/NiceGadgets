@@ -1,0 +1,18 @@
+@import '../../../styles/colors';
+
+.withoutDiscount {
+  color: $Secondary;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 50%;
+    width: 100%;
+    height: 1px;
+    background-color: $Secondary;
+    mix-blend-mode: color-dodge;
+    transform: scaleY(1);
+  }
+}

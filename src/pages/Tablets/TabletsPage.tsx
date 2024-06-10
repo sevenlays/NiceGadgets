@@ -1,3 +1,9 @@
+import { Catalog } from '../../components/Catalog/Catalog';
+
 export const TabletsPage = () => {
-  return <div>TabletsPage</div>;
+  return (
+    <div className="page__container">
+      <Catalog productType="Tablets" />
+    </div>
+  );
 };
