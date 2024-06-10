@@ -1,10 +1,10 @@
 import { Product } from '../types/Product';
 
-export const fetchProducts = (
-  url: string,
-  property?: keyof Product,
-  value?: any,
-): Promise<any> => {
+const filterByCategory = (products: Product[], category: string): Product[] => {
+  return products.filter(product => product.category === category);
+};
+
+export const fetchProducts = (url: string, category?: string): Promise<any> => {
   return fetch(url)
     .then(response => {
       if (!response.ok) {
@@ -14,8 +14,8 @@ export const fetchProducts = (
       return response.json();
     })
     .then((data: Product[]) => {
-      if (property && value) {
-        return data.filter(product => product[property] === value);
+      if (category) {
+        return filterByCategory(data, category);
       }
 
       return data;

@@ -69,7 +69,6 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   useEffect(() => {
     fetchProducts(
       '/react_phone-catalog/api/products.json',
-      'category',
       productType.toLowerCase(),
     ).then(data => {
       setProducts(data);
@@ -103,7 +102,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
       <div className="catalog__list">
         {currentProducts.map(productItem => (
-          <ProductCard product={productItem} key={productItem.id} />
+          <ProductCard product={productItem} />
         ))}
       </div>
 
