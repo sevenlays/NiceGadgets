@@ -20,7 +20,7 @@ type Props = {
 export const Catalog: React.FC<Props> = ({ productType }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(99999);
+  const [itemsPerPage, setItemsPerPage] = useState(150);
   const [translate, setTranslate] = useState(0);
   const [sortBy, setSortBy] = useState<string>('year');
 
@@ -102,11 +102,11 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
       <div className="catalog__list">
         {currentProducts.map(productItem => (
-          <ProductCard product={productItem} key={productItem.id} />
+          <ProductCard product={productItem} />
         ))}
       </div>
 
-      {itemsPerPage !== products.length && (
+      {itemsPerPage < products.length && (
         <div className="catalog__pagination">
           <div className="catalog__pagination__left">
             {currentPage === 1 ? (

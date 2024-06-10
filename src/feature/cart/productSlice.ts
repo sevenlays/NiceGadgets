@@ -3,18 +3,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface ProductStorageState {
   cart: string[];
   favorites: string[];
-  selectedButtons: {
-    [productId: string]: {
-      primary: boolean;
-      favourite: boolean;
-    };
-  };
 }
 
 const initialState: ProductStorageState = {
   cart: [],
   favorites: [],
-  selectedButtons: {},
 };
 
 const productSlice = createSlice({
