@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Product } from '../../types/Product';
 
 type Props = {
-  product: Product;
+  product?: Product;
 };
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
@@ -26,18 +26,18 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   return (
     <article className={styles.card}>
       <div className={styles.card__imageBlock}>
-        <img className={styles.card__imageBlock__image} src={product.image} />
+        <img className={styles.card__imageBlock__image} src={product?.image} />
       </div>
       <div className={styles.card__top}>
-        <h1 className={styles.card__top__title}>{product.name}</h1>
+        <h1 className={styles.card__top__title}>{product?.name}</h1>
         <div>
           <p className={styles.card__top__price}>
             <span
               className={styles.card__top__price__actual}
-            >{`$${product.price}`}</span>
+            >{`$${product?.price}`}</span>
             <div
               className={styles.card__top__price__withoutDiscount}
-            >{`$${product.fullPrice}`}</div>
+            >{`$${product?.fullPrice}`}</div>
           </p>
         </div>
       </div>
@@ -46,18 +46,18 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
         <div className={styles.phoneParams__param}>
           <p className={styles.phoneParams__param__name}>Screen</p>
           <p className={styles.phoneParams__param__overview}>
-            {product.screen}
+            {product?.screen}
           </p>
         </div>
         <div className={styles.phoneParams__param}>
           <p className={styles.phoneParams__param__name}>Capacity</p>
           <p className={styles.phoneParams__param__overview}>
-            {product.capacity}
+            {product?.capacity}
           </p>
         </div>
         <div className={styles.phoneParams__param}>
           <p className={styles.phoneParams__param__name}>RAM</p>
-          <p className={styles.phoneParams__param__overview}>{product.ram}</p>
+          <p className={styles.phoneParams__param__overview}>{product?.ram}</p>
         </div>
       </section>
       <div className={styles.buttonsPlaceholder}>
