@@ -13,9 +13,6 @@ import {
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
-  console.log('productsHOT', getHotPrices(products));
-  console.log('productsBRAND', getBrandNewModels(products));
-
   useEffect(() => {
     fetchProducts('/react_phone-catalog/api/products.json').then(data => {
       setProducts(data);
