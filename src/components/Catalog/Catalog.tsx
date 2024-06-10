@@ -106,7 +106,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
         ))}
       </div>
 
-      {itemsPerPage <= products.length && (
+      {itemsPerPage < products.length && (
         <div className="catalog__pagination">
           <div className="catalog__pagination__left">
             {currentPage === 1 ? (
