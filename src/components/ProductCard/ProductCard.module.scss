@@ -1,17 +1,35 @@
 @import '../../styles/colors';
+@import '../../styles/grid';
 
 .card {
   padding: 32px;
   border: 1px solid $Elements;
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
 
-  &__image {
-    height: 100%;
-    width: 208px;
+  &__image_container {
+    display: flex;
+    justify-content: center;
+  }
+
+  grid-column: span 4;
+
+  @include on-big-mobile {
+    grid-column: span 2;
+  }
+
+  @include on-tablet {
+    grid-column: span 6;
+  }
+
+  @include on-big-tablet {
+    grid-column: span 4;
+  }
+
+  @include on-desctop {
+    grid-column: span 6;
   }
 
   &__title {
@@ -19,8 +37,13 @@
     font-size: 14px;
     line-height: 21px;
     font-weight: 600;
-    width: 208px;
     color: $Primary;
+    width: 100%;
+    flex-grow: 1;
+  }
+  &__image {
+    height: 100%;
+    object-fit: cover;
   }
 
   &__price {
@@ -28,11 +51,10 @@
     font-weight: 700;
     font-size: 22px;
     line-height: 30.8px;
-    width: 208px;
     gap: 8px;
     color: $Primary;
     position: relative;
-    
+
     ::after {
       content: '';
       display: block;
@@ -69,5 +91,4 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
-
 }
