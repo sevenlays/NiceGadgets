@@ -14,12 +14,14 @@ interface ItemsSliderProps {
   prevButtonClass: string;
   nextButtonClass: string;
   arrayToMap: Product[];
+  withDiscount: boolean | undefined;
 }
 
 export const ItemsSlider: FC<ItemsSliderProps> = ({
   prevButtonClass,
   nextButtonClass,
   arrayToMap,
+  withDiscount,
 }) => {
   return (
     <div className="itemsSlider-wrapper">
@@ -37,7 +39,7 @@ export const ItemsSlider: FC<ItemsSliderProps> = ({
         {arrayToMap?.map((item, index) => (
           <SwiperSlide key={index}>
             <div className="productCard_wrapper">
-              <ProductCard product={item} />
+              <ProductCard product={item} IsDiscount={withDiscount} />
             </div>
           </SwiperSlide>
         ))}
