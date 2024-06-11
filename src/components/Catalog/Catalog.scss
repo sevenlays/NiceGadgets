@@ -11,23 +11,6 @@
     padding-bottom: 80px;
   }
 
-  &__breadcrumbs {
-    display: flex;
-    align-items: end;
-    gap: 8px;
-    margin-bottom: 24px;
-
-    @include on-tablet {
-      margin-bottom: 40px;
-    }
-
-    &__text {
-      font-size: 12px;
-      line-height: 15.34px;
-      color: $Secondary;
-    }
-  }
-
   &__title {
     margin-bottom: 8px;
     font-weight: 800;
