@@ -11,6 +11,7 @@ import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
 import { SingleParam } from '../../components/ProductCard/ProductParams/SingleParam/SingleParam';
 import getHexFromColorName from '../../utils/LiteralColorToHex';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const item = {
   id: 'apple-iphone-11-128gb-black',
@@ -111,6 +112,23 @@ export const ItemDetailsPage = () => {
   const [capacity, setCapacity] = useState(item.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
 
+  // ADDED NAVIGATE AND VARIABLES FOR FINDING Product //
+
+  const navigate = useNavigate();
+
+  const phoneId = useParams();
+  const tabletId = useParams();
+  const accessoriesId = useParams();
+
+  window.console.log(phoneId, tabletId, accessoriesId);
+
+  const handleBackClick = (event: React.MouseEvent) => {
+    event.preventDefault();
+    navigate(-1);
+  };
+
+  // ADDED NAVIGATE AND VARIABLES FOR FINDING Product //
+
   useEffect(() => {
     const handleResize = () => {
       const size = window.innerWidth;
@@ -134,7 +152,7 @@ export const ItemDetailsPage = () => {
   return (
     <div className={styles.page__container}>
       <div className={styles.breadcrumbs}>breadcrumbs</div>
-      <a href="#" className={styles.back}>
+      <a href="#" className={styles.back} onClick={handleBackClick}>
         <img src={iconLeft} /> Back
       </a>
       <h3 className={styles.title}>{item.name}</h3>
