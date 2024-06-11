@@ -38,8 +38,6 @@ export const ProductCard: React.FC<Props> = ({
 
   const isInFavorites = favorites.includes(product?.itemId);
 
-  window.console.log(cart);
-
   const handleToggleToCart = () => {
     if (isInCart) {
       dispatch(removeFromCart(product.itemId));

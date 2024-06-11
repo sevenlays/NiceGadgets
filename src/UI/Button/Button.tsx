@@ -24,6 +24,7 @@ type ButtonProps = {
   measure?: 'px' | '%';
   state?: 'selected' | 'disabled';
   color?: string;
+  style?: React.CSSProperties;
   onClick?: () => void;
   children?: React.ReactNode;
 };
@@ -34,6 +35,7 @@ export const Button: React.FC<ButtonProps> = ({
   size,
   measure = 'px',
   color,
+  style: inlineStyle,
   onClick,
   children,
 }) => {
@@ -51,6 +53,7 @@ export const Button: React.FC<ButtonProps> = ({
           '--radio-hover-color': darkerColor,
         }
       : {}),
+    ...inlineStyle,
   };
 
   return (
