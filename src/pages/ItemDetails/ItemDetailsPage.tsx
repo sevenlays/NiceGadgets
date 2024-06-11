@@ -7,9 +7,10 @@ import classNames from 'classnames';
 import { Button } from '../../UI';
 import { ProductParams } from '../../components/ProductCard/ProductParams/ProductParams';
 import { makeColorDarker } from '../../utils/makeColorDarker';
-
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import { SingleParam } from '../../components/ProductCard/ProductParams/SingleParam/SingleParam';
+import getHexFromColorName from '../../utils/LiteralColorToHex';
 
 const item = {
   id: 'apple-iphone-11-128gb-black',
@@ -105,35 +106,7 @@ const images = [
 
 type Orientation = 'bottom' | 'left';
 
-function colorNameToHex(color: string) {
-  // Створення тимчасового елемента
-  const tempElement = document.createElement('div');
-
-  tempElement.style.color = color;
-  document.body.appendChild(tempElement);
-
-  // Отримання значення кольору в форматі RGB
-  const computedColor = getComputedStyle(tempElement).color;
-
-  document.body.removeChild(tempElement);
-
-  // Вилучення значень R, G, B з отриманого рядка
-  const rgbValues = computedColor.match(/\d+/g)?.map(Number);
-
-  if (!rgbValues) {
-    throw new Error('Invalid color value');
-  }
-
-  const hexColor = rgbValues
-    .map(value => value.toString(16).padStart(2, '0'))
-    .join('');
-
-  return `#${hexColor}`;
-}
-
 export const ItemDetailsPage = () => {
-  // https://github.com/xiaolin/react-image-gallery
-
   const [color, setColor] = useState(item.color);
   const [capacity, setCapacity] = useState(item.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
@@ -183,8 +156,8 @@ export const ItemDetailsPage = () => {
             </div>
             <ul className={styles.colors__list}>
               {item.colorsAvailable.map(colorFromServer => {
-                const hex = colorNameToHex(colorFromServer) as string;
-                const darkerColor = makeColorDarker(hex, 15);
+                const hexColor = getHexFromColorName(colorFromServer);
+                const darkerColor = makeColorDarker(hexColor, 10);
 
                 return (
                   <li
@@ -252,8 +225,13 @@ export const ItemDetailsPage = () => {
             </div>
           </div>
 
-          <div className="params">
-            <ProductParams phoneParams={item} />
+          <div className={styles.params}>
+            <ProductParams>
+              <SingleParam name="Screen" param={item?.screen} />
+              <SingleParam name="Resolution" param={item?.resolution} />
+              <SingleParam name="Processor" param={item?.processor} />
+              <SingleParam name="RAM" param={item?.ram} />
+            </ProductParams>
           </div>
         </div>
       </div>
@@ -275,38 +253,16 @@ export const ItemDetailsPage = () => {
         <div className={styles.divider}></div>
 
         <div className={styles.params}>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Screen</div>
-            <div className={styles.params__value}>{item.screen}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Resolution</div>
-            <div className={styles.params__value}>{item.resolution}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Processor</div>
-            <div className={styles.params__value}>{item.processor}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>RAM</div>
-            <div className={styles.params__value}>{item.ram}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Built in memory</div>
-            <div className={styles.params__value}>{item.capacity}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Camera</div>
-            <div className={styles.params__value}>{item.camera}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Zoom</div>
-            <div className={styles.params__value}>{item.zoom}</div>
-          </div>
-          <div className={styles.params__wrapper}>
-            <div className={styles.params__name}>Cell</div>
-            <div className={styles.params__value}>{item.cell}</div>
-          </div>
+          <ProductParams techSpecs={true}>
+            <SingleParam name="Screen" param={item?.screen} />
+            <SingleParam name="Resolution" param={item?.resolution} />
+            <SingleParam name="Processor" param={item?.processor} />
+            <SingleParam name="RAM" param={item?.ram} />
+            <SingleParam name="Built in memory" param={item?.capacity} />
+            <SingleParam name="Camera" param={item?.camera} />
+            <SingleParam name="Zoom" param={item?.zoom} />
+            <SingleParam name="Cell" param={item?.cell.join(', ')} />
+          </ProductParams>
         </div>
       </div>
     </div>

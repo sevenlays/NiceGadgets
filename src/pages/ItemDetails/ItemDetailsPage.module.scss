@@ -271,15 +271,18 @@
   }
 }
 
-.about {
+.tech {
+  margin-top: 0;
+
   @include on-desctop {
-    grid-column: span 12;
+    margin-top: 56px;
+    grid-column: 14 / span 11;
   }
 }
 
-.tech {
+.about {
   @include on-desctop {
-    grid-column: 14 / span 11;
+    grid-column: span 12;
   }
 }
 
@@ -313,22 +316,10 @@
 .params {
   margin-top: 30px;
 
-  &__wrapper {
-    margin-top: 8px;
+  grid-column: 1 / -1;
 
-    display: flex;
-    justify-content: space-between;
-
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 21px;
-  }
-
-  &__name {
-    color: $Secondary;
-  }
-  &__value {
-    color: $Primary;
+  @include on-tablet {
+    grid-column: span 5;
   }
 }
 
