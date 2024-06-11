@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
 import iconFav from '../../assets/icons/Favourites.svg';
 import styles from './ItemDetailsPage.module.scss';
@@ -7,6 +7,9 @@ import classNames from 'classnames';
 import { Button } from '../../UI';
 import { ProductParams } from '../../components/ProductCard/ProductParams/ProductParams';
 import { makeColorDarker } from '../../utils/makeColorDarker';
+
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const item = {
   id: 'apple-iphone-11-128gb-black',
@@ -57,6 +60,51 @@ const item = {
   cell: ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE'],
 };
 
+const images = [
+  {
+    original:
+      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/3/2/3207787065_2.jpg/w_600',
+    thumbnail:
+      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/3/2/3207787065_2.jpg',
+    originalHeight: 200,
+    originalWidth: 200,
+  },
+  {
+    original:
+      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-2__ww-ua_1__1.jpg/w_600',
+    thumbnail:
+      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-2__ww-ua_1__1.jpg',
+    originalHeight: 200,
+    originalWidth: 200,
+  },
+  {
+    original:
+      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-3__ww-ua_1_.jpg/w_600',
+    thumbnail:
+      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-3__ww-ua_1_.jpg',
+    originalHeight: 200,
+    originalWidth: 200,
+  },
+  {
+    original:
+      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-4__ww-ua_1__1.jpg/w_600',
+    thumbnail:
+      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-4__ww-ua_1__1.jpg',
+    originalHeight: 200,
+    originalWidth: 200,
+  },
+  {
+    original:
+      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-6__ww-ua_1.jpg/w_600',
+    thumbnail:
+      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-6__ww-ua_1.jpg',
+    originalHeight: 200,
+    originalWidth: 200,
+  },
+];
+
+type Orientation = 'bottom' | 'left';
+
 function colorNameToHex(color: string) {
   // Створення тимчасового елемента
   const tempElement = document.createElement('div');
@@ -88,6 +136,27 @@ export const ItemDetailsPage = () => {
 
   const [color, setColor] = useState(item.color);
   const [capacity, setCapacity] = useState(item.capacity);
+  const [orientation, setOrientation] = useState<Orientation>('bottom');
+
+  useEffect(() => {
+    const handleResize = () => {
+      const size = window.innerWidth;
+
+      if (size > 650) {
+        setOrientation('left');
+      } else {
+        setOrientation('bottom');
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className={styles.page__container}>
@@ -97,7 +166,15 @@ export const ItemDetailsPage = () => {
       </a>
       <h3 className={styles.title}>{item.name}</h3>
       <div className={styles.product}>
-        <div className={styles.product__gallary}></div>
+        <div className={styles.product__gallary}>
+          <ImageGallery
+            items={images}
+            showNav={false}
+            thumbnailPosition={orientation}
+            showFullscreenButton={false}
+            showPlayButton={false}
+          />
+        </div>
         <div className={styles.product__settings}>
           <div className={styles.colors}>
             <div className={styles.colors__wrapper}>

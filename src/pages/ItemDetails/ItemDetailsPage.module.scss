@@ -6,7 +6,7 @@
   @include page-grid;
   @include container;
 
-  border-collapse:unset;
+  border-collapse: unset;
 }
 
 .breadcrumbs {
@@ -46,7 +46,7 @@
   grid-column: 1 / -1;
 
   @include on-tablet {
-    font-size: 32px; 
+    font-size: 32px;
   }
 }
 
@@ -59,8 +59,6 @@
     margin-top: 32px;
 
     grid-column: 1 / -1;
-    background-color: #f8c993;
-    height: 288px;
     width: 100%;
 
     @include on-tablet {
@@ -205,7 +203,6 @@
   @include on-tablet {
     grid-column: span 5;
   }
-  
 }
 
 .price {
@@ -334,3 +331,8 @@
     color: $Primary;
   }
 }
+
+
+/* Gallery */ 
+
+/* Gallery */ 
