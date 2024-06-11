@@ -10,6 +10,7 @@ interface SliderSectionProps {
   prevButtonClass: string;
   nextButtonClass: string;
   arrayToMap: Product[];
+  withDiscount?: boolean | undefined;
 }
 
 export const SliderSection: React.FC<SliderSectionProps> = ({
@@ -17,6 +18,7 @@ export const SliderSection: React.FC<SliderSectionProps> = ({
   prevButtonClass,
   nextButtonClass,
   arrayToMap,
+  withDiscount,
 }) => (
   <section className={styles['slider-section']}>
     <div className={styles.container}>
@@ -32,6 +34,7 @@ export const SliderSection: React.FC<SliderSectionProps> = ({
       prevButtonClass={prevButtonClass}
       nextButtonClass={nextButtonClass}
       arrayToMap={arrayToMap}
+      withDiscount={withDiscount}
     />
   </section>
 );

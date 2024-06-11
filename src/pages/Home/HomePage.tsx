@@ -72,6 +72,7 @@ export const HomePage = () => {
         prevButtonClass="buttonHotPrice-prev"
         nextButtonClass="buttonHotPrice-next"
         arrayToMap={getHotPrices(products)}
+        withDiscount={true}
       />
     </div>
   );
