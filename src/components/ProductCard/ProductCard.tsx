@@ -9,14 +9,16 @@ import { FullPrice } from './PriceWithoutDiscount/FullPrice';
 import { SingleParam } from './ProductParams/SingleParam/SingleParam';
 
 /* product object should be props now its just a placeholder ti prevent errors*/
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 import {
   addToCart,
   addToFavorites,
   removeFromCart,
   removeFromFavorites,
-} from '../../feature/cart/productSlice';
+  selectCart,
+  selectfavorites,
+} from '../../redux/app/appSlice';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type Props = {
   product: Product;
@@ -27,12 +29,10 @@ export const ProductCard: React.FC<Props> = ({
   product,
   IsDiscount = false,
 }) => {
-  const cart = useSelector((state: RootState) => state.productStorage.cart);
-  const favorites = useSelector(
-    (state: RootState) => state.productStorage.favorites,
-  );
+  const cart = useSelector(selectCart);
+  const favorites = useSelector(selectfavorites);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const isInCart = cart.includes(product?.itemId);
 
