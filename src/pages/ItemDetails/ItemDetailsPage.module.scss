@@ -1,0 +1,329 @@
+@import '../../styles/colors';
+@import '../../styles/animations';
+@import '../../styles/grid';
+
+.page__container {
+  @include page-grid;
+  @include container;
+
+  border-collapse: unset;
+}
+
+.breadcrumbs {
+  height: 16px;
+  margin-top: 24px;
+
+  grid-column: 1 / -1;
+}
+
+.back {
+  margin-top: 24px;
+
+  font-size: 12px;
+  color: $Secondary;
+  height: 16px;
+  font-weight: 600;
+
+  display: flex;
+  align-items: center;
+
+  grid-column: 1 / -1;
+
+  @include hover(color, $Primary);
+  img {
+    color: $Primary;
+    margin-right: 10px;
+  }
+}
+
+.title {
+  margin-top: 16px;
+
+  font-size: 22px;
+  font-weight: 800;
+  color: $Primary;
+
+  grid-column: 1 / -1;
+
+  @include on-tablet {
+    font-size: 32px;
+  }
+}
+
+.product {
+  grid-column: 1 / -1;
+
+  @include page-grid;
+
+  &__gallary {
+    margin-top: 32px;
+
+    grid-column: 1 / -1;
+    width: 100%;
+
+    @include on-tablet {
+      grid-column: span 7;
+    }
+
+    @include on-desctop {
+      grid-column: span 12;
+    }
+  }
+
+  &__settings {
+    display: grid;
+    grid-column: 1 / -1;
+    margin-top: 32px;
+
+    @include on-tablet {
+      grid-column: span 5;
+    }
+
+    @include on-desctop {
+      grid-column: 14 / span 11;
+    }
+  }
+
+  &__id {
+    font-size: 12px;
+    font-weight: 600;
+    color: $Icons;
+  }
+
+  .colors {
+    grid-column: 1 / -1;
+
+    margin-bottom: 24px;
+
+    font-size: 12px;
+    font-weight: 600;
+    color: $Secondary;
+
+    &__wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__list {
+      margin-top: 8px;
+
+      display: flex;
+      gap: 12px;
+    }
+
+    &__inner {
+      display: flex;
+
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      opacity: 60%;
+
+      @include hover(opacity, 80%);
+    }
+
+    &__outer {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid $Icons;
+      background-color: transparent;
+      cursor: pointer;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include hover(border-color, $Primary);
+
+      &_active {
+        border-color: $Primary;
+
+        .colors__inner {
+          opacity: 80%;
+        }
+      }
+    }
+
+    @include on-tablet {
+      grid-column: span 5;
+    }
+  }
+}
+
+.divider {
+  grid-column: 1 / -1;
+
+  height: 1px;
+  background-color: $Icons;
+
+  @include on-tablet {
+    grid-column: span 5;
+  }
+}
+
+.capacity {
+  margin-top: 24px;
+  margin-bottom: 24px;
+
+  grid-column: 1 / -1;
+
+  font-size: 12px;
+  font-weight: 600;
+  color: $Secondary;
+
+  &__list {
+    margin-top: 8px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  &__item {
+    display: flex;
+
+    color: $Primary;
+    padding: 8px;
+    border: 1px solid $Icons;
+
+    cursor: pointer;
+
+    @include hover(background-color, $Primary);
+    @include hover(color, $White);
+    @include hover(border-color, $Primary);
+
+    &_active {
+      background-color: $Primary;
+      color: $White;
+      border-color: $Primary;
+    }
+  }
+
+  @include on-tablet {
+    grid-column: span 5;
+  }
+}
+
+.price {
+  margin-top: 32px;
+  margin-bottom: 16px;
+
+  grid-column: 1 / -1;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  letter-spacing: -1px;
+
+  &__discount {
+    font-size: 32px;
+    font-weight: 800;
+    color: $Primary;
+  }
+
+  &__regular {
+    font-size: 22px;
+    font-weight: 400;
+    color: $Secondary;
+    text-decoration: line-through;
+  }
+
+  @include on-tablet {
+    grid-column: span 5;
+  }
+}
+
+.buttons {
+  grid-column: 1 / -1;
+
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+
+  &__addToCard {
+    flex-grow: 1;
+  }
+
+  @include on-tablet {
+    grid-column: span 5;
+  }
+}
+
+.about,
+.tech {
+  margin-top: 56px;
+  margin-bottom: 56px;
+
+  grid-column: 1 / -1;
+
+  &__title {
+    margin-bottom: 16px;
+
+    font-size: 20px;
+    font-weight: 700;
+    color: $Primary;
+  }
+
+  @include on-tablet {
+    font-size: 22px;
+  }
+}
+
+.tech {
+  margin-top: 0;
+
+  @include on-desctop {
+    margin-top: 56px;
+    grid-column: 14 / span 11;
+  }
+}
+
+.about {
+  @include on-desctop {
+    grid-column: span 12;
+  }
+}
+
+.description {
+  grid-column: 1 / -1;
+
+  &__item {
+    margin-top: 32px;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    color: $Primary;
+
+    @include on-tablet {
+      font-size: 20px;
+    }
+  }
+
+  &__body {
+    margin-top: 16px;
+
+    font-size: 16px;
+    font-weight: 400;
+    color: $Secondary;
+    line-height: 150%;
+  }
+}
+
+.params {
+  margin-top: 30px;
+
+  grid-column: 1 / -1;
+
+  @include on-tablet {
+    grid-column: span 5;
+  }
+}
+
+
+/* Gallery */ 
+
+/* Gallery */ 
