@@ -3,7 +3,7 @@
 import './Catalog.scss';
 import { useEffect, useState } from 'react';
 
-import { fetchProducts } from '../../services/service';
+import { getProduct } from '../../services/service';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Product } from '../../types/Product';
 import { DropdownMenu } from '../../UI';
@@ -50,11 +50,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   };
 
   useEffect(() => {
-    fetchProducts(
-      '/react_phone-catalog/api/products.json',
-      'category',
-      productType.toLowerCase(),
-    ).then(data => {
+    getProduct('products', 'category', productType.toLowerCase()).then(data => {
       setProducts(data);
     });
   }, [productType]);
