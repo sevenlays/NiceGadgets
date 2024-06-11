@@ -9,9 +9,6 @@ import { Product } from '../../types/Product';
 import { DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
-import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
-import { Breadcrumb } from '../../types/Breadcrumb';
-import { PATHS } from '../../constants';
 
 const SORTBY_OPTIONS = ['Newest', 'Alphabetically', 'Cheapest'];
 const ITEMS_ON_PAGE = ['All', '4', '8', '16'];
@@ -25,10 +22,6 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(150);
   const [sortBy, setSortBy] = useState<string>('year');
-
-  const breadcrumbsData: Breadcrumb[] = [
-    { label: productType, path: PATHS.HOME + productType.toLowerCase() },
-  ];
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const sortedPhones = sortProduct([...products], sortBy);
@@ -68,8 +61,6 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
   return (
     <div className="catalog">
-      <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
-
       <h2 className="catalog__title">{productType}</h2>
 
       <p className="catalog__subtitle">{products && products.length} models</p>

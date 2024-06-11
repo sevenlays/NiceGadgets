@@ -2,13 +2,21 @@
 @import '../../styles/grid';
 
 .catalog {
-  min-height: calc(100vh - 68.8px);
+  &__breadcrumbs {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    margin-bottom: 24px;
 
-  padding-top: 24px;
-  padding-bottom: 64px;
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
 
-  @include on-desctop {
-    padding-bottom: 80px;
+    &__text {
+      font-size: 12px;
+      line-height: 15.34px;
+      color: $Secondary;
+    }
   }
 
   &__title {
@@ -44,5 +52,48 @@
     @include on-tablet {
       margin-bottom: 40px;
     }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding-inline: 20px;
+    transition: transform 3s;
+
+    &__numbers {
+      display: flex;
+      width: 192px;
+      overflow: hidden;
+      gap: 8px;
+      transition: transform 3s;
+    }
+  }
+}
+
+.pagination-number {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  line-height: px;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 32px;
+  min-height: 32px;
+  background-color: $White;
+  border: 1px solid $Elements;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    transform 0.3s ease-in-out;
+
+  &.selected {
+    background-color: $Primary;
+    color: $White;
+  }
+
+  &:hover:not(.selected) {
+    border-color: $Primary;
   }
 }
