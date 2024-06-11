@@ -1,10 +1,14 @@
 import { Product } from '../types/Product';
 
-export const fetchProducts = (
-  url: string,
+const BASE_URL = '/react_phone-catalog/api/';
+
+export const getProduct = (
+  category: string,
   property?: keyof Product,
   value?: unknown,
-): Promise<Product[]> => {
+) => {
+  const url = BASE_URL + category + '.json';
+
   return fetch(url)
     .then(response => {
       if (!response.ok) {

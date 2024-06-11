@@ -4,7 +4,7 @@ import { SliderSection, HomeSlider } from '../../components';
 import styles from './HomePage.module.scss';
 import { Product } from '../Cart/type/ProductType';
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '../../services/service';
+import { getProduct } from '../../services/service';
 import {
   getBrandNewModels,
   getHotPrices,
@@ -14,7 +14,7 @@ export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetchProducts('/react_phone-catalog/api/products.json').then(data => {
+    getProduct('products').then(data => {
       setProducts(data);
     });
   }, []);
@@ -72,6 +72,7 @@ export const HomePage = () => {
         prevButtonClass="buttonHotPrice-prev"
         nextButtonClass="buttonHotPrice-next"
         arrayToMap={getHotPrices(products)}
+        withDiscount={true}
       />
     </div>
   );

@@ -25,7 +25,7 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({
   product,
-  IsDiscount = true,
+  IsDiscount = false,
 }) => {
   const cart = useSelector((state: RootState) => state.productStorage.cart);
   const favorites = useSelector(
@@ -37,8 +37,6 @@ export const ProductCard: React.FC<Props> = ({
   const isInCart = cart.includes(product?.itemId);
 
   const isInFavorites = favorites.includes(product?.itemId);
-
-  window.console.log(cart);
 
   const handleToggleToCart = () => {
     if (isInCart) {
