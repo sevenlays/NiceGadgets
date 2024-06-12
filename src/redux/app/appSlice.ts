@@ -64,7 +64,7 @@ const appSlice = createSlice({
     selectAccessories: state => state.products.accessories,
     selectTablets: state => state.products.tablets,
     selectAllProducts: createSelector(
-      state => state.products,
+      (state: AppStorageState) => state.products,
       products => {
         const { phones, accessories, tablets } = products;
         return [...phones, ...accessories, ...tablets];
