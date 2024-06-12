@@ -1,4 +1,4 @@
-import css from './Pagination.module.scss';
+import styles from './Pagination.module.scss';
 import React from 'react';
 import ArrowLeftBold from '../../assets/icons/ArrowLeftBold.svg';
 import ArrowRightBold from '../../assets/icons/ArrowRightBold.svg';
@@ -36,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className={css.pagination}>
+    <div className={styles.pagination}>
       <div>
         {currentPage === 1 ? (
           <Button type="icon" size={{ height: 32 }} state="disabled">
@@ -53,7 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({
         )}
       </div>
 
-      <div className={css.pagination__numbers}>
+      <div className={styles.pagination__numbers}>
         {pageNumbers.map(page => {
           return currentPage === page ? (
             <Button
