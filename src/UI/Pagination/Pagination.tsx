@@ -1,4 +1,4 @@
-import './Pagination.scss';
+import css from './Pagination.module.scss';
 import React from 'react';
 import ArrowLeftBold from '../../assets/icons/ArrowLeftBold.svg';
 import ArrowRightBold from '../../assets/icons/ArrowRightBold.svg';
@@ -24,7 +24,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const maxTranslate = -(totalPages - 5) * (itemWidth + gapWidth);
   const newTranslate = Math.max(Math.min(translate, 0), maxTranslate);
 
-  const styles = {
+  const dynamicStyles = {
     transform: `translateX(${newTranslate}px)`,
     transition: BUTTON_TRANSITION,
   };
@@ -36,7 +36,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className="pagination">
+    <div className={css.pagination}>
       <div>
         {currentPage === 1 ? (
           <Button type="icon" size={{ height: 32 }} state="disabled">
@@ -53,7 +53,7 @@ const Pagination: React.FC<PaginationProps> = ({
         )}
       </div>
 
-      <div className="pagination__numbers">
+      <div className={css.pagination__numbers}>
         {pageNumbers.map(page => {
           return currentPage === page ? (
             <Button
@@ -61,7 +61,7 @@ const Pagination: React.FC<PaginationProps> = ({
               state="selected"
               size={{ height: 32 }}
               onClick={() => onPageChange(page)}
-              style={styles}
+              style={dynamicStyles}
             >
               {page}
             </Button>
@@ -70,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({
               type="number"
               size={{ height: 32 }}
               onClick={() => onPageChange(page)}
-              style={styles}
+              style={dynamicStyles}
             >
               {page}
             </Button>
