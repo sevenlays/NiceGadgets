@@ -1,0 +1,26 @@
+@import '../../styles/colors';
+@import '../../styles/grid';
+
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin-bottom: 24px;
+
+  @include on-tablet {
+    margin-bottom: 40px;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    font-size: 12px;
+    line-height: 15.34px;
+    color: $Primary;
+
+    &--active {
+      color: $Secondary
+    }
+  }
+}

@@ -3,8 +3,9 @@ import { SliderSection, HomeSlider } from '../../components';
 
 import styles from './HomePage.module.scss';
 import { Product } from '../Cart/type/ProductType';
-import { startTransition, useEffect, useState } from 'react';
-import { fetchProducts } from '../../services/service';
+import { useEffect, useState } from 'react';
+
+import { getProduct } from '../../services/service';
 import {
   getBrandNewModels,
   getHotPrices,
@@ -16,10 +17,8 @@ export const HomePage = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    startTransition(() => {
-      fetchProducts('/react_phone-catalog/api/products.json').then(data => {
-        setProducts(data);
-      });
+    getProduct('products').then(data => {
+      setProducts(data);
     });
   }, []);
 

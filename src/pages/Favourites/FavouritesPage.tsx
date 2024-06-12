@@ -5,7 +5,15 @@ import styles from './FavouritesPage.module.scss';
 export const FavouritesPage = () => {
   const [favouriteGoods, setFavouriteGoods] = useState<string[]>([]);
 
-  const favourArr = ['good1', 'good2', 'good3', 'good4', 'good5', 'good6'];
+  const favourArr = [
+    'good1',
+    'good2',
+    'good3',
+    'good4',
+    'good5',
+    'good6',
+    'good7',
+  ];
   const storageArr = JSON.stringify(favourArr);
 
   window.localStorage.setItem('favourites', storageArr);
