@@ -1,0 +1,27 @@
+.language-list {
+  display: flex;
+  align-items: center;
+
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 800;
+
+  gap: 10px;
+  margin-right: 10px;
+
+  .button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    padding: 2px;
+  }
+
+  .active {
+    color: red;
+  }
+
+  @media (max-width: 640px) {
+    margin-right: 0;
+  }
+}
