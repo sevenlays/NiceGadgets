@@ -12,9 +12,12 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Product } from '../../types/Product';
 import { Button, DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
+import { useTranslation } from 'react-i18next';
+
+type ProductType = 'phones' | 'tablets' | 'accessories';
 
 type Props = {
-  productType: string;
+  productType: ProductType;
 };
 
 export const Catalog: React.FC<Props> = ({ productType }) => {
@@ -23,6 +26,8 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   const [itemsPerPage, setItemsPerPage] = useState(150);
   const [translate, setTranslate] = useState(0);
   const [sortBy, setSortBy] = useState<string>('year');
+
+  const { t } = useTranslation();
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const sortedPhones = sortProduct([...products], sortBy);
@@ -81,22 +86,30 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
       <div className="catalog__breadcrumbs">
         <img src={Home} alt="Breadctumbs_Path" />
         <img src={ArrowRight} alt="Breadctumbs_Path" />
-        <p className="catalog__breadcrumbs__text">{productType}</p>
+        <p className="catalog__breadcrumbs__text">
+          {t(`${productType}.title`)}
+        </p>
       </div>
 
-      <h2 className="catalog__title">{productType}</h2>
+      <h2 className="catalog__title"> {t(`${productType}.title`)}</h2>
 
-      <p className="catalog__subtitle">{products && products.length} models</p>
+      <p className="catalog__subtitle">
+        {products && products.length} {t('homePage.models')}
+      </p>
 
       <div className="catalog__dropdowns">
         <DropdownMenu
-          label="Sort by"
-          options={['Newest', 'Alphabetically', 'Cheapest']}
+          label={t('catalog.sortBy')}
+          options={[
+            t('catalog.newest'),
+            t('catalog.alphabetically'),
+            t('catalog.cheapest'),
+          ]}
           onSelect={handleSortChange}
         />
         <DropdownMenu
-          label="Items on page"
-          options={['All', '4', '8', '16']}
+          label={t('catalog.itemsOnPage')}
+          options={[t('catalog.all'), '4', '8', '16']}
           onSelect={handleItemsPerPageChange}
         />
       </div>

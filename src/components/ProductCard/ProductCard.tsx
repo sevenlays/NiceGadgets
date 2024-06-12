@@ -17,6 +17,7 @@ import {
   removeFromCart,
   removeFromFavorites,
 } from '../../feature/cart/productSlice';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
@@ -31,6 +32,8 @@ export const ProductCard: React.FC<Props> = ({
   const favorites = useSelector(
     (state: RootState) => state.productStorage.favorites,
   );
+
+  const { t } = useTranslation();
 
   const dispatch = useDispatch();
 
@@ -72,9 +75,12 @@ export const ProductCard: React.FC<Props> = ({
       </div>
 
       <ProductParams>
-        <SingleParam name="Screen" param={product?.screen} />
-        <SingleParam name="Capacity" param={product?.capacity} />
-        <SingleParam name="RAM" param={product?.ram} />
+        <SingleParam name={t('productCard.screen')} param={product?.screen} />
+        <SingleParam
+          name={t('productCard.capacity')}
+          param={product?.capacity}
+        />
+        <SingleParam name={t('productCard.RAM')} param={product?.ram} />
       </ProductParams>
       <div className={styles.buttonsPlaceholder}>
         <Button
@@ -86,7 +92,7 @@ export const ProductCard: React.FC<Props> = ({
             height: 40,
           }}
         >
-          {isInCart ? 'Added' : 'Add to cart'}
+          {isInCart ? t('productCard.added') : t('productCard.addToCart')}
         </Button>
         <Button
           state={isInFavorites ? 'selected' : 'disabled'}

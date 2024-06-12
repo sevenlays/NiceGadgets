@@ -4,7 +4,7 @@ import '../../pages/pages.scss';
 export const AccessoriesPage = () => {
   return (
     <div className="page__container">
-      <Catalog productType="Accessories" />
+      <Catalog productType="accessories" />
     </div>
   );
 };
