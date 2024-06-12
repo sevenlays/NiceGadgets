@@ -1,6 +1,4 @@
-// Right now without key page rerenders way smoother. Working on solution...
-/* eslint-disable react/jsx-key */
-import './Catalog.scss';
+import styles from './Catalog.module.scss';
 import { useEffect, useState } from 'react';
 
 import { getProduct } from '../../services/service';
@@ -44,12 +42,14 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   }, [productType]);
 
   return (
-    <div className="catalog">
-      <h2 className="catalog__title">{productType}</h2>
+    <div className={styles.catalog}>
+      <h2 className={styles.catalog__title}>{productType}</h2>
 
-      <p className="catalog__subtitle">{products && products.length} models</p>
+      <p className={styles.catalog__subtitle}>
+        {products && products.length} models
+      </p>
 
-      <div className="catalog__dropdowns">
+      <div className={styles.catalog__dropdowns}>
         <DropdownMenu
           label="Sort by"
           options={SORTBY_OPTIONS}
@@ -62,7 +62,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
         />
       </div>
 
-      <div className="catalog__list">
+      <div className={styles.catalog__list}>
         {currentProducts.map(productItem => (
           <ProductCard product={productItem} key={productItem.id} />
         ))}
