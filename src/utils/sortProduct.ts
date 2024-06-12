@@ -4,7 +4,7 @@ export const sortProduct = (
   productArray: Product[],
   criterion: string,
 ): Product[] => {
-  return productArray.sort((a, b) => {
+  return [...productArray].sort((a, b) => {
     if (criterion === 'Newest') {
       return b.year - a.year;
     } else if (criterion === 'Cheapest') {
