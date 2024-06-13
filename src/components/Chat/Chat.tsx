@@ -5,5 +5,5 @@ export function Chat() {
     app_id: 'mva304yk',
   });
 
-  return <div>Example App</div>;
+  return <div></div>;
 }
