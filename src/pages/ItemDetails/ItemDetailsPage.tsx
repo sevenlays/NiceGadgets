@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
-import iconFav from '../../assets/icons/Favourites.svg';
+import iconFavourite from '../../assets/icons/Favourites.svg';
+import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
@@ -12,7 +13,7 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 import './ProductGallery.scss';
 import { SingleParam } from '../../components/ProductCard/ProductParams/SingleParam/SingleParam';
 import getHexFromColorName from '../../utils/LiteralColorToHex';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { ProductDetail } from '../../types/ProductDetail';
 import { FullPrice } from '../../components/ProductCard/PriceWithoutDiscount/FullPrice';
 import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
@@ -22,16 +23,26 @@ import { SliderSection } from '../../components';
 import { Product } from '../../types/Product';
 import { useSelector } from 'react-redux';
 import {
+  addToCart,
+  addToFavorites,
+  removeFromCart,
+  removeFromFavorites,
   selectAccessories,
   selectAllProducts,
+  selectCart,
   selectPhones,
   selectTablets,
+  selectfavorites,
 } from '../../redux';
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
 import { useTranslation } from 'react-i18next';
 import { getColorWithoutSpaces } from '../../utils/getColorWithoutSpaces';
+import { getCategorName } from '../../utils/getCategorName';
+import Loader from '../../components/Loader/Loader';
+import pageNotFound from '../../assets/product_not_found.png';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 type Orientation = 'bottom' | 'left';
 
@@ -61,15 +72,21 @@ const defaultProduct: ProductDetail = {
   camera: '',
   zoom: '',
 };
+const defaultProducts = [defaultProduct];
 
 export const ItemDetailsPage = () => {
+  const [productVariations, setProductVariations] =
+    useState<ProductDetail[]>(defaultProducts);
   const [product, setProduct] = useState<ProductDetail>(defaultProduct);
   const [otherProducts, setOtherProducts] = useState<Product[]>([]);
-  const [color, setColor] = useState(product?.color);
-  const [capacity, setCapacity] = useState(product?.capacity);
+  const [color, setColor] = useState(product.color);
+  const [capacity, setCapacity] = useState(product.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
+  const [loader, setLoader] = useState(false);
+  const [error, setError] = useState(false);
 
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   const URL = getCategoryApiEndpoint(pathname, '/react_phone-catalog/api/');
@@ -79,6 +96,8 @@ export const ItemDetailsPage = () => {
   const phones = useSelector(selectPhones);
   const tablets = useSelector(selectTablets);
   const accessories = useSelector(selectAccessories);
+  const cart = useSelector(selectCart);
+  const favourites = useSelector(selectfavorites);
 
   useEffect(() => {
     setOtherProducts(() =>
@@ -90,7 +109,7 @@ export const ItemDetailsPage = () => {
     );
   }, [pathname, phones, tablets, accessories]);
 
-  /* Create product */
+  /* Create product ID */
 
   const allProducts = useSelector(selectAllProducts);
   const newCustomProductId = createCustomProductId(allProducts, product, 8, 5);
@@ -103,12 +122,15 @@ export const ItemDetailsPage = () => {
     accessoriesID?: string;
   }>();
 
+  const categoryPath = getCategorName(phoneID, tabletID, accessoriesID);
+
   useEffect(() => {
+    setLoader(true);
     fetch(URL)
       .then(res => res.json())
-      .then(data => {
+      .then((data: ProductDetail[]) => {
         const foundProduct = data.find(
-          (prod: ProductDetail) =>
+          prod =>
             prod.id === phoneID ||
             prod.id === tabletID ||
             prod.id === accessoriesID,
@@ -116,16 +138,42 @@ export const ItemDetailsPage = () => {
 
         if (foundProduct) {
           setProduct(foundProduct);
+          setColor(foundProduct.color);
+          setCapacity(foundProduct.capacity);
+
+          const collectionProducts = data.filter(
+            item => item.namespaceId === foundProduct.namespaceId,
+          );
+
+          setProductVariations(collectionProducts);
         }
+
+        setLoader(false);
       })
-      .catch(() => {});
-  }, [pathname, phoneID, tabletID, accessoriesID, URL]);
+      .catch(() => setError(true));
+  }, [URL, phoneID, tabletID, accessoriesID]);
+
+  const handleChangeOptions = (newColor = color, newCapacity = capacity) => {
+    const foundProduct = productVariations.find(
+      item => item.color === newColor && item.capacity === newCapacity,
+    );
+
+    if (foundProduct) {
+      setProduct(foundProduct);
+      setColor(foundProduct.color);
+      setCapacity(foundProduct.capacity);
+
+      const newUrl = `${categoryPath}/${foundProduct.id}`;
+
+      navigate(newUrl);
+    }
+  };
 
   useEffect(() => {
     const handleResize = () => {
       const size = window.innerWidth;
 
-      if (size > 650) {
+      if (size > 750) {
         setOrientation('left');
       } else {
         setOrientation('bottom');
@@ -160,173 +208,247 @@ export const ItemDetailsPage = () => {
     { label: product.id, path: PATHS.ACCESSORIES.LIST },
   ];
 
+  /* Add to card, add to favourites */
+
+  const dispatch = useAppDispatch();
+
+  const isInCart = cart.includes(product.id);
+  const isInFavorites = favourites.includes(product.id);
+
+  const handleToggleToCart = () => {
+    if (isInCart) {
+      dispatch(removeFromCart(product.id));
+    } else {
+      dispatch(addToCart(product.id));
+    }
+  };
+
+  const handleToggleToFavorites = () => {
+    if (isInFavorites) {
+      dispatch(removeFromFavorites(product.id));
+    } else {
+      dispatch(addToFavorites(product.id));
+    }
+  };
+
   return (
-    <div className={styles.page__container}>
-      <div className={styles.breadcrumbs}>
-        <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
-      </div>
-      <a href="#" className={styles.back}>
-        <img src={iconLeft} /> {t('nav.back')}
-      </a>
-      <h3 className={styles.title}>{product.name}</h3>
-      <div className={styles.product}>
-        <div className={styles.product__gallary}>
-          <ImageGallery
-            items={images}
-            showNav={false}
-            thumbnailPosition={orientation}
-            showFullscreenButton={false}
-            showPlayButton={false}
-          />
+    <>
+      <div className={styles.page__container}>
+        <div className={styles.breadcrumbs}>
+          <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
         </div>
-        <div className={styles.product__settings}>
-          <div className={styles.colors}>
-            <div className={styles.colors__wrapper}>
-              <p>{t('detailProduct.availableColors')}</p>
-              <div className={styles.product__id}>
-                {t('detailProduct.id')}: {newCustomProductId}
+        <span className={styles.back} onClick={() => navigate(-1)}>
+          <img src={iconLeft} /> {t('nav.back')}
+        </span>
+        {error ? (
+          <div className={styles.error}>
+            <h2>Product not found :(</h2>
+            <img src={pageNotFound} alt="product not found" />
+          </div>
+        ) : (
+          <>
+            <h3 className={styles.title}>{product.name}</h3>
+            <div className={styles.product}>
+              <div className={styles.product__gallary}>
+                {loader ? (
+                  <div className={styles.loader}>
+                    <Loader />
+                  </div>
+                ) : (
+                  <ImageGallery
+                    items={images}
+                    showNav={false}
+                    thumbnailPosition={orientation}
+                    showFullscreenButton={false}
+                    showPlayButton={false}
+                    lazyLoad={true}
+                  />
+                )}
+              </div>
+              <div className={styles.product__settings}>
+                <div className={styles.colors}>
+                  <div className={styles.colors__wrapper}>
+                    <p>{t('detailProduct.availableColors')}</p>
+                    <div className={styles.product__id}>
+                      {t('detailProduct.id')}: {newCustomProductId}
+                    </div>
+                  </div>
+                  <ul className={styles.colors__list}>
+                    {product.colorsAvailable.map(colorFromServer => {
+                      const validColor = getColorWithoutSpaces(colorFromServer);
+                      const hexColor = getHexFromColorName(validColor);
+                      const darkerColor = makeColorDarker(hexColor, 10);
+
+                      return (
+                        <li
+                          key={colorFromServer}
+                          className={classNames(styles.colors__outer, {
+                            [styles.colors__outer_active]:
+                              color === colorFromServer,
+                          })}
+                        >
+                          <span
+                            aria-label={colorFromServer}
+                            className={styles.colors__inner}
+                            style={{ backgroundColor: darkerColor }}
+                            onClick={() => {
+                              handleChangeOptions(colorFromServer);
+                            }}
+                          ></span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className={styles.divider}></div>
+                <div className={styles.capacity}>
+                  <p>{t('detailProduct.selectCapacity')}</p>
+                  <ul className={styles.capacity__list}>
+                    {product.capacityAvailable.map(capacityFromServer => {
+                      return (
+                        <li key={capacityFromServer}>
+                          <span
+                            className={classNames(styles.capacity__item, {
+                              [styles.capacity__item_active]:
+                                capacity === capacityFromServer,
+                            })}
+                            onClick={() => {
+                              handleChangeOptions(
+                                undefined,
+                                capacityFromServer,
+                              );
+                            }}
+                          >
+                            {capacityFromServer}
+                          </span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+                <div className={styles.divider}></div>
+
+                <div className={styles.price}>
+                  <div className={styles.price__discount}>
+                    ${product.priceDiscount}
+                  </div>
+                  <div className={styles.price__regular}>
+                    <FullPrice fullPrice={product.priceRegular} />
+                  </div>
+                </div>
+
+                <div className={styles.buttons}>
+                  <div className={styles.buttons__addToCard}>
+                    <Button
+                      type="primary"
+                      size={{ height: 48 }}
+                      state={isInCart ? 'selected' : 'disabled'}
+                      onClick={() => handleToggleToCart()}
+                    >
+                      {isInCart
+                        ? t('productCard.added')
+                        : t('productCard.addToCart')}
+                    </Button>
+                  </div>
+                  <div className={styles.buttons__addToFavourites}>
+                    <Button
+                      type="icon"
+                      state={isInFavorites ? 'selected' : 'disabled'}
+                      size={{ height: 48 }}
+                      onClick={() => handleToggleToFavorites()}
+                    >
+                      <img
+                        src={
+                          isInFavorites ? iconFavouriteActive : iconFavourite
+                        }
+                        alt="Icon"
+                      />
+                    </Button>
+                  </div>
+                </div>
+
+                <div className={styles.params}>
+                  <ProductParams>
+                    <SingleParam
+                      name={t('productCard.screen')}
+                      param={product.screen}
+                    />
+                    <SingleParam
+                      name={t('techSpech.resolution')}
+                      param={product.resolution}
+                    />
+                    <SingleParam
+                      name={t('techSpech.processor')}
+                      param={product.processor}
+                    />
+                    <SingleParam
+                      name={t('productCard.RAM')}
+                      param={product.ram}
+                    />
+                  </ProductParams>
+                </div>
               </div>
             </div>
-            <ul className={styles.colors__list}>
-              {product.colorsAvailable.map(colorFromServer => {
-                const validColor = getColorWithoutSpaces(colorFromServer);
-                const hexColor = getHexFromColorName(validColor);
-                const darkerColor = makeColorDarker(hexColor, 10);
+          </>
+        )}
 
-                return (
-                  <li
-                    key={colorFromServer}
-                    className={classNames(styles.colors__outer, {
-                      [styles.colors__outer_active]: color === colorFromServer,
-                    })}
-                  >
-                    <span
-                      aria-label={colorFromServer}
-                      className={styles.colors__inner}
-                      style={{ backgroundColor: darkerColor }}
-                      onClick={() => setColor(colorFromServer)}
-                    ></span>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+        <div className={styles.about}>
+          <h4 className={styles.about__title}>{t('detailProduct.about')}</h4>
           <div className={styles.divider}></div>
-          <div className={styles.capacity}>
-            <p>{t('detailProduct.selectCapacity')}</p>
-            <ul className={styles.capacity__list}>
-              {product.capacityAvailable.map(capacityFromServer => (
-                <li key={capacityFromServer}>
-                  <span
-                    className={classNames(styles.capacity__item, {
-                      [styles.capacity__item_active]:
-                        capacity === capacityFromServer,
-                    })}
-                    onClick={() => setCapacity(capacityFromServer)}
-                  >
-                    {capacityFromServer}
-                  </span>
-                </li>
+          {!error && (
+            <div className={styles.description}>
+              {product.description.map(description => (
+                <div
+                  className={styles.description__item}
+                  key={description.title}
+                >
+                  <h5 className={styles.description__title}>
+                    {description.title}
+                  </h5>
+                  <p className={styles.description__body}>{description.text}</p>
+                </div>
               ))}
-            </ul>
-          </div>
+            </div>
+          )}
+        </div>
+        <div className={styles.tech}>
+          <h4 className={styles.tech__title}>{t('detailProduct.techSpecs')}</h4>
           <div className={styles.divider}></div>
 
-          <div className={styles.price}>
-            <div className={styles.price__discount}>
-              ${product.priceDiscount}
+          {!error && (
+            <div className={styles.params}>
+              <ProductParams techSpecs={true}>
+                <SingleParam
+                  name={t('productCard.screen')}
+                  param={product.screen}
+                />
+                <SingleParam
+                  name={t('techSpech.resolution')}
+                  param={product.resolution}
+                />
+                <SingleParam
+                  name={t('techSpech.processor')}
+                  param={product.processor}
+                />
+                <SingleParam name={t('productCard.RAM')} param={product.ram} />
+                <SingleParam
+                  name={t('productCard.capacity')}
+                  param={product.capacity}
+                />
+                <SingleParam
+                  name={t('techSpech.camera')}
+                  param={product.camera}
+                />
+                <SingleParam name={t('techSpech.zoom')} param={product.zoom} />
+                <SingleParam
+                  name={t('techSpech.cell')}
+                  param={product.cell.join(', ')}
+                />
+              </ProductParams>
             </div>
-            <div className={styles.price__regular}>
-              <FullPrice fullPrice={product.priceRegular} />
-            </div>
-          </div>
-
-          <div className={styles.buttons}>
-            <div className={styles.buttons__addToCard}>
-              <Button
-                type="primary"
-                size={{ height: 48 }}
-                onClick={() => alert('Button clicked!')}
-              >
-                {t('productCard.addToCart')}
-              </Button>
-            </div>
-            <div className={styles.buttons__addToFavourites}>
-              <Button
-                type="icon"
-                size={{ height: 48 }}
-                onClick={() => alert('Button clicked!')}
-              >
-                <img src={iconFav} alt="Icon" />
-              </Button>
-            </div>
-          </div>
-
-          <div className={styles.params}>
-            <ProductParams>
-              <SingleParam
-                name={t('productCard.screen')}
-                param={product.screen}
-              />
-              <SingleParam
-                name={t('techSpech.resolution')}
-                param={product.resolution}
-              />
-              <SingleParam
-                name={t('techSpech.processor')}
-                param={product.processor}
-              />
-              <SingleParam name={t('productCard.RAM')} param={product.ram} />
-            </ProductParams>
-          </div>
+          )}
         </div>
       </div>
-
-      <div className={styles.about}>
-        <h4 className={styles.about__title}>{t('detailProduct.about')}</h4>
-        <div className={styles.divider}></div>
-        <div className={styles.description}>
-          {product.description.map(description => (
-            <div className={styles.description__item} key={description.title}>
-              <h5 className={styles.description__title}>{description.title}</h5>
-              <p className={styles.description__body}>{description.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className={styles.tech}>
-        <h4 className={styles.tech__title}>{t('detailProduct.techSpecs')}</h4>
-        <div className={styles.divider}></div>
-
-        <div className={styles.params}>
-          <ProductParams techSpecs={true}>
-            <SingleParam
-              name={t('productCard.screen')}
-              param={product.screen}
-            />
-            <SingleParam
-              name={t('techSpech.resolution')}
-              param={product.resolution}
-            />
-            <SingleParam
-              name={t('techSpech.processor')}
-              param={product.processor}
-            />
-            <SingleParam name={t('productCard.RAM')} param={product.ram} />
-            <SingleParam
-              name={t('productCard.capacity')}
-              param={product.capacity}
-            />
-            <SingleParam name={t('techSpech.camera')} param={product.camera} />
-            <SingleParam name={t('techSpech.zoom')} param={product.zoom} />
-            <SingleParam
-              name={t('techSpech.cell')}
-              param={product.cell.join(', ')}
-            />
-          </ProductParams>
-        </div>
-      </div>
-
       <div className={styles.slider}>
         {otherProducts.length > 0 && (
           <SliderSection
@@ -338,6 +460,6 @@ export const ItemDetailsPage = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
