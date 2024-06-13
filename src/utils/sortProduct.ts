@@ -5,11 +5,11 @@ export const sortProduct = (
   criterion: string,
 ): Product[] => {
   return [...productArray].sort((a, b) => {
-    if (criterion === 'Newest') {
+    if (criterion === 'newest') {
       return b.year - a.year;
-    } else if (criterion === 'Cheapest') {
+    } else if (criterion === 'cheapest') {
       return a.price - b.price;
-    } else if (criterion === 'Alphabetically') {
+    } else if (criterion === 'alphabetically') {
       return a.name.localeCompare(b.name);
     }
 

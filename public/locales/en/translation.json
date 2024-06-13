@@ -32,6 +32,8 @@
     "title": "Accessories"
   },
   "catalog": {
+    "modelsCountSingular": "{{count}} model",
+    "modelsCountPlural": "{{count}} models",
     "sortBy": "Sort by",
     "newest": "Newest",
     "alphabetically": "Alphabetically",

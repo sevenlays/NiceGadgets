@@ -16,11 +16,13 @@ const usePagination = <T>(items: T[], defaultItemsPerPage = 150) => {
   };
 
   const handleItemsPerPageChange = (itemsCount: string) => {
-    if (itemsCount === 'All') {
+    const itemsCountAsNumber = parseInt(itemsCount, 10);
+
+    if (isNaN(itemsCountAsNumber)) {
       setItemsPerPage(items.length);
       setCurrentPage(1);
     } else {
-      setItemsPerPage(parseInt(itemsCount, 10));
+      setItemsPerPage(itemsCountAsNumber);
       setCurrentPage(1);
     }
   };

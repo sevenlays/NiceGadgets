@@ -8,16 +8,19 @@ import Pagination from '../../UI/Pagination/Pagination';
 
 import usePagination from '../../hooks/usePagination';
 import useProductsByType from '../../hooks/useProductsByType';
-
-const SORTBY_OPTIONS = ['Newest', 'Alphabetically', 'Cheapest'];
-const ITEMS_ON_PAGE = ['All', '4', '8', '16'];
+import useCatalogTranslations from '../../hooks/useCatalogTranslations';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../providers/i18n/i18n';
+// eslint-disable-next-line max-len
+import getLocalizedModelCountString from '../../utils/getLocalizedModelCountString';
 
 type Props = {
   productType: string;
 };
 
 export const Catalog: React.FC<Props> = ({ productType }) => {
-  const [sortBy, setSortBy] = useState<string>('year');
+  const { t: localize } = useTranslation();
+  const [sortBy, setSortBy] = useState<string>('newest');
 
   const products = useProductsByType(productType);
   const sortedProducts = sortProduct(products, sortBy);
@@ -31,8 +34,14 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
     handleItemsPerPageChange,
   } = usePagination(sortedProducts);
 
-  const handleSortChange = (sortOption: string) => {
-    setSortBy(sortOption);
+  const { SORTBY_TRANSLATED_TO_ENGLISH, localizedSortOptions, ITEMS_ON_PAGE } =
+    useCatalogTranslations();
+
+  const handleSortChange = (translatedSortOption: string) => {
+    const englishSortOption =
+      SORTBY_TRANSLATED_TO_ENGLISH[translatedSortOption];
+
+    setSortBy(englishSortOption);
   };
 
   return (
@@ -40,17 +49,18 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
       <h2 className={styles.catalog__title}>{productType}</h2>
 
       <p className={styles.catalog__subtitle}>
-        {products && products.length} models
+        {products &&
+          getLocalizedModelCountString(products.length, localize, i18n)}
       </p>
 
       <div className={styles.catalog__dropdowns}>
         <DropdownMenu
-          label="Sort by"
-          options={SORTBY_OPTIONS}
+          label={localize('catalog.sortBy')}
+          options={localizedSortOptions}
           onSelect={handleSortChange}
         />
         <DropdownMenu
-          label="Items on page"
+          label={localize('catalog.itemsOnPage')}
           options={ITEMS_ON_PAGE}
           onSelect={handleItemsPerPageChange}
         />
