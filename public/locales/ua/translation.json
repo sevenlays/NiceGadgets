@@ -31,7 +31,10 @@
     "title": "Аксесуари"
   },
   "catalog": {
-    "sortBy": "Сортувати за",
+    "modelsCountSingular": "{{count}} модель",
+    "modelsCountPlural": "{{count}} моделі",
+    "modelsCountPlural_1": "{{count}} моделей",
+    "sortBy": "Сортувати",
     "newest": "Новіші",
     "alphabetically": "Алфавітно",
     "cheapest": "Найдешевші",

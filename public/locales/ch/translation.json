@@ -31,6 +31,8 @@
     "title": "配件"
   },
   "catalog": {
+    "modelsCountSingular": "{{count}} 模型",
+    "modelsCountPlural": "{{count}} 模型",
     "sortBy": "排序方式",
     "newest": "最新的",
     "alphabetically": "按字母顺序",

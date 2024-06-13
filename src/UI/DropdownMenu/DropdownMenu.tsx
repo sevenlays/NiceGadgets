@@ -31,6 +31,10 @@ export const DropdownMenu: React.FC<Props> = ({ options, label, onSelect }) => {
     };
   }, []);
 
+  useEffect(() => {
+    setSelectedOption(options[0]);
+  }, [options]);
+
   const toggleDropdown = () => setIsOpen(!isOpen);
 
   const handleOptionClick = (option: string) => {
