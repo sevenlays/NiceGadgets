@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import iconFav from '../../assets/icons/Favourites.svg';
+import iconLeft from '../../assets/icons/ArrowLeft.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
