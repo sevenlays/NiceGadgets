@@ -1,46 +1,49 @@
-import { useEffect, useState } from 'react';
-// import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { useSelector } from 'react-redux';
+import { ProductCard } from '../../components/ProductCard/ProductCard';
+import { PATHS } from '../../constants';
+import { selectAllProducts, selectfavorites } from '../../redux';
+import { Breadcrumb } from '../../types/Breadcrumb';
+import { Product } from '../../types/Product';
+import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
+
 import styles from './FavouritesPage.module.scss';
 
 export const FavouritesPage = () => {
-  const [favouriteGoods, setFavouriteGoods] = useState<string[]>([]);
+  const favorites = useSelector(selectfavorites);
+  const allProducts = useSelector(selectAllProducts);
 
-  const favourArr = [
-    'good1',
-    'good2',
-    'good3',
-    'good4',
-    'good5',
-    'good6',
-    'good7',
+  function getFavoritesProducts(): Product[] {
+    const favoritesProds = favorites.map(itemId => {
+      const prod = allProducts.find(product => product.itemId === itemId);
+
+      return prod;
+    });
+
+    return favoritesProds as Product[];
+  }
+
+  const favoritesProds = getFavoritesProducts();
+
+  const breadcrumbsData: Breadcrumb[] = [
+    { label: 'Favorites', path: PATHS.FAVOURITES },
   ];
-  const storageArr = JSON.stringify(favourArr);
-
-  window.localStorage.setItem('favourites', storageArr);
-
-  useEffect(() => {
-    const storedFavourites = window.localStorage.getItem('favourites');
-
-    if (storedFavourites) {
-      setFavouriteGoods(JSON.parse(storedFavourites));
-    }
-  }, []);
-
-  const goodsLength = favouriteGoods.length;
 
   return (
     <div className={styles.page__container}>
+      <div className={styles.breadcrumbs}>
+        <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
+      </div>
       <h2 className={styles.title}>Favourites</h2>
-      <p className={styles.counter}>{goodsLength} items</p>
+      <p className={styles.counter}>{favoritesProds.length} items</p>
 
       <div className={styles.products}>
-        {goodsLength === 0 ? (
+        {favoritesProds.length === 0 ? (
           <div>There are no goods in your favourite list</div>
         ) : (
-          favouriteGoods.map(item => {
+          favoritesProds.map(item => {
             return (
-              <div key={item} className={styles.product}>
-                {/* <ProductCard /> */}
+              <div key={item?.itemId} className={styles.product}>
+                <ProductCard product={item} />
               </div>
             );
           })

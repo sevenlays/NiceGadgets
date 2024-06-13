@@ -7,13 +7,15 @@ import style from './CartList.module.scss';
 
 type Props = {
   prodsFromStore: Product[] | null;
-  onDeleteClick: (productId: number) => void;
-  calculateTotal: (action: 'increase' | 'decrease', price: number) => void;
+  onIncrease: (product: Product) => void;
+  onDecrease: (product: Product) => void;
+  handleRemoveAllInstances: (product: Product) => void;
 };
 export const CartList: React.FC<Props> = ({
   prodsFromStore,
-  onDeleteClick,
-  calculateTotal,
+  onIncrease,
+  onDecrease,
+  handleRemoveAllInstances,
 }) => {
   return (
     <section className={style.cartList}>
@@ -21,8 +23,9 @@ export const CartList: React.FC<Props> = ({
         <React.Fragment key={product.id}>
           <CardItem
             product={product}
-            onDeleteClick={onDeleteClick}
-            calculateTotal={calculateTotal}
+            onIncrease={onIncrease}
+            onDecrease={onDecrease}
+            handleRemoveAllInstances={handleRemoveAllInstances}
           />
         </React.Fragment>
       ))}

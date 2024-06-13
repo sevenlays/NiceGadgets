@@ -41,6 +41,11 @@
     color: $Primary;
     width: 100%;
     flex-grow: 1;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
   &__image {
     height: 100%;

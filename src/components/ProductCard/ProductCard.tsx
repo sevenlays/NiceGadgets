@@ -3,6 +3,7 @@ import styles from './ProductCard.module.scss';
 import { ProductParams } from './ProductParams/ProductParams';
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
+import { Link } from 'react-router-dom';
 
 import { Product } from '../../types/Product';
 import { FullPrice } from './PriceWithoutDiscount/FullPrice';
@@ -39,7 +40,9 @@ export const ProductCard: React.FC<Props> = ({
 
   const dispatch = useAppDispatch();
 
-  const isInCart = cart.includes(product?.itemId);
+  const isInCart = cart.some(
+    itemInCart => itemInCart.cartItemId === product?.itemId,
+  );
 
   const isInFavorites = favorites.includes(product?.itemId);
 
@@ -47,7 +50,7 @@ export const ProductCard: React.FC<Props> = ({
     if (isInCart) {
       dispatch(removeFromCart(product.itemId));
     } else {
-      dispatch(addToCart(product.itemId));
+      dispatch(addToCart({ cartItemId: product.itemId, quantity: 1 }));
     }
   };
 
@@ -59,12 +62,28 @@ export const ProductCard: React.FC<Props> = ({
     }
   };
 
+  const getProductDetailsPath = () => {
+    switch (product.category) {
+      case 'phones':
+        return `/phones/${product.itemId}`;
+      case 'tablets':
+        return `/tablets/${product.itemId}`;
+      case 'accessories':
+        return `/accessories/${product.itemId}`;
+      default:
+        return '/';
+    }
+  };
+
   return (
     <article className={styles.card}>
       <div className={styles.card__image_container}>
         <img className={styles.card__image} src={product?.image} />
       </div>
-      <h5 className={styles.card__title}>{product?.name}</h5>
+      <Link to={getProductDetailsPath()}>
+        <h5 className={styles.card__title}>{product?.name}</h5>
+      </Link>
+
       <div>
         <p className={styles.card__price}>
           <span

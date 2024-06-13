@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
+// import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
 import iconFav from '../../assets/icons/Favourites.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
@@ -30,6 +30,7 @@ import {
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
+import { BAckButton } from '../../UI/Backbutton/BackButton';
 
 type Orientation = 'bottom' | 'left';
 
@@ -66,6 +67,8 @@ export const ItemDetailsPage = () => {
   const [color, setColor] = useState(product?.color);
   const [capacity, setCapacity] = useState(product?.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
+
+  // const navigate = useNavigate();
 
   const { pathname } = useLocation();
 
@@ -162,9 +165,7 @@ export const ItemDetailsPage = () => {
       <div className={styles.breadcrumbs}>
         <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
       </div>
-      <a href="#" className={styles.back}>
-        <img src={iconLeft} /> Back
-      </a>
+      <BAckButton />
       <h3 className={styles.title}>{product.name}</h3>
       <div className={styles.product}>
         <div className={styles.product__gallary}>
