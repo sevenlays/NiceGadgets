@@ -9,113 +9,114 @@ import { ProductParams } from '../../components/ProductCard/ProductParams/Produc
 import { makeColorDarker } from '../../utils/makeColorDarker';
 import ImageGallery from 'react-image-gallery';
 import 'react-image-gallery/styles/css/image-gallery.css';
+import './ProductGallery.scss';
 import { SingleParam } from '../../components/ProductCard/ProductParams/SingleParam/SingleParam';
 import getHexFromColorName from '../../utils/LiteralColorToHex';
-
-const item = {
-  id: 'apple-iphone-11-128gb-black',
-  category: 'phones',
-  namespaceId: 'apple-iphone-11',
-  name: 'Apple iPhone 11 128GB Black',
-  capacityAvailable: ['64GB', '128GB', '256GB'],
-  capacity: '128GB',
-  priceRegular: 1100,
-  priceDiscount: 1050,
-  colorsAvailable: ['black', 'green', 'yellow', 'white', 'purple', 'red'],
-  color: 'black',
-  images: [
-    'img/phones/apple-iphone-11/black/00.webp',
-    'img/phones/apple-iphone-11/black/01.webp',
-    'img/phones/apple-iphone-11/black/02.webp',
-    'img/phones/apple-iphone-11/black/03.webp',
-    'img/phones/apple-iphone-11/black/04.webp',
-  ],
-  description: [
-    {
-      title: 'And then there was Pro',
-      text: [
-        'A transformative triple-camera system that adds tons of capability without complexity.',
-        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.',
-      ],
-    },
-    {
-      title: 'Camera',
-      text: [
-        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.',
-      ],
-    },
-    {
-      title:
-        'Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.',
-      text: [
-        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.',
-      ],
-    },
-  ],
-  screen: "6.1' IPS",
-  resolution: '1792x828',
-  processor: 'Apple A13 Bionic',
-  ram: '4GB',
-  camera: '12 Mp + 12 Mp + 12MP',
-  zoom: 'Digital, 5x',
-  cell: ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE'],
-};
-
-const images = [
-  {
-    original:
-      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/3/2/3207787065_2.jpg/w_600',
-    thumbnail:
-      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/3/2/3207787065_2.jpg',
-    originalHeight: 200,
-    originalWidth: 200,
-  },
-  {
-    original:
-      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-2__ww-ua_1__1.jpg/w_600',
-    thumbnail:
-      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-2__ww-ua_1__1.jpg',
-    originalHeight: 200,
-    originalWidth: 200,
-  },
-  {
-    original:
-      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-3__ww-ua_1_.jpg/w_600',
-    thumbnail:
-      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-3__ww-ua_1_.jpg',
-    originalHeight: 200,
-    originalWidth: 200,
-  },
-  {
-    original:
-      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-4__ww-ua_1__1.jpg/w_600',
-    thumbnail:
-      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-4__ww-ua_1__1.jpg',
-    originalHeight: 200,
-    originalWidth: 200,
-  },
-  {
-    original:
-      'https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_13_q222_green_pdp_image_position-6__ww-ua_1.jpg/w_600',
-    thumbnail:
-      'https://cdn.comfy.ua/media/catalog/product/cache/4/small_image/270x265/62defc7f46f3fbfc8afcd112227d1181/i/p/iphone_13_q222_green_pdp_image_position-6__ww-ua_1.jpg',
-    originalHeight: 200,
-    originalWidth: 200,
-  },
-];
+import { useLocation, useParams } from 'react-router-dom';
+import { ProductDetail } from '../../types/ProductDetail';
+import { FullPrice } from '../../components/ProductCard/PriceWithoutDiscount/FullPrice';
+import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
+import { Breadcrumb } from '../../types/Breadcrumb';
+import { PATHS } from '../../constants';
+import { SliderSection } from '../../components';
+import { Product } from '../../types/Product';
+import { useSelector } from 'react-redux';
+import {
+  selectAccessories,
+  selectAllProducts,
+  selectPhones,
+  selectTablets,
+} from '../../redux';
+import { getLimitedCategoryProduct } from '../../services/filteForSliders';
+import { createCustomProductId } from '../../utils/createCustomProductId';
+import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
 
 type Orientation = 'bottom' | 'left';
 
+const defaultProduct: ProductDetail = {
+  id: '',
+  category: '',
+  namespaceId: '',
+  name: '',
+  capacityAvailable: ['38mm', '42mm'],
+  capacity: '',
+  priceRegular: 0,
+  priceDiscount: 0,
+  colorsAvailable: ['black'],
+  color: 'black',
+  images: [''],
+  description: [
+    {
+      title: '',
+      text: '',
+    },
+  ],
+  screen: '',
+  resolution: '',
+  processor: '',
+  ram: '',
+  cell: [''],
+  camera: '',
+  zoom: '',
+};
+
 export const ItemDetailsPage = () => {
-  const [color, setColor] = useState(item.color);
-  const [capacity, setCapacity] = useState(item.capacity);
+  const [product, setProduct] = useState<ProductDetail>(defaultProduct);
+  const [otherProducts, setOtherProducts] = useState<Product[]>([]);
+  const [color, setColor] = useState(product?.color);
+  const [capacity, setCapacity] = useState(product?.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
 
-  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-  const onBackClick = () => {
-    navigate(-1);
-  };
+  const URL = getCategoryApiEndpoint(pathname, '/react_phone-catalog/api/');
+
+  /* create products for slider */
+
+  const phones = useSelector(selectPhones);
+  const tablets = useSelector(selectTablets);
+  const accessories = useSelector(selectAccessories);
+
+  useEffect(() => {
+    setOtherProducts(() =>
+      getLimitedCategoryProduct(pathname, 8, {
+        phones,
+        tablets,
+        accessories,
+      }),
+    );
+  }, [pathname, phones, tablets, accessories]);
+
+  /* Create product */
+
+  const allProducts = useSelector(selectAllProducts);
+  const newCustomProductId = createCustomProductId(allProducts, product, 8, 5);
+
+  /* find product */
+
+  const { phoneID, tabletID, accessoriesID } = useParams<{
+    phoneID?: string;
+    tabletID?: string;
+    accessoriesID?: string;
+  }>();
+
+  useEffect(() => {
+    fetch(URL)
+      .then(res => res.json())
+      .then(data => {
+        const foundProduct = data.find(
+          (prod: ProductDetail) =>
+            prod.id === phoneID ||
+            prod.id === tabletID ||
+            prod.id === accessoriesID,
+        );
+
+        if (foundProduct) {
+          setProduct(foundProduct);
+        }
+      })
+      .catch(() => {});
+  }, [pathname, phoneID, tabletID, accessoriesID, URL]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,17 +138,34 @@ export const ItemDetailsPage = () => {
     };
   }, []);
 
+  /* make images for gallery */
+
+  const productImage = (): { original: string; thumbnail: string }[] => {
+    return product.images.map(image => ({
+      original: image,
+      thumbnail: image,
+      originalHeight: 450,
+      thumbnailHeght: 100,
+    }));
+  };
+
+  const images = productImage();
+
+  /* breadcrumbs */
+
+  const breadcrumbsData: Breadcrumb[] = [
+    { label: product.id, path: PATHS.ACCESSORIES.LIST },
+  ];
+
   return (
     <div className={styles.page__container}>
-      <div className={styles.breadcrumbs}>breadcrumbs</div>
-      <Button
-        type="back"
-        size={{ width: 66, height: 16 }}
-        onClick={onBackClick}
-      >
-        Back
-      </Button>
-      <h3 className={styles.title}>{item.name}</h3>
+      <div className={styles.breadcrumbs}>
+        <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
+      </div>
+      <a href="#" className={styles.back}>
+        <img src={iconLeft} /> Back
+      </a>
+      <h3 className={styles.title}>{product.name}</h3>
       <div className={styles.product}>
         <div className={styles.product__gallary}>
           <ImageGallery
@@ -162,10 +180,10 @@ export const ItemDetailsPage = () => {
           <div className={styles.colors}>
             <div className={styles.colors__wrapper}>
               <p>Available colors</p>
-              <div className={styles.product__id}>ID: 802390</div>
+              <div className={styles.product__id}>ID: {newCustomProductId}</div>
             </div>
             <ul className={styles.colors__list}>
-              {item.colorsAvailable.map(colorFromServer => {
+              {product.colorsAvailable.map(colorFromServer => {
                 const hexColor = getHexFromColorName(colorFromServer);
                 const darkerColor = makeColorDarker(hexColor, 10);
 
@@ -177,7 +195,6 @@ export const ItemDetailsPage = () => {
                     })}
                   >
                     <span
-                      // href="#"
                       aria-label={colorFromServer}
                       className={styles.colors__inner}
                       style={{ backgroundColor: darkerColor }}
@@ -192,7 +209,7 @@ export const ItemDetailsPage = () => {
           <div className={styles.capacity}>
             <p>Select capacity</p>
             <ul className={styles.capacity__list}>
-              {item.capacityAvailable.map(capacityFromServer => (
+              {product.capacityAvailable.map(capacityFromServer => (
                 <li key={capacityFromServer}>
                   <span
                     className={classNames(styles.capacity__item, {
@@ -210,8 +227,12 @@ export const ItemDetailsPage = () => {
           <div className={styles.divider}></div>
 
           <div className={styles.price}>
-            <div className={styles.price__discount}>${item.priceDiscount}</div>
-            <div className={styles.price__regular}>${item.priceRegular}</div>
+            <div className={styles.price__discount}>
+              ${product.priceDiscount}
+            </div>
+            <div className={styles.price__regular}>
+              <FullPrice fullPrice={product.priceRegular} />
+            </div>
           </div>
 
           <div className={styles.buttons}>
@@ -237,10 +258,10 @@ export const ItemDetailsPage = () => {
 
           <div className={styles.params}>
             <ProductParams>
-              <SingleParam name="Screen" param={item?.screen} />
-              <SingleParam name="Resolution" param={item?.resolution} />
-              <SingleParam name="Processor" param={item?.processor} />
-              <SingleParam name="RAM" param={item?.ram} />
+              <SingleParam name="Screen" param={product.screen} />
+              <SingleParam name="Resolution" param={product.resolution} />
+              <SingleParam name="Processor" param={product.processor} />
+              <SingleParam name="RAM" param={product.ram} />
             </ProductParams>
           </div>
         </div>
@@ -250,7 +271,7 @@ export const ItemDetailsPage = () => {
         <h4 className={styles.about__title}>About</h4>
         <div className={styles.divider}></div>
         <div className={styles.description}>
-          {item.description.map(description => (
+          {product.description.map(description => (
             <div className={styles.description__item} key={description.title}>
               <h5 className={styles.description__title}>{description.title}</h5>
               <p className={styles.description__body}>{description.text}</p>
@@ -264,16 +285,28 @@ export const ItemDetailsPage = () => {
 
         <div className={styles.params}>
           <ProductParams techSpecs={true}>
-            <SingleParam name="Screen" param={item?.screen} />
-            <SingleParam name="Resolution" param={item?.resolution} />
-            <SingleParam name="Processor" param={item?.processor} />
-            <SingleParam name="RAM" param={item?.ram} />
-            <SingleParam name="Built in memory" param={item?.capacity} />
-            <SingleParam name="Camera" param={item?.camera} />
-            <SingleParam name="Zoom" param={item?.zoom} />
-            <SingleParam name="Cell" param={item?.cell.join(', ')} />
+            <SingleParam name="Screen" param={product.screen} />
+            <SingleParam name="Resolution" param={product.resolution} />
+            <SingleParam name="Processor" param={product.processor} />
+            <SingleParam name="RAM" param={product.ram} />
+            <SingleParam name="Built in memory" param={product.capacity} />
+            <SingleParam name="Camera" param={product.camera} />
+            <SingleParam name="Zoom" param={product.zoom} />
+            <SingleParam name="Cell" param={product.cell.join(', ')} />
           </ProductParams>
         </div>
+      </div>
+
+      <div className={styles.slider}>
+        {otherProducts.length > 0 && (
+          <SliderSection
+            title="You may also like"
+            prevButtonClass="buttonHotPrice-prev"
+            nextButtonClass="buttonHotPrice-next"
+            arrayToMap={otherProducts}
+            withDiscount={true}
+          />
+        )}
       </div>
     </div>
   );

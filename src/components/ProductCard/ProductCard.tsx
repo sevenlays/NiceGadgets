@@ -10,14 +10,19 @@ import { FullPrice } from './PriceWithoutDiscount/FullPrice';
 import { SingleParam } from './ProductParams/SingleParam/SingleParam';
 
 /* product object should be props now its just a placeholder ti prevent errors*/
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { useSelector } from 'react-redux';
 import {
   addToCart,
   addToFavorites,
   removeFromCart,
   removeFromFavorites,
-} from '../../feature/cart/productSlice';
+  selectCart,
+  selectfavorites,
+} from '../../redux/app/appSlice';
+
+import { useTranslation } from 'react-i18next';
+
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Link } from 'react-router-dom';
 
 type Props = {
@@ -29,12 +34,12 @@ export const ProductCard: React.FC<Props> = ({
   product,
   IsDiscount = true,
 }) => {
-  const cart = useSelector((state: RootState) => state.productStorage.cart);
-  const favorites = useSelector(
-    (state: RootState) => state.productStorage.favorites,
-  );
+  const cart = useSelector(selectCart);
+  const favorites = useSelector(selectfavorites);
 
-  const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const dispatch = useAppDispatch();
 
   const isInCart = cart.includes(product?.itemId);
 
@@ -75,9 +80,12 @@ export const ProductCard: React.FC<Props> = ({
       </div>
 
       <ProductParams>
-        <SingleParam name="Screen" param={product?.screen} />
-        <SingleParam name="Capacity" param={product?.capacity} />
-        <SingleParam name="RAM" param={product?.ram} />
+        <SingleParam name={t('productCard.screen')} param={product?.screen} />
+        <SingleParam
+          name={t('productCard.capacity')}
+          param={product?.capacity}
+        />
+        <SingleParam name={t('productCard.RAM')} param={product?.ram} />
       </ProductParams>
       <div className={styles.buttonsPlaceholder}>
         <Button
@@ -89,7 +97,7 @@ export const ProductCard: React.FC<Props> = ({
             height: 40,
           }}
         >
-          {isInCart ? 'Added' : 'Add to cart'}
+          {isInCart ? t('productCard.added') : t('productCard.addToCart')}
         </Button>
         <Button
           state={isInFavorites ? 'selected' : 'disabled'}

@@ -1,14 +1,13 @@
-// Right now without key page rerenders way smoother. Working on solution...
-/* eslint-disable react/jsx-key */
-import './Catalog.scss';
-import { useEffect, useState } from 'react';
+import styles from './Catalog.module.scss';
+import { useState } from 'react';
 
-import { getProduct } from '../../services/service';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { Product } from '../../types/Product';
 import { DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
+
+import usePagination from '../../hooks/usePagination';
+import useProductsByType from '../../hooks/useProductsByType';
 
 const SORTBY_OPTIONS = ['Newest', 'Alphabetically', 'Cheapest'];
 const ITEMS_ON_PAGE = ['All', '4', '8', '16'];
@@ -18,50 +17,33 @@ type Props = {
 };
 
 export const Catalog: React.FC<Props> = ({ productType }) => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(150);
   const [sortBy, setSortBy] = useState<string>('year');
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const sortedPhones = sortProduct([...products], sortBy);
-  const currentProducts =
-    itemsPerPage === sortedPhones.length
-      ? sortedPhones
-      : sortedPhones.slice(startIndex, startIndex + itemsPerPage);
-  const totalPages = Math.ceil(products.length / itemsPerPage);
+  const products = useProductsByType(productType);
+  const sortedProducts = sortProduct(products, sortBy);
 
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handleItemsPerPageChange = (items: string) => {
-    if (items === 'All') {
-      setItemsPerPage(products.length);
-      setCurrentPage(1);
-    } else {
-      setItemsPerPage(parseInt(items, 10));
-      setCurrentPage(1);
-    }
-  };
+  const {
+    currentPage,
+    itemsPerPage,
+    totalPages,
+    currentItems: currentProducts,
+    handlePageChange,
+    handleItemsPerPageChange,
+  } = usePagination(sortedProducts);
 
   const handleSortChange = (sortOption: string) => {
     setSortBy(sortOption);
   };
 
-  useEffect(() => {
-    getProduct('products', 'category', productType.toLowerCase()).then(data => {
-      setProducts(data);
-    });
-  }, [productType]);
-
   return (
-    <div className="catalog">
-      <h2 className="catalog__title">{productType}</h2>
+    <div className={styles.catalog}>
+      <h2 className={styles.catalog__title}>{productType}</h2>
 
-      <p className="catalog__subtitle">{products && products.length} models</p>
+      <p className={styles.catalog__subtitle}>
+        {products && products.length} models
+      </p>
 
-      <div className="catalog__dropdowns">
+      <div className={styles.catalog__dropdowns}>
         <DropdownMenu
           label="Sort by"
           options={SORTBY_OPTIONS}
@@ -74,9 +56,9 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
         />
       </div>
 
-      <div className="catalog__list">
+      <div className={styles.catalog__list}>
         {currentProducts.map(productItem => (
-          <ProductCard product={productItem} />
+          <ProductCard product={productItem} key={productItem.id} />
         ))}
       </div>
 

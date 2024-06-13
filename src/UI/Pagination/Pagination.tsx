@@ -1,4 +1,4 @@
-import './Pagination.scss';
+import styles from './Pagination.module.scss';
 import React from 'react';
 /* eslint-disable max-len */
 import { ReactComponent as ArrowLeftBold } from '../../assets/icons/ArrowLeftBold.svg';
@@ -25,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
   const maxTranslate = -(totalPages - 5) * (itemWidth + gapWidth);
   const newTranslate = Math.max(Math.min(translate, 0), maxTranslate);
 
-  const styles = {
+  const dynamicStyles = {
     transform: `translateX(${newTranslate}px)`,
     transition: BUTTON_TRANSITION,
   };
@@ -37,7 +37,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       <div>
         {currentPage === 1 ? (
           <Button type="icon" size={{ height: 32 }} state="disabled">
@@ -54,7 +54,7 @@ const Pagination: React.FC<PaginationProps> = ({
         )}
       </div>
 
-      <div className="pagination__numbers">
+      <div className={styles.pagination__numbers}>
         {pageNumbers.map(page => {
           return currentPage === page ? (
             <Button
@@ -62,7 +62,7 @@ const Pagination: React.FC<PaginationProps> = ({
               state="selected"
               size={{ height: 32 }}
               onClick={() => onPageChange(page)}
-              style={styles}
+              style={dynamicStyles}
             >
               {page}
             </Button>
@@ -71,7 +71,7 @@ const Pagination: React.FC<PaginationProps> = ({
               type="number"
               size={{ height: 32 }}
               onClick={() => onPageChange(page)}
-              style={styles}
+              style={dynamicStyles}
             >
               {page}
             </Button>
