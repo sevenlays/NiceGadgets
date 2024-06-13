@@ -7,6 +7,10 @@
   gap: 8px;
   margin-bottom: 24px;
 
+  &__home * {
+    fill: var(--primary);
+  }
+
   @include on-tablet {
     margin-bottom: 40px;
   }
@@ -16,11 +20,12 @@
     flex-direction: row;
     align-items: end;
     font-size: 12px;
-    line-height: 15.34px;
-    color: $Primary;
+    line-height: 15.30px;
+    color: var(--primary);
+
 
     &--active {
-      color: $Secondary
+      color: var(--secondary);
     }
   }
 }

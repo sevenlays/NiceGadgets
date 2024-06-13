@@ -8,7 +8,7 @@
 .footer {
   padding-block: 32px;
 
-  border-top: 1px solid $Icons;
+  border-top: 1px solid var(--footer-header-border);
 
   &__wrapper {
     display: flex;

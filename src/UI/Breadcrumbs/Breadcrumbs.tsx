@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './Breadcrumbs.scss';
-import Home from '../../assets/icons/Home.svg';
-import ArrowRight from '../../assets/icons/ArrowRight.svg';
+import { ReactComponent as Home } from '../../assets/icons/Home.svg';
+import { ReactComponent as Arrow } from '../../assets/icons/ArrowRight.svg';
 import { Breadcrumb } from '../../types/Breadcrumb';
 
 interface Props {
@@ -19,9 +19,9 @@ export const BreadcrumbsComponent: React.FC<Props> = ({ breadcrumbs }) => {
   return (
     <div className="breadcrumbs">
       <Link to={'/'} className="breadcrumbs__link">
-        <img src={Home} alt="Home" />
+        <Home className="breadcrumbs__home" />
       </Link>
-      <img src={ArrowRight} alt="ArrowRight" className="breadcrumbs__icon" />
+      <Arrow className="breadcrumbs__icon" />
       {breadcrumbs.map((breadcrumb, index) => (
         <React.Fragment key={index}>
           <Link
@@ -31,11 +31,7 @@ export const BreadcrumbsComponent: React.FC<Props> = ({ breadcrumbs }) => {
             <p className="breadcrumbs__text">{breadcrumb.label}</p>
           </Link>
           {index < breadcrumbs.length - 1 && (
-            <img
-              src={ArrowRight}
-              alt="ArrowRight"
-              className="breadcrumbs__icon"
-            />
+            <Arrow className="breadcrumbs__icon" />
           )}
         </React.Fragment>
       ))}

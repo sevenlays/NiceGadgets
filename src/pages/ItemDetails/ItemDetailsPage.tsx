@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
+import { useNavigate } from 'react-router-dom';
 import iconFav from '../../assets/icons/Favourites.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
@@ -111,6 +111,12 @@ export const ItemDetailsPage = () => {
   const [capacity, setCapacity] = useState(item.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
 
+  const navigate = useNavigate();
+
+  const onBackClick = () => {
+    navigate(-1);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       const size = window.innerWidth;
@@ -134,9 +140,13 @@ export const ItemDetailsPage = () => {
   return (
     <div className={styles.page__container}>
       <div className={styles.breadcrumbs}>breadcrumbs</div>
-      <a href="#" className={styles.back}>
-        <img src={iconLeft} /> Back
-      </a>
+      <Button
+        type="back"
+        size={{ width: 66, height: 16 }}
+        onClick={onBackClick}
+      >
+        Back
+      </Button>
       <h3 className={styles.title}>{item.name}</h3>
       <div className={styles.product}>
         <div className={styles.product__gallary}>

@@ -25,11 +25,11 @@
 
     position: relative;
 
-    color: $Secondary;
+    color: var(--secondary);
     padding: 8px 0;
 
     @include underline;
-  
+
     &_active {
       @include underline-active;
     }
@@ -42,7 +42,7 @@
   .nav {
     font-weight: 800;
     font-size: 12px;
-    
+
     padding: 0;
     margin-left: 13px;
     &__list {
@@ -53,7 +53,7 @@
     &__link {
       padding-block: 18px;
       text-transform: uppercase;
-  
+
       &:hover {
         @include underline-active;
       }
