@@ -4,12 +4,12 @@ import style from './CartTotal.module.scss';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  favouriteProducts: Product[];
+  prodsFromStore: Product[] | null;
   total: number;
 };
 
-export const CartTotal: React.FC<Props> = ({ favouriteProducts, total }) => {
-  const amount = favouriteProducts.length;
+export const CartTotal: React.FC<Props> = ({ prodsFromStore, total }) => {
+  const amount = prodsFromStore?.length;
 
   const { t } = useTranslation();
 

@@ -5,6 +5,9 @@ import { Product } from './type/ProductType';
 import { CartList } from './CartList/CartList';
 import { CartTotal } from './CartTotal/CartTotal';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectAllProducts, selectCart } from '../../redux';
+import { getProductsFromStorage } from '../../utils/getProductsFromStorage';
 
 const productsExample = [
   {
@@ -136,15 +139,21 @@ const productsExample = [
 ];
 
 export const CartPage = () => {
-  /* Скоріш за все FavouriyeProdict буде приходити з Редакс стейту. Так як продукти додаються з іншого компонента, але покищо роблю через UseState локально для цього компонета */
   const [favouriteProducts, setfavouriteProducts] =
     useState<Product[]>(productsExample);
-
   const initialTotal = favouriteProducts.reduce((accumulator, currentValue) => {
     return accumulator + currentValue.price;
   }, 0);
   const [total, setTotal] = useState(initialTotal);
   const navigate = useNavigate();
+
+  const cart = useSelector(selectCart);
+  const allProducts = useSelector(selectAllProducts);
+
+  const prodsFromStore = getProductsFromStorage(allProducts, cart);
+
+  window.console.log(cart);
+  window.console.log(prodsFromStore);
 
   const onBackClick = () => {
     navigate(-1);
@@ -186,11 +195,11 @@ export const CartPage = () => {
         <h1 className={style.cart__pageName}>Cart</h1>
         <main className={style.cart__content}>
           <CartList
-            favouriteProducts={favouriteProducts}
+            prodsFromStore={prodsFromStore}
             onDeleteClick={onDeleteClick}
             calculateTotal={calculateTotal}
           />
-          <CartTotal favouriteProducts={favouriteProducts} total={total} />
+          <CartTotal prodsFromStore={prodsFromStore} total={total} />
         </main>
       </section>
     </div>
