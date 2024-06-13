@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from '../../../UI';
-import icon from '../../../assets/icons/Shopping bag.svg';
+import { ReactComponent as Icon } from '../../../assets/icons/Shopping bag.svg';
 import styles from './CartIcon.module.scss';
 import { PATHS } from '../../../constants';
 
@@ -19,8 +19,13 @@ export const CartIcon = () => {
         to={`${PATHS.CART}`}
         style={{ width: '100%', boxSizing: 'border-box' }}
       >
-        <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
-          <img src={icon} alt="burger-icon" className={styles.icon__img} />
+        <Button
+          type="icon"
+          size={{ width: 100, height: 100 }}
+          measure="%"
+          state="header"
+        >
+          <Icon className={styles.icon__fill} />
         </Button>
       </NavLink>
     </div>

@@ -13,7 +13,8 @@
     "home": "Головна",
     "phones": "Телефони",
     "tablets": "Планшети",
-    "accessories": "Аксесуари"
+    "accessories": "Аксесуари",
+    "back": "Назад"
   },
   "footer": {
     "github": "Github",
@@ -31,7 +32,10 @@
     "title": "Аксесуари"
   },
   "catalog": {
-    "sortBy": "Сортувати за",
+    "modelsCountSingular": "{{count}} модель",
+    "modelsCountPlural": "{{count}} моделі",
+    "modelsCountPlural_1": "{{count}} моделей",
+    "sortBy": "Сортувати",
     "newest": "Новіші",
     "alphabetically": "Алфавітно",
     "cheapest": "Найдешевші",
@@ -49,5 +53,21 @@
     "totalFor": "Всього за",
     "checkout": "Оформити замовлення",
     "items": "предметів"
+  },
+  "detailProduct": {
+    "availableColors": "Доступні кольори",
+    "selectCapacity": "Обсяг пам'яті",
+    "about": "Опис",
+    "techSpecs": "Характеристики",
+    "youMayAlsoLike": "Вам також може сподобатися",
+    "id": "Артикул"
+  },
+  "techSpech": {
+    "processor": "Процесор",
+    "resolution": "Роздільна здатність дисплея",
+    "memory": "Вбудована пам'ять",
+    "camera": "Камера",
+    "zoom": "Зум",
+    "cell": "Стандарт зв'язку"
   }
 }

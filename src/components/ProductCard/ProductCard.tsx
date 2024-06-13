@@ -1,8 +1,9 @@
 import { Button } from '../../UI';
 import styles from './ProductCard.module.scss';
 import { ProductParams } from './ProductParams/ProductParams';
-import iconFavourite from '../../assets/icons/Favourites.svg';
-import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
+import { ReactComponent as Favourite } from '../../assets/icons/Favourites.svg';
+/* eslint-disable-next-line max-len */
+import { ReactComponent as FavouriteActive } from '../../assets/icons/Favourites Filled.svg';
 
 import { Product } from '../../types/Product';
 import { FullPrice } from './PriceWithoutDiscount/FullPrice';
@@ -22,6 +23,7 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { Link } from 'react-router-dom';
 
 type Props = {
   product: Product;
@@ -30,7 +32,7 @@ type Props = {
 
 export const ProductCard: React.FC<Props> = ({
   product,
-  IsDiscount = false,
+  IsDiscount = true,
 }) => {
   const cart = useSelector(selectCart);
   const favorites = useSelector(selectfavorites);
@@ -64,7 +66,10 @@ export const ProductCard: React.FC<Props> = ({
       <div className={styles.card__image_container}>
         <img className={styles.card__image} src={product?.image} />
       </div>
-      <h5 className={styles.card__title}>{product?.name}</h5>
+      <Link to="#">
+        <h5 className={styles.card__title}>{product?.name}</h5>
+      </Link>
+
       <div>
         <p className={styles.card__price}>
           <span
@@ -100,10 +105,11 @@ export const ProductCard: React.FC<Props> = ({
           size={{ width: 50, height: 40 }}
           onClick={handleToggleToFavorites}
         >
-          <img
-            src={isInFavorites ? iconFavouriteActive : iconFavourite}
-            alt="icon"
-          ></img>
+          {isInFavorites ? (
+            <FavouriteActive />
+          ) : (
+            <Favourite className={styles.card__favourite_icon} />
+          )}
         </Button>
       </div>
     </article>

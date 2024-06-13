@@ -31,7 +31,7 @@
 
     position: relative;
 
-    color: $Secondary;
+    color: var(--secondary);
     padding: 8px 0;
 
     @include underline;
