@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { SliderSection, HomeSlider } from '../../components';
+import { SliderSection, HomeSlider, Chat } from '../../components';
 
 import styles from './HomePage.module.scss';
 import { Product } from '../Cart/type/ProductType';
@@ -90,6 +90,7 @@ export const HomePage = () => {
         arrayToMap={getHotPrices(products)}
         withDiscount={true}
       />
+      <Chat />
     </div>
   );
 };
