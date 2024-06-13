@@ -46,7 +46,9 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
   return (
     <div className={styles.catalog}>
-      <h2 className={styles.catalog__title}>{productType}</h2>
+      <h2 className={styles.catalog__title}>
+        {localize(`${productType.toLowerCase()}.title`)}
+      </h2>
 
       <p className={styles.catalog__subtitle}>
         {products &&
