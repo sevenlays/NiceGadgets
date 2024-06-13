@@ -3,12 +3,15 @@ import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
 import { Catalog } from '../../components/Catalog/Catalog';
 import { PATHS } from '../../constants';
 import { Breadcrumb } from '../../types/Breadcrumb';
-
-const breadcrumbsData: Breadcrumb[] = [
-  { label: 'Tablets', path: PATHS.TABLETS.LIST },
-];
+import { useTranslation } from 'react-i18next';
 
 export const TabletsPage = () => {
+  const { t: localize } = useTranslation();
+
+  const breadcrumbsData: Breadcrumb[] = [
+    { label: localize('tablets.title'), path: PATHS.TABLETS.LIST },
+  ];
+
   return (
     <div className="page__container">
       <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />

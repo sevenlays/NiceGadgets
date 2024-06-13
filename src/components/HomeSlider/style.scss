@@ -58,19 +58,21 @@
     align-items: center;
     min-width: 32px;
 
-    border: 1px solid $Icons;
+    border: 1px solid var(--icon-border-color);
+    background-color: var(--icon-background-color);
 
     cursor: pointer;
 
     transition: all 0.3s linear;
 
     svg path {
-      fill: $Primary;
+      fill: var(--primary);
       transition: all 0.3s linear;
     }
 
     &:hover {
-      border: 1px solid $Primary;
+      border-color: var(--icon-border-hover-color);
+      background-color: var(--icon-hover-color);
     }
 
     @media screen and (min-width: 1200px) {

@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/indent */
+/* eslint-disable max-len */
 import React from 'react';
 import classNames from 'classnames';
 import styles from './Button.module.scss';
 import { makeColorDarker } from '../../utils/makeColorDarker';
-import ArrowLeft from '../../assets/icons/ArrowLeftBold.svg';
+import { ReactComponent as ArrowLeft } from '../../assets/icons/ArrowLeftBold.svg';
 import getHexFromColorName from '../../utils/LiteralColorToHex';
 
 type Size = {
@@ -19,10 +20,10 @@ interface CustomCSSProperties extends React.CSSProperties {
 }
 
 type ButtonProps = {
-  type: 'number' | 'radio' | 'icon' | 'back' | 'primary';
+  type: 'number' | 'radio' | 'icon' | 'back' | 'primary' | 'sign';
   size: Size;
   measure?: 'px' | '%';
-  state?: 'selected' | 'disabled';
+  state?: 'selected' | 'disabled' | 'header';
   color?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
@@ -58,9 +59,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button className={btnClass} onClick={onClick} style={style}>
-      {type === 'back' && (
-        <img src={ArrowLeft} className={styles.arrowLeft} alt="Arrow Left" />
-      )}
+      {type === 'back' && <ArrowLeft className={`${styles.arrowLeft}`} />}
       {children}
     </button>
   );

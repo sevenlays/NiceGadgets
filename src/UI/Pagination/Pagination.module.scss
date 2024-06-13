@@ -7,6 +7,10 @@
   padding-inline: 20px;
   transition: transform 3s;
 
+  &__arrow * {
+    fill: var(--primary);
+  }
+
   &__numbers {
     display: flex;
     width: 192px;

@@ -7,6 +7,7 @@ import {
   CartPage,
   FavouritesPage,
   HomePage,
+  ItemDetailsPage,
   PhonesPage,
   TabletsPage,
 } from '../pages';
@@ -27,7 +28,11 @@ export const AppRouter = () => {
           <Route index element={<PhonesPage />} />
           <Route
             path={PHONES.DETAILS}
-            element={<div>Single Phone Details</div>}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
           />
         </Route>
 
@@ -35,7 +40,11 @@ export const AppRouter = () => {
           <Route index element={<TabletsPage />} />
           <Route
             path={TABLETS.DETAILS}
-            element={<div>Single Tablet Details</div>}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
           />
         </Route>
 
@@ -43,7 +52,11 @@ export const AppRouter = () => {
           <Route index element={<AccessoriesPage />} />
           <Route
             path={ACCESSORIES.DETAILS}
-            element={<div>Single Accessories Details</div>}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
           />
         </Route>
 

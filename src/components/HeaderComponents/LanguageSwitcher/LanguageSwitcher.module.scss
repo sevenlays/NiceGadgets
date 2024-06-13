@@ -13,12 +13,12 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-
+    color: var(--primary);
     padding: 2px;
   }
 
   .active {
-    color: red;
+    color: var(--lang-seleted);
   }
 
   @media (max-width: 640px) {

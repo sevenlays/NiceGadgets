@@ -3,16 +3,21 @@
 
 .card {
   padding: 32px;
-  border: 1px solid $Elements;
+  border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 8px;
+  background-color: var(--card-background);
 
   &__image_container {
     display: flex;
     justify-content: center;
     height: 200px;
+  }
+
+  &__favourite_icon * {
+    fill: var(--primary);
   }
 
   grid-column: span 4;
@@ -38,10 +43,12 @@
     font-size: 14px;
     line-height: 21px;
     font-weight: 600;
-    color: $Primary;
+    color: var(--primary);
     width: 100%;
     flex-grow: 1;
+    min-height: 42px;
   }
+
   &__image {
     height: 100%;
     object-fit: contain;
@@ -53,7 +60,7 @@
     font-size: 22px;
     line-height: 30.8px;
     gap: 8px;
-    color: $Primary;
+    color: var(--primary);
     position: relative;
 
     ::after {
@@ -68,23 +75,12 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
 
-    &__withoutDiscount {
-      color: $Secondary;
-      position: relative;
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: 50%;
-        width: 100%;
-        height: 1px;
-        background-color: $Secondary;
-        mix-blend-mode: color-dodge;
-        transform: scaleY(1);
-      }
-    }
+  transition: box-shadow 0.5s ease;
+  
+  &:hover {
+    box-shadow: inset 0 1px 15px 0 var(--button-shadow);
   }
 }
 
@@ -92,4 +88,12 @@
   display: flex;
   justify-content: space-between;
   gap: 8px;
+}
+
+@media screen and (max-width: 639px) {
+  .card {
+    &__title {
+      min-height: 63px;
+    }
+  }
 }

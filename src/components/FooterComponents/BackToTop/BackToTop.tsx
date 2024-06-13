@@ -1,5 +1,5 @@
 import { Button } from '../../../UI';
-import icon from '../../../assets/icons/ArrowUp.svg';
+import { ReactComponent as Icon } from '../../../assets/icons/ArrowUp.svg';
 import styles from './BackToTop.module.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -12,7 +12,7 @@ export const BackToTop = () => {
         {t('footer.backToTop')}
       </a>
       <Button type="icon" size={{ width: 32, height: 32 }}>
-        <img src={icon} alt="Icon" />
+        <Icon className={styles.back__fill} />
       </Button>
     </div>
   );
