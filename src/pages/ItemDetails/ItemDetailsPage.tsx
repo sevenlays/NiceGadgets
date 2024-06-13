@@ -31,6 +31,7 @@ import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
 import { useTranslation } from 'react-i18next';
+import { getColorWithoutSpaces } from '../../utils/getColorWithoutSpaces';
 
 type Orientation = 'bottom' | 'left';
 
@@ -188,7 +189,8 @@ export const ItemDetailsPage = () => {
             </div>
             <ul className={styles.colors__list}>
               {product.colorsAvailable.map(colorFromServer => {
-                const hexColor = getHexFromColorName(colorFromServer);
+                const validColor = getColorWithoutSpaces(colorFromServer);
+                const hexColor = getHexFromColorName(validColor);
                 const darkerColor = makeColorDarker(hexColor, 10);
 
                 return (
