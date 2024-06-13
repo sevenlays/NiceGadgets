@@ -1,13 +1,13 @@
 import styles from './Catalog.module.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { getProduct } from '../../services/service';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
-import { Product } from '../../types/Product';
 import { DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
+
 import usePagination from '../../hooks/usePagination';
+import useProductsByType from '../../hooks/useProductsByType';
 
 const SORTBY_OPTIONS = ['Newest', 'Alphabetically', 'Cheapest'];
 const ITEMS_ON_PAGE = ['All', '4', '8', '16'];
@@ -17,9 +17,9 @@ type Props = {
 };
 
 export const Catalog: React.FC<Props> = ({ productType }) => {
-  const [products, setProducts] = useState<Product[]>([]);
   const [sortBy, setSortBy] = useState<string>('year');
 
+  const products = useProductsByType(productType);
   const sortedProducts = sortProduct(products, sortBy);
 
   const {
@@ -34,12 +34,6 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
   const handleSortChange = (sortOption: string) => {
     setSortBy(sortOption);
   };
-
-  useEffect(() => {
-    getProduct('products', 'category', productType.toLowerCase()).then(data => {
-      setProducts(data);
-    });
-  }, [productType]);
 
   return (
     <div className={styles.catalog}>
