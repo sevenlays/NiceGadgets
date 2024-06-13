@@ -1,0 +1,53 @@
+{
+  "homePage": {
+    "mobilePhones": "Mobile phones",
+    "models": "models",
+    "tablets": "Tablets",
+    "accessories": "Accessories",
+    "hotPrices": "Hot prices",
+    "brandNewModels": "Brand new models",
+    "shopByCategory": "Shop by category",
+    "welcome": "Welcome to Nice Gadgets store!"
+  },
+  "nav": {
+    "home": "Home",
+    "phones": "Phones",
+    "tablets": "Tablets",
+    "accessories": "Accessories"
+  },
+  "footer": {
+    "github": "Github",
+    "contacts": "Contacts",
+    "rights": "Rights",
+    "backToTop": "Back to top"
+  },
+  "tablets": {
+    "title": "Tablets"
+  },
+  "phones": {
+    "title": "Phones"
+  },
+  "accessories": {
+    "title": "Accessories"
+  },
+  "catalog": {
+    "sortBy": "Sort by",
+    "newest": "Newest",
+    "alphabetically": "Alphabetically",
+    "cheapest": "Cheapest",
+    "itemsOnPage": "Items on page",
+    "all": "All"
+  },
+  "productCard": {
+    "screen": "Screen",
+    "RAM": "RAM",
+    "capacity": "Capacity",
+    "added": "Added",
+    "addToCart": "Add to cart"
+  },
+  "cart": {
+    "totalFor": "Total for",
+    "checkout": "Checkout",
+    "items": "items"
+  }
+}
