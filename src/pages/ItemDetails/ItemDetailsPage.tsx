@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 import iconFav from '../../assets/icons/Favourites.svg';
-import iconLeft from '../../assets/icons/ArrowLeft.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
@@ -30,6 +29,7 @@ import {
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
+import { BAckButton } from '../../UI/Backbutton/BackButton';
 import { useTranslation } from 'react-i18next';
 import { getColorWithoutSpaces } from '../../utils/getColorWithoutSpaces';
 
@@ -68,6 +68,8 @@ export const ItemDetailsPage = () => {
   const [color, setColor] = useState(product?.color);
   const [capacity, setCapacity] = useState(product?.capacity);
   const [orientation, setOrientation] = useState<Orientation>('bottom');
+
+  // const navigate = useNavigate();
 
   const { pathname } = useLocation();
   const { t } = useTranslation();
@@ -156,18 +158,40 @@ export const ItemDetailsPage = () => {
 
   /* breadcrumbs */
 
-  const breadcrumbsData: Breadcrumb[] = [
-    { label: product.id, path: PATHS.ACCESSORIES.LIST },
-  ];
+  const generateBreadcrumbs = (): Breadcrumb[] => {
+    const breadcrumbs: Breadcrumb[] = [];
+
+    if (product.category === 'phones') {
+      breadcrumbs.push({ label: 'Phones', path: PATHS.PHONES.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.PHONES.DETAILS.replace(':phoneID', product.id),
+      });
+    } else if (product.category === 'tablets') {
+      breadcrumbs.push({ label: 'Tablets', path: PATHS.TABLETS.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.TABLETS.DETAILS.replace(':tabletID', product.id),
+      });
+    } else if (product.category === 'accessories') {
+      breadcrumbs.push({ label: 'Accessories', path: PATHS.ACCESSORIES.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.ACCESSORIES.DETAILS.replace(':accessoriesID', product.id),
+      });
+    }
+
+    return breadcrumbs;
+  };
+
+  const breadcrumbsData = generateBreadcrumbs();
 
   return (
     <div className={styles.page__container}>
       <div className={styles.breadcrumbs}>
         <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
       </div>
-      <a href="#" className={styles.back}>
-        <img src={iconLeft} /> {t('nav.back')}
-      </a>
+      <BAckButton />
       <h3 className={styles.title}>{product.name}</h3>
       <div className={styles.product}>
         <div className={styles.product__gallary}>

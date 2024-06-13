@@ -4,6 +4,7 @@ import { ProductParams } from './ProductParams/ProductParams';
 import { ReactComponent as Favourite } from '../../assets/icons/Favourites.svg';
 /* eslint-disable-next-line max-len */
 import { ReactComponent as FavouriteActive } from '../../assets/icons/Favourites Filled.svg';
+import { Link } from 'react-router-dom';
 
 import { Product } from '../../types/Product';
 import { FullPrice } from './PriceWithoutDiscount/FullPrice';
@@ -23,7 +24,6 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { Link } from 'react-router-dom';
 
 type Props = {
   product: Product;
@@ -41,7 +41,9 @@ export const ProductCard: React.FC<Props> = ({
 
   const dispatch = useAppDispatch();
 
-  const isInCart = cart.includes(product?.itemId);
+  const isInCart = cart.some(
+    itemInCart => itemInCart.cartItemId === product?.itemId,
+  );
 
   const isInFavorites = favorites.includes(product?.itemId);
 
@@ -49,7 +51,7 @@ export const ProductCard: React.FC<Props> = ({
     if (isInCart) {
       dispatch(removeFromCart(product.itemId));
     } else {
-      dispatch(addToCart(product.itemId));
+      dispatch(addToCart({ cartItemId: product.itemId, quantity: 1 }));
     }
   };
 
@@ -61,12 +63,25 @@ export const ProductCard: React.FC<Props> = ({
     }
   };
 
+  const getProductDetailsPath = () => {
+    switch (product.category) {
+      case 'phones':
+        return `/phones/${product.itemId}`;
+      case 'tablets':
+        return `/tablets/${product.itemId}`;
+      case 'accessories':
+        return `/accessories/${product.itemId}`;
+      default:
+        return '/';
+    }
+  };
+
   return (
     <article className={styles.card}>
       <div className={styles.card__image_container}>
         <img className={styles.card__image} src={product?.image} />
       </div>
-      <Link to="#">
+      <Link to={getProductDetailsPath()}>
         <h5 className={styles.card__title}>{product?.name}</h5>
       </Link>
 
