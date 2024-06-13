@@ -7,10 +7,10 @@
   font-weight: 600;
 
   &__name {
-    color: $Secondary;
+    color: var(--secondary);
   }
 
   &__overview {
-    color: $Primary;
+    color: var(--primary);
   }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
+import iconLeft from '../../assets/icons/ArrowLeft.svg';
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
 import styles from './ItemDetailsPage.module.scss';

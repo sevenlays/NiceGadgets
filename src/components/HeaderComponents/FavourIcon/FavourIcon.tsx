@@ -1,4 +1,4 @@
-import icon from '../../../assets/icons/Favourites.svg';
+import { ReactComponent as Icon } from '../../../assets/icons/Favourites.svg';
 import styles from './FavourIcon.module.scss';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Button } from '../../../UI';
@@ -19,8 +19,13 @@ export const FavourIcon = () => {
         to={`${PATHS.FAVOURITES}`}
         style={{ width: '100%', boxSizing: 'border-box' }}
       >
-        <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
-          <img src={icon} alt="burger-icon" className={styles.icon__img} />
+        <Button
+          type="icon"
+          size={{ width: 100, height: 100 }}
+          measure="%"
+          state="header"
+        >
+          <Icon className={styles.icon__fill} />
         </Button>
       </NavLink>
     </div>

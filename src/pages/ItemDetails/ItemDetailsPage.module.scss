@@ -20,7 +20,9 @@
   margin-top: 24px;
 
   font-size: 12px;
-  color: $Secondary;
+  background-color: var(--background);
+  color: var(--back-button-color);
+
   height: 16px;
   font-weight: 600;
 
@@ -32,7 +34,7 @@
 
   @include hover(color, $Primary);
   img {
-    color: $Primary;
+    color: var(--back-button-hover-color);
     margin-right: 10px;
   }
 }
@@ -350,6 +352,6 @@
   }
 }
 
-/* Gallery */ 
+/* Gallery */
 
-/* Gallery */ 
+/* Gallery */
