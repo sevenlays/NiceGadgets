@@ -30,6 +30,7 @@ import {
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
+import { useTranslation } from 'react-i18next';
 
 type Orientation = 'bottom' | 'left';
 
@@ -68,6 +69,7 @@ export const ItemDetailsPage = () => {
   const [orientation, setOrientation] = useState<Orientation>('bottom');
 
   const { pathname } = useLocation();
+  const { t } = useTranslation();
 
   const URL = getCategoryApiEndpoint(pathname, '/react_phone-catalog/api/');
 
@@ -163,7 +165,7 @@ export const ItemDetailsPage = () => {
         <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
       </div>
       <a href="#" className={styles.back}>
-        <img src={iconLeft} /> Back
+        <img src={iconLeft} /> {t('nav.back')}
       </a>
       <h3 className={styles.title}>{product.name}</h3>
       <div className={styles.product}>
@@ -179,8 +181,10 @@ export const ItemDetailsPage = () => {
         <div className={styles.product__settings}>
           <div className={styles.colors}>
             <div className={styles.colors__wrapper}>
-              <p>Available colors</p>
-              <div className={styles.product__id}>ID: {newCustomProductId}</div>
+              <p>{t('detailProduct.availableColors')}</p>
+              <div className={styles.product__id}>
+                {t('detailProduct.id')}: {newCustomProductId}
+              </div>
             </div>
             <ul className={styles.colors__list}>
               {product.colorsAvailable.map(colorFromServer => {
@@ -207,7 +211,7 @@ export const ItemDetailsPage = () => {
           </div>
           <div className={styles.divider}></div>
           <div className={styles.capacity}>
-            <p>Select capacity</p>
+            <p>{t('detailProduct.selectCapacity')}</p>
             <ul className={styles.capacity__list}>
               {product.capacityAvailable.map(capacityFromServer => (
                 <li key={capacityFromServer}>
@@ -242,7 +246,7 @@ export const ItemDetailsPage = () => {
                 size={{ height: 48 }}
                 onClick={() => alert('Button clicked!')}
               >
-                Add to cart
+                {t('productCard.addToCart')}
               </Button>
             </div>
             <div className={styles.buttons__addToFavourites}>
@@ -258,17 +262,26 @@ export const ItemDetailsPage = () => {
 
           <div className={styles.params}>
             <ProductParams>
-              <SingleParam name="Screen" param={product.screen} />
-              <SingleParam name="Resolution" param={product.resolution} />
-              <SingleParam name="Processor" param={product.processor} />
-              <SingleParam name="RAM" param={product.ram} />
+              <SingleParam
+                name={t('productCard.screen')}
+                param={product.screen}
+              />
+              <SingleParam
+                name={t('techSpech.resolution')}
+                param={product.resolution}
+              />
+              <SingleParam
+                name={t('techSpech.processor')}
+                param={product.processor}
+              />
+              <SingleParam name={t('productCard.RAM')} param={product.ram} />
             </ProductParams>
           </div>
         </div>
       </div>
 
       <div className={styles.about}>
-        <h4 className={styles.about__title}>About</h4>
+        <h4 className={styles.about__title}>{t('detailProduct.about')}</h4>
         <div className={styles.divider}></div>
         <div className={styles.description}>
           {product.description.map(description => (
@@ -280,19 +293,34 @@ export const ItemDetailsPage = () => {
         </div>
       </div>
       <div className={styles.tech}>
-        <h4 className={styles.tech__title}>Tech specs</h4>
+        <h4 className={styles.tech__title}>{t('detailProduct.techSpecs')}</h4>
         <div className={styles.divider}></div>
 
         <div className={styles.params}>
           <ProductParams techSpecs={true}>
-            <SingleParam name="Screen" param={product.screen} />
-            <SingleParam name="Resolution" param={product.resolution} />
-            <SingleParam name="Processor" param={product.processor} />
-            <SingleParam name="RAM" param={product.ram} />
-            <SingleParam name="Built in memory" param={product.capacity} />
-            <SingleParam name="Camera" param={product.camera} />
-            <SingleParam name="Zoom" param={product.zoom} />
-            <SingleParam name="Cell" param={product.cell.join(', ')} />
+            <SingleParam
+              name={t('productCard.screen')}
+              param={product.screen}
+            />
+            <SingleParam
+              name={t('techSpech.resolution')}
+              param={product.resolution}
+            />
+            <SingleParam
+              name={t('techSpech.processor')}
+              param={product.processor}
+            />
+            <SingleParam name={t('productCard.RAM')} param={product.ram} />
+            <SingleParam
+              name={t('productCard.capacity')}
+              param={product.capacity}
+            />
+            <SingleParam name={t('techSpech.camera')} param={product.camera} />
+            <SingleParam name={t('techSpech.zoom')} param={product.zoom} />
+            <SingleParam
+              name={t('techSpech.cell')}
+              param={product.cell.join(', ')}
+            />
           </ProductParams>
         </div>
       </div>
@@ -300,7 +328,7 @@ export const ItemDetailsPage = () => {
       <div className={styles.slider}>
         {otherProducts.length > 0 && (
           <SliderSection
-            title="You may also like"
+            title={t('detailProduct.youMayAlsoLike')}
             prevButtonClass="buttonHotPrice-prev"
             nextButtonClass="buttonHotPrice-next"
             arrayToMap={otherProducts}
