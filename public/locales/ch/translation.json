@@ -13,7 +13,8 @@
     "home": "主页",
     "phones": "电话",
     "tablets": "平板电脑",
-    "accessories": "配件"
+    "accessories": "配件",
+    "back": "后退"
   },
   "footer": {
     "github": "Github",
@@ -49,5 +50,21 @@
     "totalFor": "总计",
     "checkout": "查看",
     "items": "项目"
+  },
+  "detailProduct": {
+    "availableColors": "颜色选择器",
+    "selectCapacity": "颜色选择器",
+    "about": "概述",
+    "techSpecs": "技术规格",
+    "youMayAlsoLike": "你也许也喜欢",
+    "id": "文章"
+  },
+  "techSpech": {
+    "processor": "处理器",
+    "resolution": "显示分辨率",
+    "memory": "内置内存",
+    "camera": "细胞",
+    "zoom": "飞涨",
+    "cell": "通讯标准"
   }
 }
