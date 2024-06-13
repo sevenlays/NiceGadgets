@@ -1,7 +1,7 @@
 @import './colors';
 
 .App,
-[data-theme='original'] {
+[data-theme='Original'] {
   --background: #{$White};
   --primary: #{$Primary};
   --secondary: #{$Secondary};
@@ -35,7 +35,7 @@
   --icon-numbers-selected: #{$Primary};
 }
 
-[data-theme='original-dark'] {
+[data-theme='Original-dark'] {
   --background: #{$Black_dark};
   --primary: #{$White_dark};
   --secondary: #{$Secondary_dark};

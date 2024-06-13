@@ -13,7 +13,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <div className="App" data-theme="original-dark">
+    <div className="App" data-theme="Original-dark">
       <AppRouter />
     </div>
   );
