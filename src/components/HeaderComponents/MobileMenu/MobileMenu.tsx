@@ -2,8 +2,9 @@ import { Button } from '../../../UI';
 import { Logo } from '../../Logo/Logo';
 import { CloseIcon } from '../CloseIcon/CloseIcon';
 import styles from './MobileMenu.module.scss';
-import favouriteIcon from '../../../assets/icons/Favourites.svg';
-import cartIcon from '../../../assets/icons/Shopping bag.svg';
+/* eslint-disable max-len */
+import { ReactComponent as FavouriteIcon } from '../../../assets/icons/Favourites.svg';
+import { ReactComponent as CartIcon } from '../../../assets/icons/Shopping bag.svg';
 import cn from 'classnames';
 import { Nav } from '../Nav/Nav';
 import { NavLink } from 'react-router-dom';
@@ -50,8 +51,13 @@ export const MobileMenu: React.FC<Props> = ({
             style={{ width: '100%' }}
             onClick={handleCloseMenu}
           >
-            <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
-              <img src={favouriteIcon} alt="Icon" />
+            <Button
+              type="icon"
+              size={{ width: 100, height: 100 }}
+              measure="%"
+              state="header"
+            >
+              <FavouriteIcon className={styles.icon__fill} />
             </Button>
           </NavLink>
         </div>
@@ -65,8 +71,13 @@ export const MobileMenu: React.FC<Props> = ({
             style={{ width: '100%' }}
             onClick={handleCloseMenu}
           >
-            <Button type="icon" size={{ width: 100, height: 100 }} measure="%">
-              <img src={cartIcon} alt="Icon" />
+            <Button
+              type="icon"
+              size={{ width: 100, height: 100 }}
+              measure="%"
+              state="header"
+            >
+              <CartIcon className={styles.icon__fill} />
             </Button>
           </NavLink>
         </div>

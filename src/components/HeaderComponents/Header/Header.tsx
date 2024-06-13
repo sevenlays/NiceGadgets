@@ -7,6 +7,7 @@ import styles from './Header.module.scss';
 import { BurgerIcon } from '../BurgerIcon/BurgerIcon';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { useState } from 'react';
+import { ToggleTheme } from '../../ToggleTheme/ToggleTheme';
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -22,8 +23,8 @@ export const Header = () => {
         setShowMenu={setShowMenu}
         handleCloseMenu={handleCloseMenu}
       />
-
       <Logo />
+      <ToggleTheme />
 
       <div className={styles.nav__desctop}>
         <Nav handleCloseMenu={handleCloseMenu} />

@@ -1,7 +1,7 @@
 @import '../../styles/colors';
 
 .navigation-button button svg path {
-  fill: $Primary;
+  fill: var(--primary);
 }
 
 .swiper-button-disabled {
