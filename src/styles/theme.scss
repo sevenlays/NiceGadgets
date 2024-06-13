@@ -33,9 +33,11 @@
   --icon-numbers-hover-border: #{$Primary};
   --icon-numbers-hover-color: #{$White};
   --icon-numbers-selected: #{$Primary};
+  --toggle-theme-background: url('../assets/day.png');
+  --lang-seleted: #{$Red};
 }
 
-[data-theme='Original-dark'] {
+[data-theme='Original Dark'] {
   --background: #{$Black_dark};
   --primary: #{$White_dark};
   --secondary: #{$Secondary_dark};
@@ -67,4 +69,6 @@
   --icon-numbers-hover-border: #{$Elements_dark};
   --icon-numbers-hover-color: #{$Elements_dark};
   --icon-numbers-selected: #{$Accent_dark};
+  --toggle-theme-background: url('../assets/night.png');
+  --lang-seleted: #{$Accent-dark};
 }
