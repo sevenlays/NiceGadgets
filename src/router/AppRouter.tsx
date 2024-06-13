@@ -26,17 +26,38 @@ export const AppRouter = () => {
 
         <Route path={PHONES.LIST}>
           <Route index element={<PhonesPage />} />
-          <Route path={PHONES.DETAILS} element={<ItemDetailsPage />} />
+          <Route
+            path={PHONES.DETAILS}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
+          />
         </Route>
 
         <Route path={TABLETS.LIST}>
           <Route index element={<TabletsPage />} />
-          <Route path={TABLETS.DETAILS} element={<ItemDetailsPage />} />
+          <Route
+            path={TABLETS.DETAILS}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
+          />
         </Route>
 
         <Route path={ACCESSORIES.LIST}>
           <Route index element={<AccessoriesPage />} />
-          <Route path={ACCESSORIES.DETAILS} element={<ItemDetailsPage />} />
+          <Route
+            path={ACCESSORIES.DETAILS}
+            element={
+              <div>
+                <ItemDetailsPage />
+              </div>
+            }
+          />
         </Route>
 
         <Route path="*" element={<div>Not found page</div>} />
