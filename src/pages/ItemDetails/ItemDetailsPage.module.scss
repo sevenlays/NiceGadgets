@@ -2,6 +2,7 @@
 @import '../../styles/animations';
 @import '../../styles/grid';
 
+
 .page__container {
   @include page-grid;
   @include container;
@@ -18,14 +19,17 @@
 
 .title {
   margin-top: 16px;
+  height: 62px;
 
   font-size: 22px;
   font-weight: 800;
+  line-height: 31px;
   color: var(--primary);
 
   grid-column: 1 / -1;
 
   @include on-tablet {
+    height: 100%;
     font-size: 32px;
   }
 }
@@ -37,9 +41,9 @@
 
   &__gallary {
     margin-top: 32px;
+    min-height: 512px;
 
     grid-column: 1 / -1;
-    width: 100%;
 
     @include on-tablet {
       grid-column: span 7;
