@@ -11,10 +11,11 @@ import './providers/i18n/i18n';
 import './index.scss';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Suspense } from 'react';
+import Loader from './components/Loader/Loader';
 
 createRoot(document.getElementById('root') as HTMLElement).render(
   <Provider store={store}>
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Loader />}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <App />
