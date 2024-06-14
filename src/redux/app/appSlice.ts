@@ -1,7 +1,8 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchProducts } from './operations';
-import { AppStorageState } from '../../types/AppStorageState';
+import { AppStorageState, CartItem } from '../../types/AppStorageState';
 import { Theme } from '../../types/Theme';
+// import { Product } from '../../types/Product';
 
 const initialState: AppStorageState = {
   cart: [],
@@ -21,11 +22,13 @@ const appSlice = createSlice({
   name: 'appStorage',
   initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<string>) => {
+    addToCart: (state, action: PayloadAction<CartItem>) => {
       state.cart.push(action.payload);
     },
     removeFromCart: (state, action: PayloadAction<string>) => {
-      state.cart = state.cart.filter(itemId => itemId !== action.payload);
+      state.cart = state.cart.filter(
+        itemId => itemId.cartItemId !== action.payload,
+      );
     },
     addToFavorites: (state, action: PayloadAction<string>) => {
       state.favorites.push(action.payload);
@@ -34,6 +37,18 @@ const appSlice = createSlice({
       state.favorites = state.favorites.filter(
         itemId => itemId !== action.payload,
       );
+    },
+    increaseQuantity: (state, action: PayloadAction<string>) => {
+      const item = state.cart.find(item => item.cartItemId === action.payload);
+      if (item) {
+        item.quantity += 1;
+      }
+    },
+    decreaseQuantity: (state, action: PayloadAction<string>) => {
+      const item = state.cart.find(item => item.cartItemId === action.payload);
+      if (item && item.quantity > 1) {
+        item.quantity -= 1;
+      }
     },
     setTheme: (state, action: PayloadAction<Theme>) => {
       state.theme = action.payload;
@@ -82,6 +97,8 @@ export const {
   addToFavorites,
   removeFromFavorites,
   setTheme,
+  decreaseQuantity,
+  increaseQuantity,
 } = appSlice.actions;
 
 export const {
