@@ -1,9 +1,9 @@
 import styles from './Pagination.module.scss';
 import React from 'react';
 /* eslint-disable max-len */
-import { ReactComponent as ArrowLeftBold } from '../../assets/icons/ArrowLeftBold.svg';
-import { ReactComponent as ArrowRightBold } from '../../assets/icons/ArrowRightBold.svg';
-import { Button } from '..';
+import { ReactComponent as ArrowLeftBold } from '../../assets/icons/ArrowLeft.svg';
+import { ReactComponent as ArrowRightBold } from '../../assets/icons/ArrowRight.svg';
+import { Button } from '../Button/Button';
 
 const BUTTON_TRANSITION = 'background-color 0.3s, transform 0.3s ease-in-out';
 

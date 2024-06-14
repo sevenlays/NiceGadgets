@@ -19,8 +19,12 @@
   cursor: pointer;
 
   @include hover(color, $Primary);
-  img {
+  &__img {
     color: $Primary;
     margin-right: 10px;
+  }
+
+  &__img * {
+    fill: var(--primary);
   }
 }

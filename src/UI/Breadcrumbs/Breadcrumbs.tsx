@@ -20,7 +20,7 @@ export const BreadcrumbsComponent: React.FC<Props> = ({ breadcrumbs }) => {
   return (
     <div className={styles.breadcrumbs}>
       <Link to={PATHS.HOME} className={styles.breadcrumbs__link}>
-        <Home className={styles.breadcrumbs__icon} />
+        <Home className={styles.breadcrumbs__home} />
       </Link>
 
       <Arrow className={styles.breadcrumbs__icon} />
