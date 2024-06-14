@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import iconFav from '../../assets/icons/Favourites.svg';
+import { ReactComponent as IconFav } from '../../assets/icons/Favourites.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
@@ -281,7 +281,7 @@ export const ItemDetailsPage = () => {
                 size={{ height: 48 }}
                 onClick={() => alert('Button clicked!')}
               >
-                <img src={iconFav} alt="Icon" />
+                <IconFav className={styles.buttons__addToFavourites__icon} />
               </Button>
             </div>
           </div>

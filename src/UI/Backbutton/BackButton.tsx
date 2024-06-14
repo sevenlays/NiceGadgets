@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
+import { ReactComponent as Left } from '../../assets/icons/ArrowLeftBold.svg';
 import styles from './BackButton.module.scss';
 
 export const BackButton = () => {
@@ -7,7 +7,8 @@ export const BackButton = () => {
 
   return (
     <span className={styles.back} onClick={() => navigate(-1)}>
-      <img src={iconLeft} /> <p style={{ marginTop: '1.55px' }}>Back</p>
+      <Left className={styles.back__img} />{' '}
+      <p style={{ marginTop: '1.55px' }}>Back</p>
     </span>
   );
 };
