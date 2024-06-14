@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 // import iconLeft from '../../assets/icons/ArrowLeft.svg';
-import iconFavourite from '../../assets/icons/Favourites.svg';
-import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
+import { ReactComponent as IconFavourite } from '../../assets/icons/Favourites.svg';
+import { ReactComponent as IconFavouriteActive } from '../../assets/icons/Favourites Filled.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
@@ -384,12 +384,13 @@ export const ItemDetailsPage = () => {
                       size={{ height: 48 }}
                       onClick={() => handleToggleToFavorites()}
                     >
-                      <img
-                        src={
-                          isInFavorites ? iconFavouriteActive : iconFavourite
-                        }
-                        alt="Icon"
-                      />
+                      {isInFavorites ? (
+                        <IconFavouriteActive />
+                      ) : (
+                        <IconFavourite
+                          className={styles.buttons__addToFavourites__icon}
+                        />
+                      )}
                     </Button>
                   </div>
                 </div>
