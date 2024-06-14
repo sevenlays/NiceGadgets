@@ -34,11 +34,14 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center; 
     margin-top: 16px;
     font-size: 14px;
     line-height: 21px;
     font-weight: 600;
     color: $Primary;
+    height: 42px;
     width: 100%;
     flex-grow: 1;
   }
