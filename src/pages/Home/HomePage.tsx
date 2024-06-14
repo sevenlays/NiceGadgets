@@ -11,10 +11,16 @@ import {
   getHotPrices,
 } from '../../services/filteForSliders';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { selectAccessories, selectPhones, selectTablets } from '../../redux';
 
 export const HomePage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const { t } = useTranslation();
+
+  const countOfPhones = useSelector(selectPhones).length;
+  const countOfTablets = useSelector(selectTablets).length;
+  const countOfAccsesories = useSelector(selectAccessories).length;
 
   useEffect(() => {
     getProduct('products').then(data => {
@@ -49,14 +55,18 @@ export const HomePage = () => {
                 <h3 className={styles.subtitle}>
                   {t('homePage.mobilePhones')}
                 </h3>
-                <p className={styles.description}>123 {t('homePage.models')}</p>
+                <p className={styles.description}>
+                  {countOfPhones} {t('homePage.models')}
+                </p>
               </Link>
             </div>
             <div className={styles.card}>
               <Link to="/tablets" className={styles.link}>
                 <div className={`${styles.image} ${styles.tablets}`} />
                 <h3 className={styles.subtitle}>{t('homePage.tablets')}</h3>
-                <p className={styles.description}>123 {t('homePage.models')}</p>
+                <p className={styles.description}>
+                  {countOfTablets} {t('homePage.models')}
+                </p>
               </Link>
             </div>
             <div className={styles.card}>
@@ -64,7 +74,9 @@ export const HomePage = () => {
                 <div className={`${styles.image} ${styles.accessories}`} />
                 <h3 className={styles.subtitle}>{t('homePage.accessories')}</h3>
 
-                <p className={styles.description}>123 {t('homePage.models')}</p>
+                <p className={styles.description}>
+                  {countOfAccsesories} {t('homePage.models')}
+                </p>
               </Link>
             </div>
           </div>

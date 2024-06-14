@@ -37,12 +37,14 @@ import {
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
+import { BackButton } from '../../UI/Backbutton/BackButton';
 import { useTranslation } from 'react-i18next';
 import { getColorWithoutSpaces } from '../../utils/getColorWithoutSpaces';
 import { getCategorName } from '../../utils/getCategorName';
 import Loader from '../../components/Loader/Loader';
 import pageNotFound from '../../assets/product_not_found.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { CartItem } from '../../types/AppStorageState';
 
 type Orientation = 'bottom' | 'left';
 
@@ -84,6 +86,8 @@ export const ItemDetailsPage = () => {
   const [orientation, setOrientation] = useState<Orientation>('bottom');
   const [loader, setLoader] = useState(false);
   const [error, setError] = useState(false);
+
+  // const navigate = useNavigate();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -204,22 +208,51 @@ export const ItemDetailsPage = () => {
 
   /* breadcrumbs */
 
-  const breadcrumbsData: Breadcrumb[] = [
-    { label: product.id, path: PATHS.ACCESSORIES.LIST },
-  ];
+  const generateBreadcrumbs = (): Breadcrumb[] => {
+    const breadcrumbs: Breadcrumb[] = [];
+
+    if (product.category === 'phones') {
+      breadcrumbs.push({ label: 'Phones', path: PATHS.PHONES.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.PHONES.DETAILS.replace(':phoneID', product.id),
+      });
+    } else if (product.category === 'tablets') {
+      breadcrumbs.push({ label: 'Tablets', path: PATHS.TABLETS.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.TABLETS.DETAILS.replace(':tabletID', product.id),
+      });
+    } else if (product.category === 'accessories') {
+      breadcrumbs.push({ label: 'Accessories', path: PATHS.ACCESSORIES.LIST });
+      breadcrumbs.push({
+        label: product.name,
+        path: PATHS.ACCESSORIES.DETAILS.replace(':accessoriesID', product.id),
+      });
+    }
+
+    return breadcrumbs;
+  };
+
+  const breadcrumbsData = generateBreadcrumbs();
 
   /* Add to card, add to favourites */
 
+  const cartItem: CartItem = {
+    cartItemId: product.id,
+    quantity: 1,
+  };
+
   const dispatch = useAppDispatch();
 
-  const isInCart = cart.includes(product.id);
+  const isInCart = cart.includes(cartItem);
   const isInFavorites = favourites.includes(product.id);
 
   const handleToggleToCart = () => {
     if (isInCart) {
       dispatch(removeFromCart(product.id));
     } else {
-      dispatch(addToCart(product.id));
+      dispatch(addToCart(cartItem));
     }
   };
 
@@ -232,10 +265,21 @@ export const ItemDetailsPage = () => {
   };
 
   return (
-    <>
-      <div className={styles.page__container}>
-        <div className={styles.breadcrumbs}>
-          <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
+    <div className={styles.page__container}>
+      <div className={styles.breadcrumbs}>
+        <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
+      </div>
+      <BackButton />
+      <h3 className={styles.title}>{product.name}</h3>
+      <div className={styles.product}>
+        <div className={styles.product__gallary}>
+          <ImageGallery
+            items={images}
+            showNav={false}
+            thumbnailPosition={orientation}
+            showFullscreenButton={false}
+            showPlayButton={false}
+          />
         </div>
         <span className={styles.back} onClick={() => navigate(-1)}>
           <img src={iconLeft} /> {t('nav.back')}
@@ -246,7 +290,7 @@ export const ItemDetailsPage = () => {
             <img src={pageNotFound} alt="product not found" />
           </div>
         ) : (
-          <>
+          <div>
             <h3 className={styles.title}>{product.name}</h3>
             <div className={styles.product}>
               <div className={styles.product__gallary}>
@@ -389,7 +433,7 @@ export const ItemDetailsPage = () => {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         <div className={styles.about}>
@@ -460,6 +504,6 @@ export const ItemDetailsPage = () => {
           />
         )}
       </div>
-    </>
+    </div>
   );
 };
