@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
-import iconLeft from '../../assets/icons/ArrowLeft.svg';
+// import iconLeft from '../../assets/icons/ArrowLeft.svg';
 import iconFavourite from '../../assets/icons/Favourites.svg';
 import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
 import styles from './ItemDetailsPage.module.scss';
@@ -265,32 +265,19 @@ export const ItemDetailsPage = () => {
   };
 
   return (
-    <div className={styles.page__container}>
-      <div className={styles.breadcrumbs}>
-        <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
-      </div>
-      <BackButton />
-      <h3 className={styles.title}>{product.name}</h3>
-      <div className={styles.product}>
-        <div className={styles.product__gallary}>
-          <ImageGallery
-            items={images}
-            showNav={false}
-            thumbnailPosition={orientation}
-            showFullscreenButton={false}
-            showPlayButton={false}
-          />
+    <>
+      <div className={styles.page__container}>
+        <div className={styles.breadcrumbs}>
+          <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
         </div>
-        <span className={styles.back} onClick={() => navigate(-1)}>
-          <img src={iconLeft} /> {t('nav.back')}
-        </span>
+        <BackButton />
         {error ? (
           <div className={styles.error}>
             <h2>Product not found :(</h2>
             <img src={pageNotFound} alt="product not found" />
           </div>
         ) : (
-          <div>
+          <div className={styles.product}>
             <h3 className={styles.title}>{product.name}</h3>
             <div className={styles.product}>
               <div className={styles.product__gallary}>
@@ -504,6 +491,6 @@ export const ItemDetailsPage = () => {
           />
         )}
       </div>
-    </div>
+    </>
   );
 };
