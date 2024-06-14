@@ -315,7 +315,7 @@ export const ItemDetailsPage = () => {
                           })}
                         >
                           <span
-                            aria-label={colorFromServer}
+                            title={colorFromServer}
                             className={styles.colors__inner}
                             style={{ backgroundColor: darkerColor }}
                             onClick={() => {
