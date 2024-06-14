@@ -2,7 +2,6 @@
 @import '../../styles/animations';
 @import '../../styles/grid';
 
-
 .page__container {
   @include page-grid;
   @include container;
@@ -39,7 +38,7 @@
 
   @include page-grid;
 
-  &__gallary {
+  &__gallery {
     margin-top: 32px;
     min-height: 512px;
 
@@ -237,9 +236,9 @@
     flex-grow: 1;
   }
   &__addToFavourites {
-   &__icon * {
-    fill: var(--primary)
-   }
+    &__icon * {
+      fill: var(--primary);
+    }
   }
 
   @include on-tablet {
@@ -308,7 +307,6 @@
     line-height: 150%;
   }
 }
-
 
 .params {
   margin-top: 30px;
