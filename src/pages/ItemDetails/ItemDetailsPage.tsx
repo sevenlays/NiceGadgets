@@ -385,9 +385,7 @@ export const ItemDetailsPage = () => {
                       onClick={() => handleToggleToFavorites()}
                     >
                       {isInFavorites ? (
-                        <IconFavouriteActive
-                          className={styles.buttons__addToFavourites__icon}
-                        />
+                        <IconFavouriteActive />
                       ) : (
                         <IconFavourite
                           className={styles.buttons__addToFavourites__icon}
