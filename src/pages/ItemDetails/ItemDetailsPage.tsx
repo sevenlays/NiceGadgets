@@ -44,7 +44,6 @@ import { getCategorName } from '../../utils/getCategorName';
 import Loader from '../../components/Loader/Loader';
 import pageNotFound from '../../assets/product_not_found.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { CartItem } from '../../types/AppStorageState';
 
 type Orientation = 'bottom' | 'left';
 
@@ -238,21 +237,18 @@ export const ItemDetailsPage = () => {
 
   /* Add to card, add to favourites */
 
-  const cartItem: CartItem = {
-    cartItemId: product.id,
-    quantity: 1,
-  };
-
   const dispatch = useAppDispatch();
 
-  const isInCart = cart.includes(cartItem);
+  const isInCart = cart.some(
+    itemInCart => itemInCart.cartItemId === product?.id,
+  );
   const isInFavorites = favourites.includes(product.id);
 
   const handleToggleToCart = () => {
     if (isInCart) {
       dispatch(removeFromCart(product.id));
     } else {
-      dispatch(addToCart(cartItem));
+      dispatch(addToCart({ cartItemId: product.id, quantity: 1 }));
     }
   };
 
