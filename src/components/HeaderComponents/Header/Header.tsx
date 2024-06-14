@@ -6,11 +6,25 @@ import { Nav } from '../Nav/Nav';
 import styles from './Header.module.scss';
 import { BurgerIcon } from '../BurgerIcon/BurgerIcon';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ToggleTheme } from '../../ToggleTheme/ToggleTheme';
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
+
+  useEffect(() => {
+    const body = document.body;
+
+    if (showMenu) {
+      body.style.overflow = 'hidden';
+    } else {
+      body.style.overflow = 'auto';
+    }
+
+    return () => {
+      body.style.overflow = 'auto';
+    };
+  }, [showMenu]);
 
   const handleCloseMenu = () => {
     setShowMenu(false);
