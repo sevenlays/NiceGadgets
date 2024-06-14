@@ -29,7 +29,7 @@ import {
 import { getLimitedCategoryProduct } from '../../services/filteForSliders';
 import { createCustomProductId } from '../../utils/createCustomProductId';
 import { getCategoryApiEndpoint } from '../../utils/getCategoryApiEndpoint';
-import { BAckButton } from '../../UI/Backbutton/BackButton';
+import { BackButton } from '../../UI/Backbutton/BackButton';
 import { useTranslation } from 'react-i18next';
 import { getColorWithoutSpaces } from '../../utils/getColorWithoutSpaces';
 
@@ -191,7 +191,7 @@ export const ItemDetailsPage = () => {
       <div className={styles.breadcrumbs}>
         <BreadcrumbsComponent breadcrumbs={breadcrumbsData} />
       </div>
-      <BAckButton />
+      <BackButton />
       <h3 className={styles.title}>{product.name}</h3>
       <div className={styles.product}>
         <div className={styles.product__gallary}>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { removeFromCart, selectAllProducts, selectCart } from '../../redux';
 import { getProductsFromStorage } from '../../utils/getProductsFromStorage';
-import { BAckButton } from '../../UI/Backbutton/BackButton';
+import { BackButton } from '../../UI/Backbutton/BackButton';
 import { Product } from './type/ProductType';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 
@@ -56,7 +56,7 @@ export const CartPage = () => {
   return (
     <div className="page__container">
       <section className={style.cart}>
-        <BAckButton />
+        <BackButton />
         <h1 className={style.cart__pageName}>Cart</h1>
         <main className={style.cart__content}>
           <CartList

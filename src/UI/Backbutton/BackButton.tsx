@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import iconLeft from '../../assets/icons/ArrowLeftBold.svg';
 import styles from './BackButton.module.scss';
 
-export const BAckButton = () => {
+export const BackButton = () => {
   const navigate = useNavigate();
 
   return (
