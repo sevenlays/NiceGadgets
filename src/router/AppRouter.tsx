@@ -17,10 +17,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 const { HOME, FAVOURITES, PHONES, TABLETS, ACCESSORIES, CART } = PATHS;
 
 const pageTransition = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-  transition: { duration: 0.5 },
+  initial: { opacity: 0, x: -100 },
+  animate: { opacity: 1, x: 0 },
+  exit: { opacity: 0, x: 200 },
+  transition: { duration: 0.5, ease: 'easeInOut' },
 };
 
 export const HomePageWithMotion = () => (
@@ -47,7 +47,7 @@ const AccessoriesPageWithMotion = () => (
   </motion.div>
 );
 
-const ItemDetailsPagePageWithMotion = () => (
+const ItemDetailsPageWithMotion = () => (
   <motion.div {...pageTransition}>
     <ItemDetailsPage />
   </motion.div>
@@ -67,7 +67,7 @@ const CartPagePageWithMotion = () => (
 
 export const AppRouter = () => {
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <Routes>
         <Route path={HOME} element={<RouteLayout />}>
           <Route index element={<HomePageWithMotion />} />
@@ -82,7 +82,7 @@ export const AppRouter = () => {
               path={PHONES.DETAILS}
               element={
                 <div>
-                  <ItemDetailsPagePageWithMotion />
+                  <ItemDetailsPageWithMotion />
                 </div>
               }
             />
@@ -94,7 +94,7 @@ export const AppRouter = () => {
               path={TABLETS.DETAILS}
               element={
                 <div>
-                  <ItemDetailsPagePageWithMotion />
+                  <ItemDetailsPageWithMotion />
                 </div>
               }
             />
@@ -106,7 +106,7 @@ export const AppRouter = () => {
               path={ACCESSORIES.DETAILS}
               element={
                 <div>
-                  <ItemDetailsPagePageWithMotion />
+                  <ItemDetailsPageWithMotion />
                 </div>
               }
             />

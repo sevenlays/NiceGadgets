@@ -1,5 +1,5 @@
 import styles from './Catalog.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { DropdownMenu } from '../../UI';
@@ -24,6 +24,10 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
 
   const products = useProductsByType(productType);
   const sortedProducts = sortProduct(products, sortBy);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const {
     currentPage,

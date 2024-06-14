@@ -2,12 +2,12 @@ import { Button } from '../../../UI';
 import { ReactComponent as Icon } from '../../../assets/icons/ArrowUp.svg';
 import styles from './BackToTop.module.scss';
 import { useTranslation } from 'react-i18next';
-import { scrollToTop, useScrollToTop } from '../../../hooks/useScrollTop';
+import { scrollToTop } from '../../../hooks/useScrollTop';
 
 export const BackToTop = () => {
   const { t } = useTranslation();
 
-  useScrollToTop();
+  // useScrollToTop();
 
   return (
     <div className={styles.back} onClick={scrollToTop}>
