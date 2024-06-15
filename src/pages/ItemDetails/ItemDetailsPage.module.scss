@@ -18,14 +18,17 @@
 
 .title {
   margin-top: 16px;
+  height: 62px;
 
   font-size: 22px;
   font-weight: 800;
+  line-height: 31px;
   color: var(--primary);
 
   grid-column: 1 / -1;
 
   @include on-tablet {
+    height: 100%;
     font-size: 32px;
   }
 }
@@ -35,11 +38,11 @@
 
   @include page-grid;
 
-  &__gallary {
+  &__gallery {
     margin-top: 32px;
+    min-height: 512px;
 
     grid-column: 1 / -1;
-    width: 100%;
 
     @include on-tablet {
       grid-column: span 7;
@@ -233,9 +236,9 @@
     flex-grow: 1;
   }
   &__addToFavourites {
-   &__icon * {
-    fill: var(--primary)
-   }
+    &__icon * {
+      fill: var(--primary);
+    }
   }
 
   @include on-tablet {
@@ -304,7 +307,6 @@
     line-height: 150%;
   }
 }
-
 
 .params {
   margin-top: 30px;

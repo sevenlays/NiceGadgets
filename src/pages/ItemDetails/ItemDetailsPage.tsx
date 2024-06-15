@@ -281,7 +281,7 @@ export const ItemDetailsPage = () => {
           <div className={styles.product}>
             <h3 className={styles.title}>{product.name}</h3>
             <div className={styles.product}>
-              <div className={styles.product__gallary}>
+              <div className={styles.product__gallery}>
                 {loader ? (
                   <div className={styles.loader}>
                     <Loader />
