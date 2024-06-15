@@ -1,10 +1,12 @@
 import styles from './Catalog.module.scss';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
+import SearchIcon from '../../assets/icons/Search.svg';
+import CloseIcon from '../../assets/icons/Close.svg';
 
 import usePagination from '../../hooks/usePagination';
 import useProductsByType from '../../hooks/useProductsByType';
@@ -21,12 +23,28 @@ type Props = {
 export const Catalog: React.FC<Props> = ({ productType }) => {
   const { t: localize } = useTranslation();
   const [sortBy, setSortBy] = useState<string>('newest');
+  const [query, setQuery] = useState('');
 
   const products = useProductsByType(productType);
-  const sortedProducts = sortProduct(products, sortBy);
+
+  const filteredProducts = useMemo(() => {
+    const queryWords = query
+      .toLowerCase()
+      .split(' ')
+      .filter(word => word);
+
+    return products.filter(product => {
+      const productName = product.name.toLowerCase();
+
+      return queryWords.every(word => productName.includes(word));
+    });
+  }, [products, query]);
+
+  const sortedProducts = sortProduct(filteredProducts, sortBy);
 
   const {
     currentPage,
+    setCurrentPage,
     itemsPerPage,
     totalPages,
     currentItems: currentProducts,
@@ -44,6 +62,15 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
     setSortBy(englishSortOption);
   };
 
+  const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(event.target.value.trimStart());
+    setCurrentPage(1);
+  };
+
+  const handleQueryClear = () => {
+    setQuery('');
+  };
+
   return (
     <div className={styles.catalog}>
       <h2 className={styles.catalog__title}>
@@ -55,17 +82,36 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
           getLocalizedModelCountString(products.length, localize, i18n)}
       </p>
 
-      <div className={styles.catalog__dropdowns}>
-        <DropdownMenu
-          label={localize('catalog.sortBy')}
-          options={localizedSortOptions}
-          onSelect={handleSortChange}
-        />
-        <DropdownMenu
-          label={localize('catalog.itemsOnPage')}
-          options={ITEMS_ON_PAGE}
-          onSelect={handleItemsPerPageChange}
-        />
+      <div className={styles.catalog__filters}>
+        <div className={styles.catalog__dropdowns}>
+          <DropdownMenu
+            label={localize('catalog.sortBy')}
+            options={localizedSortOptions}
+            onSelect={handleSortChange}
+          />
+          <DropdownMenu
+            label={localize('catalog.itemsOnPage')}
+            options={ITEMS_ON_PAGE}
+            onSelect={handleItemsPerPageChange}
+          />
+        </div>
+
+        <div className={styles.catalog__searchContainer}>
+          <input
+            type="text"
+            placeholder="Search"
+            className={styles.catalog__input}
+            value={query}
+            onChange={handleQueryChange}
+          />
+
+          <img
+            src={query === '' ? SearchIcon : CloseIcon}
+            alt=""
+            className={styles.catalog__searchIcon}
+            onClick={handleQueryClear}
+          />
+        </div>
       </div>
 
       <div className={styles.catalog__list}>
@@ -74,7 +120,7 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
         ))}
       </div>
 
-      {itemsPerPage < products.length && (
+      {itemsPerPage < sortedProducts.length && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

@@ -56,22 +56,18 @@ const Pagination: React.FC<PaginationProps> = ({
 
       <div className={styles.pagination__numbers}>
         {pageNumbers.map(page => {
-          return currentPage === page ? (
+          return (
             <Button
+              key={page}
               type="number"
-              state="selected"
+              state={currentPage === page ? 'selected' : undefined}
               size={{ height: 32 }}
               onClick={() => onPageChange(page)}
-              style={dynamicStyles}
-            >
-              {page}
-            </Button>
-          ) : (
-            <Button
-              type="number"
-              size={{ height: 32 }}
-              onClick={() => onPageChange(page)}
-              style={dynamicStyles}
+              style={
+                pageNumbers.length >= 4
+                  ? dynamicStyles
+                  : { transition: BUTTON_TRANSITION }
+              }
             >
               {page}
             </Button>
