@@ -52,6 +52,8 @@
   }
 
   &__title {
+    display: flex;
+    align-items: center;
     margin-top: 16px;
     font-size: 14px;
     line-height: 21px;
