@@ -17,10 +17,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 const { HOME, FAVOURITES, PHONES, TABLETS, ACCESSORIES, CART } = PATHS;
 
 const pageTransition = {
-  initial: { opacity: 0, x: -100 },
+  initial: { opacity: 0, x: -120 },
   animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 200 },
-  transition: { duration: 0.5, ease: 'easeInOut' },
+  exit: { opacity: 0, x: 120 },
+  transition: { duration: 0.6, ease: 'easeInOut' },
 };
 
 export const HomePageWithMotion = () => (
@@ -64,12 +64,17 @@ const CartPagePageWithMotion = () => (
     <CartPage />
   </motion.div>
 );
+const RouteLayoutPageWithMotion = () => (
+  <motion.div {...pageTransition}>
+    <RouteLayout />
+  </motion.div>
+);
 
 export const AppRouter = () => {
   return (
     <AnimatePresence mode="wait">
       <Routes>
-        <Route path={HOME} element={<RouteLayout />}>
+        <Route path={HOME} element={<RouteLayoutPageWithMotion />}>
           <Route index element={<HomePageWithMotion />} />
 
           <Route path={FAVOURITES} element={<FavouritesPagePageWithMotion />} />
