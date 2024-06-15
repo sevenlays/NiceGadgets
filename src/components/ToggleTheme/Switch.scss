@@ -1,7 +1,7 @@
 .switch {
   align-self: center;
   position: relative;
-  
+
   &__checkbox {
     opacity: 0;
     position: absolute;
@@ -14,8 +14,8 @@
     background-position: center;
     background-size: 100%;
     background-repeat: no-repeat;
-    width: 50px;
-    height: 26px;
+    width: 30px;
+    height: 15.5px;
     border-radius: 50px;
     position: relative;
     padding: 5px;
@@ -23,26 +23,25 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid var(--icon-numbers-hover-border);
 
     &__ball {
       width: 22px;
-      height: 20px;
+      height: 13px;
       position: absolute;
-      left: 1px;
-      top: 2px;
+      left: 2px;
+      top: -1.5px;
       border-radius: 50%;
       transition: transform 0.2s linear;
     }
   }
 
   &__checkbox:checked + &__label .switch__label__ball {
-    transform: translateX(24px);
+    transform: translateX(13px);
   }
 }
 
 .sun-icon,
 .moon-icon {
-  width: 22px;
-  height: 20px;
+  width: 12.5px;
+  height: 13px;
 }

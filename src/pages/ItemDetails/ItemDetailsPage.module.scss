@@ -18,14 +18,17 @@
 
 .title {
   margin-top: 16px;
+  height: 62px;
 
   font-size: 22px;
   font-weight: 800;
-  color: $Primary;
+  line-height: 31px;
+  color: var(--primary);
 
   grid-column: 1 / -1;
 
   @include on-tablet {
+    height: 100%;
     font-size: 32px;
   }
 }
@@ -35,11 +38,11 @@
 
   @include page-grid;
 
-  &__gallary {
+  &__gallery {
     margin-top: 32px;
+    min-height: 512px;
 
     grid-column: 1 / -1;
-    width: 100%;
 
     @include on-tablet {
       grid-column: span 7;
@@ -67,7 +70,7 @@
   &__id {
     font-size: 12px;
     font-weight: 600;
-    color: $Icons;
+    color: var(--icons);
   }
 
   .colors {
@@ -77,7 +80,7 @@
 
     font-size: 12px;
     font-weight: 600;
-    color: $Secondary;
+    color: var(--secondary);
 
     &__wrapper {
       display: flex;
@@ -106,7 +109,7 @@
       width: 34px;
       height: 34px;
       border-radius: 50%;
-      border: 1px solid $Icons;
+      border: 1px solid var(--elements);
       background-color: transparent;
       cursor: pointer;
 
@@ -114,11 +117,14 @@
       justify-content: center;
       align-items: center;
 
-      @include hover(border-color, $Primary);
+      @include hover(border-color, var(--secondary));
 
       &_active {
-        border-color: $Primary;
+        border-color: var(--primary);
 
+        &:hover {
+          border-color: var(--primary);
+        }
         .colors__inner {
           opacity: 80%;
         }
@@ -135,7 +141,7 @@
   grid-column: 1 / -1;
 
   height: 1px;
-  background-color: $Icons;
+  background-color: var(--elements);
 
   @include on-tablet {
     grid-column: span 5;
@@ -150,7 +156,7 @@
 
   font-size: 12px;
   font-weight: 600;
-  color: $Secondary;
+  color: var(--secondary);
 
   &__list {
     margin-top: 8px;
@@ -163,9 +169,9 @@
   &__item {
     display: flex;
 
-    color: $Primary;
+    color: var(--primary);
     padding: 8px;
-    border: 1px solid $Icons;
+    border: 1px solid var(--icons);
 
     cursor: pointer;
 
@@ -174,9 +180,15 @@
     @include hover(border-color, $Primary);
 
     &_active {
-      background-color: $Primary;
-      color: $White;
-      border-color: $Primary;
+      background-color: var(--primary);
+      color: var(--background);
+      border-color: var(--primary);
+
+      &:hover {
+        background-color: var(--primary);
+        color: var(--background);
+        border-color: var(--primary);
+      }
     }
   }
 
@@ -200,14 +212,12 @@
   &__discount {
     font-size: 32px;
     font-weight: 800;
-    color: $Primary;
+    color: var(--primary);
   }
 
   &__regular {
     font-size: 22px;
     font-weight: 400;
-    color: $Secondary;
-    text-decoration: line-through;
   }
 
   @include on-tablet {
@@ -224,6 +234,11 @@
 
   &__addToCard {
     flex-grow: 1;
+  }
+  &__addToFavourites {
+    &__icon * {
+      fill: var(--primary);
+    }
   }
 
   @include on-tablet {
@@ -243,7 +258,7 @@
 
     font-size: 20px;
     font-weight: 700;
-    color: $Primary;
+    color: var(--primary);
   }
 
   @include on-tablet {
@@ -276,7 +291,7 @@
   &__title {
     font-size: 16px;
     font-weight: 700;
-    color: $Primary;
+    color: var(--primary);
 
     @include on-tablet {
       font-size: 20px;
@@ -288,7 +303,7 @@
 
     font-size: 16px;
     font-weight: 400;
-    color: $Secondary;
+    color: var(--secondary);
     line-height: 150%;
   }
 }

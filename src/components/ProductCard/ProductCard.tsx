@@ -79,7 +79,9 @@ export const ProductCard: React.FC<Props> = ({
   return (
     <article className={styles.card}>
       <div className={styles.card__image_container}>
-        <img className={styles.card__image} src={product?.image} />
+        <Link to={getProductDetailsPath()}>
+          <img className={styles.card__image} src={product?.image} />
+        </Link>
       </div>
       <Link to={getProductDetailsPath()}>
         <h5 className={styles.card__title}>{product?.name}</h5>

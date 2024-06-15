@@ -7,6 +7,14 @@
   gap: 8px;
   margin-bottom: 24px;
 
+  &__home * {
+    fill: var(--primary);
+  }
+
+  &__icon * {
+    fill: var(--icons);
+  }
+
   @include on-tablet {
     margin-bottom: 40px;
   }

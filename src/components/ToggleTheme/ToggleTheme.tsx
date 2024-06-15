@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './Switch.scss';
-import { ReactComponent as Sun } from '../../assets/icons/sun.svg';
-import { ReactComponent as Moon } from '../../assets/icons/moon.svg';
+import { ReactComponent as Black } from '../../assets/icons/dark.svg';
+import { ReactComponent as White } from '../../assets/icons/white.svg';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { selectTheme } from '../../redux';
@@ -34,9 +34,9 @@ export const ToggleTheme = () => {
       <label htmlFor="checkbox" className="switch__label">
         <div className="switch__label__ball">
           {theme === 'Original' ? (
-            <Sun className={`sun-icon ${isChecked ? 'active' : ''}`} />
+            <Black className={`sun-icon ${isChecked ? 'active' : ''}`} />
           ) : (
-            <Moon className={`moon-icon ${isChecked ? 'active' : ''}`} />
+            <White className={`moon-icon ${isChecked ? 'active' : ''}`} />
           )}
         </div>
       </label>

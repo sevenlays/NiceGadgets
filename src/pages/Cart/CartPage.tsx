@@ -10,6 +10,7 @@ import { getProductsFromStorage } from '../../utils/getProductsFromStorage';
 import { BackButton } from '../../UI/Backbutton/BackButton';
 import { Product } from './type/ProductType';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { EmptyCart } from './EmptyCart/EmptyCart';
 
 export const CartPage = () => {
   const cart = useSelector(selectCart);
@@ -59,13 +60,19 @@ export const CartPage = () => {
         <BackButton />
         <h1 className={style.cart__pageName}>Cart</h1>
         <main className={style.cart__content}>
-          <CartList
-            prodsFromStore={uniqueProducts}
-            onIncrease={handleIncreaseAmount}
-            onDecrease={handleDecreaseAmount}
-            handleRemoveAllInstances={handleRemoveAllInstances}
-          />
-          <CartTotal prodsFromStore={productsWithCopies} />
+          {uniqueProducts.length > 0 ? (
+            <>
+              <CartList
+                prodsFromStore={uniqueProducts}
+                onIncrease={handleIncreaseAmount}
+                onDecrease={handleDecreaseAmount}
+                handleRemoveAllInstances={handleRemoveAllInstances}
+              />
+              <CartTotal prodsFromStore={productsWithCopies} />
+            </>
+          ) : (
+            <EmptyCart />
+          )}
         </main>
       </section>
     </div>

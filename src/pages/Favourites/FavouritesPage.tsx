@@ -7,6 +7,7 @@ import { Product } from '../../types/Product';
 import { BreadcrumbsComponent } from '../../UI/Breadcrumbs/Breadcrumbs';
 
 import styles from './FavouritesPage.module.scss';
+import { EmptyFav } from './EmptyFavourites/Emptyfav';
 
 export const FavouritesPage = () => {
   const favorites = useSelector(selectfavorites);
@@ -38,7 +39,7 @@ export const FavouritesPage = () => {
 
       <div className={styles.products}>
         {favoritesProds.length === 0 ? (
-          <div>There are no goods in your favourite list</div>
+          <EmptyFav />
         ) : (
           favoritesProds.map(item => {
             return (

@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 // import iconLeft from '../../assets/icons/ArrowLeft.svg';
-import iconFavourite from '../../assets/icons/Favourites.svg';
-import iconFavouriteActive from '../../assets/icons/Favourites Filled.svg';
+import { ReactComponent as IconFavourite } from '../../assets/icons/Favourites.svg';
+import { ReactComponent as IconFavouriteActive } from '../../assets/icons/Favourites Filled.svg';
 import styles from './ItemDetailsPage.module.scss';
 import classNames from 'classnames';
 import { Button } from '../../UI';
@@ -44,6 +44,7 @@ import { getCategorName } from '../../utils/getCategorName';
 import Loader from '../../components/Loader/Loader';
 import pageNotFound from '../../assets/product_not_found.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+// import { useScrollToTop } from '../../hooks/useScrollTop';
 
 type Orientation = 'bottom' | 'left';
 
@@ -101,6 +102,10 @@ export const ItemDetailsPage = () => {
   const accessories = useSelector(selectAccessories);
   const cart = useSelector(selectCart);
   const favourites = useSelector(selectfavorites);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productVariations]);
 
   useEffect(() => {
     setOtherProducts(() =>
@@ -276,7 +281,7 @@ export const ItemDetailsPage = () => {
           <div className={styles.product}>
             <h3 className={styles.title}>{product.name}</h3>
             <div className={styles.product}>
-              <div className={styles.product__gallary}>
+              <div className={styles.product__gallery}>
                 {loader ? (
                   <div className={styles.loader}>
                     <Loader />
@@ -315,7 +320,7 @@ export const ItemDetailsPage = () => {
                           })}
                         >
                           <span
-                            aria-label={colorFromServer}
+                            title={colorFromServer}
                             className={styles.colors__inner}
                             style={{ backgroundColor: darkerColor }}
                             onClick={() => {
@@ -384,12 +389,13 @@ export const ItemDetailsPage = () => {
                       size={{ height: 48 }}
                       onClick={() => handleToggleToFavorites()}
                     >
-                      <img
-                        src={
-                          isInFavorites ? iconFavouriteActive : iconFavourite
-                        }
-                        alt="Icon"
-                      />
+                      {isInFavorites ? (
+                        <IconFavouriteActive />
+                      ) : (
+                        <IconFavourite
+                          className={styles.buttons__addToFavourites__icon}
+                        />
+                      )}
                     </Button>
                   </div>
                 </div>

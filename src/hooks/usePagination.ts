@@ -29,6 +29,7 @@ const usePagination = <T>(items: T[], defaultItemsPerPage = 150) => {
 
   return {
     currentPage,
+    setCurrentPage,
     itemsPerPage,
     totalPages,
     currentItems,
