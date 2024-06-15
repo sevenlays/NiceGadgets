@@ -1,0 +1,27 @@
+@import '../../../styles/colors';
+@import '../../../styles/animations';
+
+.block {
+  &__title {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: $Primary;
+  }
+
+  &__list {
+    margin-top: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: $Icons;
+
+    @include hover(color, $Secondary);
+  }
+}

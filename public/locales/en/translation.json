@@ -20,7 +20,16 @@
     "github": "Github",
     "contacts": "Contacts",
     "rights": "Rights",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "policy": "Private policy",
+    "shipping": "Shipping",
+    "warranty": "Warranty",
+    "address": "7535 Dadeland Mall, Miami",
+    "made": "Made by",
+    "team": "team",
+    "right": "All right reserved",
+    "and": "and",
+    "info": "Info"
   },
   "tablets": {
     "title": "Tablets"

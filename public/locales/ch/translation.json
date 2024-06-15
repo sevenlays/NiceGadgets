@@ -20,7 +20,16 @@
     "github": "Github",
     "contacts": "联系方式",
     "rights": "权利",
-    "backToTop": "回到顶部"
+    "backToTop": "回到顶部",
+    "policy": "隐私政策",
+    "shipping": "船运",
+    "warranty": "保修单",
+    "address": "7535 Dadeland 购物中心, 迈阿密",
+    "made": "由制成",
+    "team": "团队",
+    "right": "版权所有",
+    "and": "和",
+    "info": "信息"
   },
   "tablets": {
     "title": "平板电脑"
