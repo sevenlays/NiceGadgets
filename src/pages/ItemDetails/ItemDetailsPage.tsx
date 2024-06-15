@@ -44,6 +44,7 @@ import { getCategorName } from '../../utils/getCategorName';
 import Loader from '../../components/Loader/Loader';
 import pageNotFound from '../../assets/product_not_found.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+// import { useScrollToTop } from '../../hooks/useScrollTop';
 
 type Orientation = 'bottom' | 'left';
 
@@ -101,6 +102,10 @@ export const ItemDetailsPage = () => {
   const accessories = useSelector(selectAccessories);
   const cart = useSelector(selectCart);
   const favourites = useSelector(selectfavorites);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [productVariations]);
 
   useEffect(() => {
     setOtherProducts(() =>
@@ -315,7 +320,7 @@ export const ItemDetailsPage = () => {
                           })}
                         >
                           <span
-                            aria-label={colorFromServer}
+                            title={colorFromServer}
                             className={styles.colors__inner}
                             style={{ backgroundColor: darkerColor }}
                             onClick={() => {

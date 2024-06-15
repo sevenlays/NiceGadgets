@@ -14,9 +14,19 @@
     font-weight: 600;
     color: var(--secondary);
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+
     transition: 0.3s color;
     &:hover {
       color: var(--primary);
+
+      button {
+        color: var(--primary);
+        border-color: var(--primary);
+      }
     }
   }
   &__icon {
