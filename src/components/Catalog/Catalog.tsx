@@ -5,8 +5,9 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { DropdownMenu } from '../../UI';
 import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
-import SearchIcon from '../../assets/icons/Search.svg';
-import CloseIcon from '../../assets/icons/Close.svg';
+import { ReactComponent as SearchIcon } from '../../assets/icons/Search.svg';
+import { ReactComponent as CloseIcon } from '../../assets/icons/Close.svg';
+import { EmptySearch } from './EmptySearch/EmptySearch';
 
 import usePagination from '../../hooks/usePagination';
 import useProductsByType from '../../hooks/useProductsByType';
@@ -109,19 +110,25 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
             onChange={handleQueryChange}
           />
 
-          <img
-            src={query === '' ? SearchIcon : CloseIcon}
-            alt=""
-            className={styles.catalog__searchIcon}
-            onClick={handleQueryClear}
-          />
+          {query === '' ? (
+            <SearchIcon className={styles.catalog__searchIcon} />
+          ) : (
+            <CloseIcon
+              className={styles.catalog__closeIcon}
+              onClick={handleQueryClear}
+            />
+          )}
         </div>
       </div>
 
       <div className={styles.catalog__list}>
-        {currentProducts.map(productItem => (
-          <ProductCard product={productItem} key={productItem.id} />
-        ))}
+        {currentProducts.length === 0 && query !== ' ' ? (
+          <EmptySearch />
+        ) : (
+          currentProducts.map(productItem => (
+            <ProductCard product={productItem} key={productItem.id} />
+          ))
+        )}
       </div>
 
       {itemsPerPage < sortedProducts.length && (

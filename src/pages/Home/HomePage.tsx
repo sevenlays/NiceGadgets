@@ -2,31 +2,28 @@ import { Link } from 'react-router-dom';
 import { SliderSection, HomeSlider, Chat } from '../../components';
 
 import styles from './HomePage.module.scss';
-import { Product } from '../Cart/type/ProductType';
-import { useEffect, useState } from 'react';
 
-import { getProduct } from '../../services/service';
 import {
   getBrandNewModels,
   getHotPrices,
 } from '../../services/filteForSliders';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { selectAccessories, selectPhones, selectTablets } from '../../redux';
+import {
+  selectAccessories,
+  selectAllProducts,
+  selectPhones,
+  selectTablets,
+} from '../../redux';
 
 export const HomePage = () => {
-  const [products, setProducts] = useState<Product[]>([]);
   const { t } = useTranslation();
 
   const countOfPhones = useSelector(selectPhones).length;
   const countOfTablets = useSelector(selectTablets).length;
   const countOfAccsesories = useSelector(selectAccessories).length;
 
-  useEffect(() => {
-    getProduct('products').then(data => {
-      setProducts(data);
-    });
-  }, []);
+  const products = useSelector(selectAllProducts);
 
   return (
     <div className={styles['page-wrapper']}>

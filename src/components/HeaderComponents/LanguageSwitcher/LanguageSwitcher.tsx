@@ -22,31 +22,42 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <ul className={styles['language-list']}>
-      <li>
-        <button
-          className={`${styles.button} ${currentLanguage === 'ua' ? styles.active : ''}`}
-          onClick={() => handleLanguageChange('ua')}
-        >
-          UA
-        </button>
-      </li>
-      <li>
-        <button
-          className={`${styles.button} ${currentLanguage === 'en' ? styles.active : ''}`}
-          onClick={() => handleLanguageChange('en')}
-        >
-          ENG
-        </button>
-      </li>
-      <li>
-        <button
-          className={`${styles.button} ${currentLanguage === 'ch' ? styles.active : ''}`}
-          onClick={() => handleLanguageChange('ch')}
-        >
-          中文
-        </button>
-      </li>
-    </ul>
+    <div className={styles['language-dropdown']}>
+      <button className={styles['dropdown-button']}>
+        {currentLanguage.toUpperCase()}
+      </button>
+      <ul className={styles['language-list']}>
+        {currentLanguage !== 'ua' && (
+          <li>
+            <button
+              className={`${styles.button} ${currentLanguage === 'ua' ? styles.active : ''}`}
+              onClick={() => handleLanguageChange('ua')}
+            >
+              UA
+            </button>
+          </li>
+        )}
+        {currentLanguage !== 'en' && (
+          <li>
+            <button
+              className={`${styles.button} ${currentLanguage === 'en' ? styles.active : ''}`}
+              onClick={() => handleLanguageChange('en')}
+            >
+              ENG
+            </button>
+          </li>
+        )}
+        {currentLanguage !== 'ch' && (
+          <li>
+            <button
+              className={`${styles.button} ${currentLanguage === 'ch' ? styles.active : ''}`}
+              onClick={() => handleLanguageChange('ch')}
+            >
+              中文
+            </button>
+          </li>
+        )}
+      </ul>
+    </div>
   );
 };

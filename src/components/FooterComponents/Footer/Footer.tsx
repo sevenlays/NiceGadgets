@@ -1,12 +1,10 @@
 // eslint-disable-next-line max-len
-import { LanguageSwitcher } from '../../HeaderComponents/LanguageSwitcher/LanguageSwitcher';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { FooterLogo } from '../FooterLogo/FooterLogo';
 import { FooterSection } from '../FooterSection/FooterSection';
 import styles from './Footer.module.scss';
 import iconBlack from '../../../assets/icons/github.svg';
 import iconWhite from '../../../assets/icons/gitWhite.svg';
-import { ToggleTheme } from '../../ToggleTheme/ToggleTheme';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { selectTheme } from '../../../redux';
@@ -60,8 +58,7 @@ export const Footer = () => {
         <div className={styles.footer__section}>
           <div className={styles.footer__buttons}>
             <BackToTop />
-            <ToggleTheme />
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
           </div>
         </div>
 
