@@ -10,7 +10,7 @@
   &__fill * {
     fill: var(--primary);
   }
-  
+
   &_active {
     @include underline-active;
   }

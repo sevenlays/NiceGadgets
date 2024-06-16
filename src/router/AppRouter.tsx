@@ -13,6 +13,7 @@ import {
 } from '../pages';
 
 import { motion, AnimatePresence } from 'framer-motion';
+import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 
 const { HOME, FAVOURITES, PHONES, TABLETS, ACCESSORIES, CART } = PATHS;
 
@@ -69,6 +70,11 @@ const RouteLayoutPageWithMotion = () => (
     <RouteLayout />
   </motion.div>
 );
+const NotFoundPageWithMotion = () => (
+  <motion.div {...pageTransition}>
+    <NotFoundPage />
+  </motion.div>
+);
 
 export const AppRouter = () => {
   return (
@@ -117,7 +123,7 @@ export const AppRouter = () => {
             />
           </Route>
 
-          <Route path="*" element={<div>Not found page</div>} />
+          <Route path="*" element={<NotFoundPageWithMotion />} />
         </Route>
       </Routes>
     </AnimatePresence>

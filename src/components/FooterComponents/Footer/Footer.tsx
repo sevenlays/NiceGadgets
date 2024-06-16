@@ -1,11 +1,9 @@
 // eslint-disable-next-line max-len
-import { LanguageSwitcher } from '../../HeaderComponents/LanguageSwitcher/LanguageSwitcher';
 import { BackToTop } from '../BackToTop/BackToTop';
 import { FooterLogo } from '../FooterLogo/FooterLogo';
 import { FooterSection } from '../FooterSection/FooterSection';
 import styles from './Footer.module.scss';
 import icon from '../../../assets/icons/github.svg';
-import { ToggleTheme } from '../../ToggleTheme/ToggleTheme';
 import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
@@ -56,8 +54,7 @@ export const Footer = () => {
         <div className={styles.footer__section}>
           <div className={styles.footer__buttons}>
             <BackToTop />
-            <ToggleTheme />
-            <LanguageSwitcher />
+            {/* <LanguageSwitcher /> */}
           </div>
         </div>
 

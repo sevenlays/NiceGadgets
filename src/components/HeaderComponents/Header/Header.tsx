@@ -1,4 +1,3 @@
-// import { BurgerIcon } from '../BurgerIcon/BurgerIcon';
 import { CartIcon } from '../CartIcon/CartIcon';
 import { FavourIcon } from '../FavourIcon/FavourIcon';
 import { Logo } from '../../Logo/Logo';
@@ -7,7 +6,7 @@ import styles from './Header.module.scss';
 import { BurgerIcon } from '../BurgerIcon/BurgerIcon';
 import { MobileMenu } from '../MobileMenu/MobileMenu';
 import { useEffect, useState } from 'react';
-import { ToggleTheme } from '../../ToggleTheme/ToggleTheme';
+import { ThemeSwitcher } from '../ThemeSwitcher/ThemeSwitcher';
 
 export const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -38,7 +37,7 @@ export const Header = () => {
         handleCloseMenu={handleCloseMenu}
       />
       <Logo />
-      <ToggleTheme />
+      <ThemeSwitcher />
 
       <div className={styles.nav__desctop}>
         <Nav handleCloseMenu={handleCloseMenu} />
