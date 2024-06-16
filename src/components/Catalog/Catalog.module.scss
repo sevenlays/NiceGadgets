@@ -31,7 +31,7 @@
     margin-bottom: 32px;
     font-size: 14px;
     line-height: 21px;
-    color:var(--secondary);
+    color: var(--secondary);
 
     @include on-tablet {
       margin-bottom: 40px;
@@ -41,7 +41,6 @@
   &__filters {
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 24px;
@@ -49,28 +48,53 @@
 
   &__searchContainer {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     width: 200px;
+    height:42px;
     padding-inline: 12px;
-    border: 1px solid $Icons;
+      border: 1px solid var(--icons);
 
     &:hover {
-      border-color: $Secondary;
+      border-color: var(--secondary);
     }
 
     &:focus {
-      border-color: $Primary;
+      border-color: var(--primary);
     }
   }
 
   &__input {
     height: 43px;
+    width:100%;
     padding-right: 10px;
     outline: none;
     border: none;
+    background-color: inherit;
+    color: var(--primary);
     font-family: inherit;
     font-weight: 600;
     line-height: 21px;
+
+    &::placeholder {
+      color: var(--secondary);
+    }
+  }
+
+  &__searchIcon {
+    width: 16px;
+  }
+
+  &__searchIcon * {
+    fill: var(--primary);
+  }
+
+  &__closeIcon {
+    width: 16px;
+  }
+
+  &__closeIcon * {
+    fill: var(--primary);
   }
 
   &__dropdowns {
@@ -79,7 +103,7 @@
 
     @media (max-width: 448px) {
       width: 100%
-  }
+    }
   }
 
   &__list {
@@ -119,19 +143,19 @@
   font-weight: 500;
   min-width: 32px;
   min-height: 32px;
-  background-color: $White;
-  border: 1px solid $Elements;
+  background-color: var(--background);
+  border: 1px solid var(--elements);
   cursor: pointer;
   transition:
     background-color 0.3s,
     transform 0.3s ease-in-out;
 
   &.selected {
-    background-color: $Primary;
+    background-color: var(--icon-selected-color);
     color: $White;
   }
 
   &:hover:not(.selected) {
-    border-color: $Primary;
+    border-color: var(--icon-hover-color);
   }
 }
