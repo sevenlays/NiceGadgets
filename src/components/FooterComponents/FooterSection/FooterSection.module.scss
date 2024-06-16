@@ -6,7 +6,7 @@
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 800;
-    color: $Primary;
+    color: var(--primary);
   }
 
   &__list {
@@ -20,8 +20,8 @@
   &__link {
     font-size: 13px;
     font-weight: 600;
-    color: $Icons;
+    color: var(--icons);
 
-    @include hover(color, $Secondary);
+    @include hover(color, var(--secondary));
   }
 }
