@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from '../../providers/i18n/i18n';
 // eslint-disable-next-line max-len
 import getLocalizedModelCountString from '../../utils/getLocalizedModelCountString';
+import { useSearchParams } from 'react-router-dom';
 
 type Props = {
   productType: string;
@@ -23,8 +24,13 @@ type Props = {
 
 export const Catalog: React.FC<Props> = ({ productType }) => {
   const { t: localize } = useTranslation();
-  const [sortBy, setSortBy] = useState<string>('newest');
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialSortBy = searchParams.get('sortBy') || 'newest';
+  const initialQuery = searchParams.get('query') || '';
+
+  const [sortBy, setSortBy] = useState<string>(initialSortBy);
+  const [query, setQuery] = useState(initialQuery);
 
   const products = useProductsByType(productType);
 
@@ -65,15 +71,20 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
       SORTBY_TRANSLATED_TO_ENGLISH[translatedSortOption];
 
     setSortBy(englishSortOption);
+    setSearchParams({ sortBy: englishSortOption, query });
   };
 
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value.trimStart());
+    const newQuery = event.target.value.trimStart();
+
+    setQuery(newQuery);
+    setSearchParams({ sortBy, query: newQuery });
     setCurrentPage(1);
   };
 
   const handleQueryClear = () => {
     setQuery('');
+    setSearchParams({ sortBy, query: '' });
   };
 
   return (
