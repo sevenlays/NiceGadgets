@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { Product } from '../../types/Product';
 import { FullPrice } from './PriceWithoutDiscount/FullPrice';
 import { SingleParam } from './ProductParams/SingleParam/SingleParam';
+import { motion } from 'framer-motion';
 
 /* product object should be props now its just a placeholder ti prevent errors*/
 import { useSelector } from 'react-redux';
@@ -76,8 +77,15 @@ export const ProductCard: React.FC<Props> = ({
     }
   };
 
+  const cardAnimation = {
+    initial: { opacity: 0, x: -100 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 100 },
+    transition: { duration: 0.2 },
+  };
+
   return (
-    <article className={styles.card}>
+    <motion.article className={styles.card} {...cardAnimation}>
       <div className={styles.card__image_container}>
         <Link to={getProductDetailsPath()}>
           <img className={styles.card__image} src={product?.image} />
@@ -129,6 +137,6 @@ export const ProductCard: React.FC<Props> = ({
           )}
         </Button>
       </div>
-    </article>
+    </motion.article>
   );
 };

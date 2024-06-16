@@ -44,7 +44,7 @@ import { getCategorName } from '../../utils/getCategorName';
 import Loader from '../../components/Loader/Loader';
 import pageNotFound from '../../assets/product_not_found.png';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-// import { useScrollToTop } from '../../hooks/useScrollTop';
+import { motion } from 'framer-motion';
 
 type Orientation = 'bottom' | 'left';
 
@@ -265,6 +265,13 @@ export const ItemDetailsPage = () => {
     }
   };
 
+  const galleryAnimation = {
+    initial: { opacity: 0, x: -100 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 100 },
+    transition: { duration: 0.3 },
+  };
+
   return (
     <>
       <div className={styles.page__container}>
@@ -281,7 +288,10 @@ export const ItemDetailsPage = () => {
           <div className={styles.product}>
             <h3 className={styles.title}>{product.name}</h3>
             <div className={styles.product}>
-              <div className={styles.product__gallery}>
+              <motion.div
+                className={styles.product__gallery}
+                {...galleryAnimation}
+              >
                 {loader ? (
                   <div className={styles.loader}>
                     <Loader />
@@ -296,7 +306,7 @@ export const ItemDetailsPage = () => {
                     lazyLoad={true}
                   />
                 )}
-              </div>
+              </motion.div>
               <div className={styles.product__settings}>
                 <div className={styles.colors}>
                   <div className={styles.colors__wrapper}>
