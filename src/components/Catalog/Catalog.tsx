@@ -7,6 +7,7 @@ import { sortProduct } from '../../utils/sortProduct';
 import Pagination from '../../UI/Pagination/Pagination';
 import SearchIcon from '../../assets/icons/Search.svg';
 import CloseIcon from '../../assets/icons/Close.svg';
+import { EmptySearch } from './EmptySearch/EmptySearch';
 
 import usePagination from '../../hooks/usePagination';
 import useProductsByType from '../../hooks/useProductsByType';
@@ -119,9 +120,13 @@ export const Catalog: React.FC<Props> = ({ productType }) => {
       </div>
 
       <div className={styles.catalog__list}>
-        {currentProducts.map(productItem => (
-          <ProductCard product={productItem} key={productItem.id} />
-        ))}
+        {currentProducts.length === 0 && query !== ' ' ? (
+          <EmptySearch />
+        ) : (
+          currentProducts.map(productItem => (
+            <ProductCard product={productItem} key={productItem.id} />
+          ))
+        )}
       </div>
 
       {itemsPerPage < sortedProducts.length && (
