@@ -52,14 +52,14 @@
     justify-content: center;
     width: 200px;
     padding-inline: 12px;
-    border: 1px solid $Icons;
+    border: 1px solid var(--icons);
 
     &:hover {
-      border-color: $Secondary;
+      border-color: var(--secondary);
     }
 
     &:focus {
-      border-color: $Primary;
+      border-color: var(--primary);
     }
   }
 
@@ -68,6 +68,8 @@
     padding-right: 10px;
     outline: none;
     border: none;
+    background-color: inherit;
+    color: var(--primary);
     font-family: inherit;
     font-weight: 600;
     line-height: 21px;
@@ -119,19 +121,19 @@
   font-weight: 500;
   min-width: 32px;
   min-height: 32px;
-  background-color: $White;
-  border: 1px solid $Elements;
+  background-color: var(--background);
+  border: 1px solid var(--elements);
   cursor: pointer;
   transition:
     background-color 0.3s,
     transform 0.3s ease-in-out;
 
   &.selected {
-    background-color: $Primary;
+    background-color: var(--icon-selected-color);
     color: $White;
   }
 
   &:hover:not(.selected) {
-    border-color: $Primary;
+    border-color: var(--icon-hover-color);
   }
 }
