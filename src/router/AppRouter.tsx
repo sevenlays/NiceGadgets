@@ -18,10 +18,10 @@ import { NotFoundPage } from '../pages/NotFound/NotFoundPage';
 const { HOME, FAVOURITES, PHONES, TABLETS, ACCESSORIES, CART } = PATHS;
 
 const pageTransition = {
-  initial: { opacity: 0, x: -120 },
+  initial: { opacity: 0, x: -70 },
   animate: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: 120 },
-  transition: { duration: 0.6, ease: 'easeInOut' },
+  exit: { opacity: 0, x: 70 },
+  transition: { duration: 0.5, ease: 'easeInOut' },
 };
 
 export const HomePageWithMotion = () => (
